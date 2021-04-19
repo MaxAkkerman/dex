@@ -1,0 +1,21 @@
+wBTC {"address": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac"}
+{"public": "aa9dc47537980bd4be4506f333c66bdde79966fb836e253b9a11ba8386340f24","secret": "2b2c49e0c71c3883668c3a1ee6c15d1c6e9c15ec65dc4339962136d3fb43959e"}
+{ "seedphrase": "fetch invest flush month olive ugly gadget luggage dolphin join topple wool"}
+
+tonos-cli call 0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac grant '{"dest":"0:5bc55e05b9965f07df0a97362caa17a2ca4e43341cdccfb9bfcf6a331ea969e3","tokens":"17542000","grams":"20000000"}' --sign "fetch invest flush month olive ugly gadget luggage dolphin join topple wool" --abi RootTokenContract.abi
+
+
+wUSDT {"address": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb"}
+{"public": "27736faf1e25718f398a0a5eff04036b5fb4525dc77a3b37bd7137e05ac57501","secret": "d3b79cb669fb996f32cc7ba80a5db615b71457835c47330ca483e3eeeea7c32b"}
+{ "seedphrase": "mail profit search fuel combine release gospel path sleep space shy ivory"}
+
+tonos-cli call 0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb grant '{"dest":"0:7a88518594ae415d57dfc84541d307a73df300873f5e3cae1c2de89a5eaea441","tokens":"1500000000000","grams":"20000000"}' --sign "mail profit search fuel combine release gospel path sleep space shy ivory" --abi RootTokenContract.abi
+
+
+
+wETH {"address": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa"}
+{"public": "80a017c13abdf3958e690204446fb78233b1a4597871eba0ef863ec017c548c7","secret": "b6be2ac8995392af6869095df27dbab6b8add563d99f10a3b59219e76b99a5d6"}
+{ "seedphrase": "grid resist ski quiz narrow evidence finish phone eye gold large rail"}
+
+tonos-cli call 0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa grant '{"dest":"0:a4ee841f571a45f1870a4edbc772e1b0f35298d18210176524603d646aeb345c","tokens":"560000000","grams":"20000000"}' --sign "grid resist ski quiz narrow evidence finish phone eye gold large rail" --abi RootTokenContract.abi
+

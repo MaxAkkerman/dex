@@ -1,0 +1,25 @@
+
+tonos-cli genphrase
+tonos-cli getkeypair WTONroot.keys.json "early chaos hurt screen very reopen you artwork couch vapor fence paper"
+tonos-cli genaddr RootTokenContract.tvc RootTokenContract.abi.json --setkey WTONroot.keys.json --wc 0
+
+root address
+0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210
+
+addres wrapper
+
+tvm_linker decode --tvc TONTokenWallet.tvc > code.txt
+export TVM_WALLET_CODE=`cat code.txt`
+
+tonos-cli deploy TONwrapper.tvc {} --sign TONwrapper.keys.json --abi TONwrapper.abi.json
+
+tonos-cli deploy RootTokenContract.tvc '{"name":"57726170706564544f4e","symbol":"57544f4e", "decimals":"9","root_public_key":"0", "root_owner":"0xa39cbd7030558f6a65ff6c988c2077e464670d57308e908f6a0a3f860e631280", "wallet_code":"'$TVM_WALLET_CODE'","total_supply":"0"}' --abi RootTokenContract.abi.json --sign WTONroot.keys.json --wc 0
+tonos-cli run 0:3f380138ce0177e11d3d2369b0e49423ddcefdd5776b42ef08de2b7e6853b85b getRootKey {} --abi RootTokenContract.abi
+tonos-cli run 0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa getName {} --abi RootTokenContract.abi
+tonos-cli call 0:3f380138ce0177e11d3d2369b0e49423ddcefdd5776b42ef08de2b7e6853b85b mint '{"tokens":"10"}' --sign TONwrapper.keys.json --abi RootTokenContract.abi
+
+
+tonos-cli run 0:5ae522de257d341a6b6107e10b5f7ef98a02c98d99ffdf3b902a4837272cd61b getRootAddress {} --abi TONTokenWallet.abi
+
+
+tonos-cli account 0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210

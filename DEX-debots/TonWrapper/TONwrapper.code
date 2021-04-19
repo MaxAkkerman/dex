@@ -1,0 +1,3072 @@
+.globl	constructor
+.public	constructor
+.type	constructor, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7_with_init_storage$
+}
+;; constructor protection
+GETGLOB 6
+THROWIF 51
+PUSHINT 1
+SETGLOB 6
+;; end constructor protection
+; Decode input parameters
+ENDS
+; constructor TONWrapper
+GETGLOB 2
+;; ==
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+EQUAL
+THROWIFNOT 102
+ACCEPT
+; expValue
+; end expValue
+FALSE
+; colValue
+SETGLOB 11
+; end colValue
+; end constructor TONWrapper
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	isRoot
+.public	isRoot
+.type	isRoot, @function
+PUSH S1
+PUSHCONT {
+	LDU 32
+	GETGLOB 4
+	ROT
+	SETINDEXQ 5
+	SETGLOB 4
+}
+IFNOT
+; Decode input parameters
+; Decode arg0
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: arg0
+; modifier alwaysAccept
+ACCEPT
+; function isRoot
+;; return
+;; push identifier arg0
+DUP
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+SDEQ
+;; emitting 1 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xe2304169
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+}
+PUSHCONT {
+	GETGLOB 4
+	DUP
+	INDEX 3
+	PUSH S1
+	INDEX 2
+	GETGLOB 9
+	BLKSWAP 1, 3
+	INDEX 1
+	NEWC
+	PUSHINT 2
+	STZEROES
+	STI 1
+	PUSHINT 3
+	STZEROES
+	STSLICE
+	SWAP
+	STGRAMS
+	STDICT
+	PUSHINT 104
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	GETGLOB 4
+	INDEX 5
+	STUR 32
+	PUSH S1
+	STIR 1
+	ENDC
+	GETGLOB 4
+	INDEX 4
+	SENDRAWMSG
+}
+IFELSE
+DROP
+; end function isRoot
+DROP
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	isRoot_internal
+.type	isRoot_internal, @function
+;; param: arg0
+; modifier alwaysAccept
+ACCEPT
+; function isRoot
+;; return
+;; push identifier arg0
+DUP
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+SDEQ
+TUPLE 1
+SETGLOB 8
+; end function isRoot
+DROP
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	createZeroWallet
+.public	createZeroWallet
+.type	createZeroWallet, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+ENDS
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 102
+ACCEPT
+; function createZeroWallet
+;; if
+;; push identifier initStatus
+GETGLOB 11
+;; ==
+FALSE
+EQUAL
+PUSHCONT {
+	CALL $createWalletId_internal$
+	;; decl: walletId
+	;; push identifier ROOT_WRAPPED_TON
+	PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+	;; decl: creator
+	MYADDR
+	;; decl: owner
+	;; get member value
+	;; push identifier owner
+	DUP
+	PARSEMSGADDR
+	INDEX 3
+	PLDU 256
+	;; decl: ownerUINT
+	NEWC
+	STSLICECONST x0000000d
+	STSLICECONST x00000126
+	;; workchain_id
+	PUSHINT 0
+	STIR 8
+	;; pubkey
+	;; push identifier walletId
+	PUSH S4
+	STUR 256
+	;; internal_owner
+	;; push identifier ownerUINT
+	PUSH S1
+	STUR 256
+	;; grams
+	PUSHINT 500000000
+	STUR 128
+	ENDC
+	;; decl: body
+	;; transfer()
+	;; push identifier creator
+	PUSH S3
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x43b9aca00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier body
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	BLKDROP 5
+}
+IF
+;; end if
+; end function createZeroWallet
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	createZeroWallet_internal
+.type	createZeroWallet_internal, @function
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 102
+ACCEPT
+; function createZeroWallet
+;; if
+;; push identifier initStatus
+GETGLOB 11
+;; ==
+FALSE
+EQUAL
+PUSHCONT {
+	CALL $createWalletId_internal$
+	;; decl: walletId
+	;; push identifier ROOT_WRAPPED_TON
+	PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+	;; decl: creator
+	MYADDR
+	;; decl: owner
+	;; get member value
+	;; push identifier owner
+	DUP
+	PARSEMSGADDR
+	INDEX 3
+	PLDU 256
+	;; decl: ownerUINT
+	NEWC
+	STSLICECONST x0000000d
+	STSLICECONST x00000126
+	;; workchain_id
+	PUSHINT 0
+	STIR 8
+	;; pubkey
+	;; push identifier walletId
+	PUSH S4
+	STUR 256
+	;; internal_owner
+	;; push identifier ownerUINT
+	PUSH S1
+	STUR 256
+	;; grams
+	PUSHINT 500000000
+	STUR 128
+	ENDC
+	;; decl: body
+	;; transfer()
+	;; push identifier creator
+	PUSH S3
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x43b9aca00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier body
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	BLKDROP 5
+}
+IF
+;; end if
+; end function createZeroWallet
+; end modifier checkOwnerAndAccept
+
+.globl	setZeroWallet
+.public	setZeroWallet
+.type	setZeroWallet, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode value0
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: value0
+; modifier onlyRoot
+;; get member sender
+GETGLOB 9
+CALL $isRoot_internal$
+THROWIFNOT 101
+ACCEPT
+; function setZeroWallet
+; expValue
+; end expValue
+;; push identifier value0
+DUP
+; colValue
+SETGLOB 10
+; end colValue
+; expValue
+; end expValue
+TRUE
+; colValue
+SETGLOB 11
+; end colValue
+; end function setZeroWallet
+DROP
+; end modifier onlyRoot
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	setZeroWallet_internal
+.type	setZeroWallet_internal, @function
+;; param: value0
+; modifier onlyRoot
+;; get member sender
+GETGLOB 9
+CALL $isRoot_internal$
+THROWIFNOT 101
+ACCEPT
+; function setZeroWallet
+; expValue
+; end expValue
+;; push identifier value0
+DUP
+; colValue
+SETGLOB 10
+; end colValue
+; expValue
+; end expValue
+TRUE
+; colValue
+SETGLOB 11
+; end colValue
+; end function setZeroWallet
+DROP
+; end modifier onlyRoot
+
+.globl	getZeroAddress
+.public	getZeroAddress
+.type	getZeroAddress, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+PUSH S1
+PUSHCONT {
+	LDU 32
+	GETGLOB 4
+	ROT
+	SETINDEXQ 5
+	SETGLOB 4
+}
+IFNOT
+; Decode input parameters
+ENDS
+; modifier alwaysAccept
+ACCEPT
+; function getZeroAddress
+;; ret param: walletZero
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+; expValue
+; end expValue
+;; push identifier addressZero
+GETGLOB 10
+; colValue
+NIP
+; end colValue
+;; returning named params
+;; emitting 1 value(s)
+PUSH S1
+EQINT -1
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST x85363c6a
+	PUSH S1
+	STSLICER
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+}
+PUSHCONT {
+	GETGLOB 4
+	DUP
+	INDEX 3
+	PUSH S1
+	INDEX 2
+	GETGLOB 9
+	BLKSWAP 1, 3
+	INDEX 1
+	NEWC
+	PUSHINT 2
+	STZEROES
+	STI 1
+	PUSHINT 3
+	STZEROES
+	STSLICE
+	SWAP
+	STGRAMS
+	STDICT
+	PUSHINT 104
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	GETGLOB 4
+	INDEX 5
+	STUR 32
+	PUSH S1
+	STSLICER
+	ENDC
+	GETGLOB 4
+	INDEX 4
+	SENDRAWMSG
+}
+IFELSE
+DROP
+; end function getZeroAddress
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getZeroAddress_internal
+.type	getZeroAddress_internal, @function
+; modifier alwaysAccept
+ACCEPT
+; function getZeroAddress
+;; ret param: walletZero
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+; expValue
+; end expValue
+;; push identifier addressZero
+GETGLOB 10
+; colValue
+NIP
+; end colValue
+;; returning named params
+TUPLE 1
+SETGLOB 8
+; end function getZeroAddress
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	sendTransfer
+.public	sendTransfer
+.type	sendTransfer, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode dest
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode value
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+; Decode bounce
+LDIQ 1
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDI 1
+}
+IFNOT
+ENDS
+;; param: dest
+;; param: value
+;; param: bounce
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 102
+ACCEPT
+; function sendTransfer
+;; transfer()
+;; push identifier value
+PUSH S1
+;; push identifier dest
+PUSH S3
+;; push identifier bounce
+PUSH S2
+NEWC
+STSLICECONST x6_
+STI 1
+PUSHINT 3
+STZEROES
+STSLICE
+SWAP
+STGRAMS
+PUSHINT 105
+STZEROES
+STSLICECONST 0
+STSLICECONST 0
+ENDC
+PUSHINT 3
+SENDRAWMSG
+; end function sendTransfer
+BLKDROP 3
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	sendTransfer_internal
+.type	sendTransfer_internal, @function
+;; param: dest
+;; param: value
+;; param: bounce
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 102
+ACCEPT
+; function sendTransfer
+;; transfer()
+;; push identifier value
+PUSH S1
+;; push identifier dest
+PUSH S3
+;; push identifier bounce
+PUSH S2
+NEWC
+STSLICECONST x6_
+STI 1
+PUSHINT 3
+STZEROES
+STSLICE
+SWAP
+STGRAMS
+PUSHINT 105
+STZEROES
+STSLICECONST 0
+STSLICECONST 0
+ENDC
+PUSHINT 3
+SENDRAWMSG
+; end function sendTransfer
+BLKDROP 3
+; end modifier checkOwnerAndAccept
+
+.globl	createWalletId_internal
+.type	createWalletId_internal, @function
+; function createWalletId
+LTIME
+ADDRAND
+;; return
+RANDSEED
+; end function createWalletId
+
+.globl	getLastQueue_internal
+.type	getLastQueue_internal, @function
+; function getLastQueue
+;; map.max
+;; push identifier rootQueue
+GETGLOB 15
+PUSHINT 128
+DICTUMAX
+NULLSWAPIFNOT
+PUSHCONT {
+	SWAP
+	PLDU 256
+	TUPLE 2
+}
+IF
+;; decl: rs
+;; if
+;; push identifier rs
+DUP
+ISNULL
+NOT
+PUSHCONT {
+	;; push identifier rs
+	DUP
+	DUP
+	ISNULL
+	THROWIF 63
+	UNTUPLE 2
+	SWAP
+	SWAP
+	;; decl: number
+	;; return
+	;; push identifier number
+	PUSH S1
+	XCHG s3
+	BLKDROP 3
+	RET
+}
+PUSHCONT {
+	;; return
+	DROP
+	PUSHINT 0
+	RET
+}
+CONDSEL
+JMPX
+;; end if
+; end function getLastQueue
+
+.globl	getFirstQueue_internal
+.type	getFirstQueue_internal, @function
+; function getFirstQueue
+;; map.min
+;; push identifier rootQueue
+GETGLOB 15
+PUSHINT 128
+DICTUMIN
+NULLSWAPIFNOT
+PUSHCONT {
+	SWAP
+	PLDU 256
+	TUPLE 2
+}
+IF
+;; decl: rs
+;; if
+;; push identifier rs
+DUP
+ISNULL
+NOT
+PUSHCONT {
+	;; push identifier rs
+	DUP
+	DUP
+	ISNULL
+	THROWIF 63
+	UNTUPLE 2
+	SWAP
+	SWAP
+	;; decl: number
+	;; return
+	;; push identifier number
+	PUSH S1
+	XCHG s3
+	BLKDROP 3
+	RET
+}
+PUSHCONT {
+	;; return
+	DROP
+	PUSHINT 0
+	RET
+}
+CONDSEL
+JMPX
+;; end if
+; end function getFirstQueue
+
+.globl	addDEXclientToQueue_internal
+.type	addDEXclientToQueue_internal, @function
+;; param: dexclient
+;; param: destination
+;; param: qty
+; function addDEXclientToQueue
+;; ret param: addStatus
+PUSHINT 0
+CALL $getLastQueue_internal$
+;; decl: last
+;; ++
+; expValue
+; end expValue
+INC
+UFITS 128
+; colValue
+; end colValue
+CALL $createWalletId_internal$
+;; decl: queueID
+;; index
+;; push identifier queueID
+DUP
+;; push identifier queueRouter
+GETGLOB 14
+PUSHINT 256
+DICTUGET
+PUSHCONT {
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 3
+}
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 3
+}
+IFELSE
+;; decl: cq
+; expValue
+DUP
+; end expValue
+;; push identifier dexclient
+PUSH S7
+; colValue
+SETINDEX 0
+NIP
+; end colValue
+; expValue
+DUP
+; end expValue
+;; push identifier destination
+PUSH S6
+; colValue
+SETINDEX 1
+NIP
+; end colValue
+; expValue
+DUP
+; end expValue
+;; push identifier qty
+PUSH S5
+; colValue
+SETINDEX 2
+NIP
+; end colValue
+; expValue
+;; fetch queueRouter
+GETGLOB 14
+;; push identifier queueID
+PUSH S2
+SWAP
+; end expValue
+;; push identifier cq
+PUSH S2
+; colValue
+UNTUPLE 3
+NEWC
+PUSH S3
+STSLICER
+PUSH S2
+STSLICER
+PUSH S1
+STUR 128
+XCHG s3
+BLKDROP 3
+ROTREV
+PUSHINT 256
+DICTUSETB
+SETGLOB 14
+; end colValue
+;; map.add
+; expValue
+;; fetch rootQueue
+GETGLOB 15
+; end expValue
+;; push identifier queueID
+PUSH S2
+NEWC
+STU 256
+;; push identifier last
+PUSH S4
+ROT
+PUSHINT 128
+DICTUADDB
+SWAP
+; colValue
+SETGLOB 15
+; end colValue
+; expValue
+; end expValue
+; colValue
+POP S4
+; end colValue
+;; returning named params
+BLKSWAP 3, 4
+BLKDROP 6
+; end function addDEXclientToQueue
+
+.globl	takeFirstFromQueue_internal
+.type	takeFirstFromQueue_internal, @function
+; function takeFirstFromQueue
+;; map.delMin
+; expValue
+;; fetch rootQueue
+GETGLOB 15
+; end expValue
+PUSHINT 128
+DICTUREMMIN
+NULLSWAPIFNOT
+PUSHCONT {
+	SWAP
+	PLDU 256
+	TUPLE 2
+}
+IF
+SWAP
+; colValue
+SETGLOB 15
+; end colValue
+;; decl: rs
+;; if
+;; push identifier rs
+DUP
+ISNULL
+NOT
+PUSHCONT {
+	;; push identifier rs
+	DUP
+	DUP
+	ISNULL
+	THROWIF 63
+	UNTUPLE 2
+	SWAP
+	SWAP
+	;; decl: queueID
+	;; return
+	NIP
+	NIP
+	RET
+}
+PUSHCONT {
+	;; return
+	DROP
+	PUSHINT 0
+	RET
+}
+CONDSEL
+JMPX
+;; end if
+; end function takeFirstFromQueue
+
+.globl	getLengthQueue
+.public	getLengthQueue
+.type	getLengthQueue, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+PUSH S1
+PUSHCONT {
+	LDU 32
+	GETGLOB 4
+	ROT
+	SETINDEXQ 5
+	SETGLOB 4
+}
+IFNOT
+; Decode input parameters
+ENDS
+; modifier alwaysAccept
+ACCEPT
+; function getLengthQueue
+;; ret param: length
+PUSHINT 0
+CALL $getFirstQueue_internal$
+;; decl: first
+CALL $getLastQueue_internal$
+;; decl: last
+; expValue
+; end expValue
+;; push identifier last
+DUP
+;; >=
+;; push identifier first
+PUSH S2
+GEQ
+PUSHCONT {
+	;; push identifier last
+	DUP
+	;; -
+	;; push identifier first
+	PUSH S2
+	SUB
+	UFITS 128
+	;; +
+	PUSHINT 1
+	ADD
+	UFITS 128
+}
+PUSHCONT {
+	PUSHINT 0
+}
+IFELSE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+;; emitting 1 value(s)
+PUSH S1
+EQINT -1
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xaedbf9e9
+	PUSH S1
+	STUR 128
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+}
+PUSHCONT {
+	GETGLOB 4
+	DUP
+	INDEX 3
+	PUSH S1
+	INDEX 2
+	GETGLOB 9
+	BLKSWAP 1, 3
+	INDEX 1
+	NEWC
+	PUSHINT 2
+	STZEROES
+	STI 1
+	PUSHINT 3
+	STZEROES
+	STSLICE
+	SWAP
+	STGRAMS
+	STDICT
+	PUSHINT 104
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	GETGLOB 4
+	INDEX 5
+	STUR 32
+	PUSH S1
+	STUR 128
+	ENDC
+	GETGLOB 4
+	INDEX 4
+	SENDRAWMSG
+}
+IFELSE
+DROP
+; end function getLengthQueue
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getLengthQueue_internal
+.type	getLengthQueue_internal, @function
+; modifier alwaysAccept
+ACCEPT
+; function getLengthQueue
+;; ret param: length
+PUSHINT 0
+CALL $getFirstQueue_internal$
+;; decl: first
+CALL $getLastQueue_internal$
+;; decl: last
+; expValue
+; end expValue
+;; push identifier last
+DUP
+;; >=
+;; push identifier first
+PUSH S2
+GEQ
+PUSHCONT {
+	;; push identifier last
+	DUP
+	;; -
+	;; push identifier first
+	PUSH S2
+	SUB
+	UFITS 128
+	;; +
+	PUSHINT 1
+	ADD
+	UFITS 128
+}
+PUSHCONT {
+	PUSHINT 0
+}
+IFELSE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+TUPLE 1
+SETGLOB 8
+; end function getLengthQueue
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	getAllQueue
+.public	getAllQueue
+.type	getAllQueue, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+PUSH S1
+PUSHCONT {
+	LDU 32
+	GETGLOB 4
+	ROT
+	SETINDEXQ 5
+	SETGLOB 4
+}
+IFNOT
+; Decode input parameters
+ENDS
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 102
+ACCEPT
+; function getAllQueue
+;; ret param: queueArr
+PUSHINT 0
+NEWDICT
+PAIR
+CALL $getFirstQueue_internal$
+;; decl: first
+CALL $getLastQueue_internal$
+;; decl: last
+;; push identifier last
+DUP
+;; >=
+;; push identifier first
+PUSH S2
+GEQ
+PUSHCONT {
+	;; push identifier last
+	DUP
+	;; -
+	;; push identifier first
+	PUSH S2
+	SUB
+	UFITS 128
+	;; +
+	PUSHINT 1
+	ADD
+	UFITS 128
+}
+PUSHCONT {
+	PUSHINT 0
+}
+IFELSE
+;; decl: repeatQty
+;; push identifier first
+PUSH S2
+;; decl: count
+; while
+;; push identifier repeatQty
+PUSH S1
+PUSHCONT {
+	; expValue
+	PUSH S4
+	; end expValue
+	;; index
+	;; push identifier count
+	PUSH S1
+	;; push identifier rootQueue
+	GETGLOB 15
+	PUSHINT 128
+	DICTUGET
+	PUSHCONT {
+		PLDU 256
+	}
+	PUSHCONT {
+		PUSHINT 0
+	}
+	IFELSE
+	;; array.push(..)
+	NEWC
+	STU 256
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSETB
+	PAIR
+	; colValue
+	POP S5
+	; end colValue
+	;; ++
+	; expValue
+	; end expValue
+	INC
+	UFITS 128
+	; colValue
+	; end colValue
+}
+REPEAT
+; end while
+;; returning named params
+BLKDROP 4
+;; emitting 1 value(s)
+PUSH S1
+EQINT -1
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xaa4c46cd
+	PUSH S1
+	UNPAIR
+	XCHG s2
+	STU 32
+	STDICT
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+}
+PUSHCONT {
+	GETGLOB 4
+	DUP
+	INDEX 3
+	PUSH S1
+	INDEX 2
+	GETGLOB 9
+	BLKSWAP 1, 3
+	INDEX 1
+	NEWC
+	PUSHINT 2
+	STZEROES
+	STI 1
+	PUSHINT 3
+	STZEROES
+	STSLICE
+	SWAP
+	STGRAMS
+	STDICT
+	PUSHINT 104
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	GETGLOB 4
+	INDEX 5
+	STUR 32
+	PUSH S1
+	UNPAIR
+	XCHG s2
+	STU 32
+	STDICT
+	ENDC
+	GETGLOB 4
+	INDEX 4
+	SENDRAWMSG
+}
+IFELSE
+DROP
+; end function getAllQueue
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getAllQueue_internal
+.type	getAllQueue_internal, @function
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 102
+ACCEPT
+; function getAllQueue
+;; ret param: queueArr
+PUSHINT 0
+NEWDICT
+PAIR
+CALL $getFirstQueue_internal$
+;; decl: first
+CALL $getLastQueue_internal$
+;; decl: last
+;; push identifier last
+DUP
+;; >=
+;; push identifier first
+PUSH S2
+GEQ
+PUSHCONT {
+	;; push identifier last
+	DUP
+	;; -
+	;; push identifier first
+	PUSH S2
+	SUB
+	UFITS 128
+	;; +
+	PUSHINT 1
+	ADD
+	UFITS 128
+}
+PUSHCONT {
+	PUSHINT 0
+}
+IFELSE
+;; decl: repeatQty
+;; push identifier first
+PUSH S2
+;; decl: count
+; while
+;; push identifier repeatQty
+PUSH S1
+PUSHCONT {
+	; expValue
+	PUSH S4
+	; end expValue
+	;; index
+	;; push identifier count
+	PUSH S1
+	;; push identifier rootQueue
+	GETGLOB 15
+	PUSHINT 128
+	DICTUGET
+	PUSHCONT {
+		PLDU 256
+	}
+	PUSHCONT {
+		PUSHINT 0
+	}
+	IFELSE
+	;; array.push(..)
+	NEWC
+	STU 256
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSETB
+	PAIR
+	; colValue
+	POP S5
+	; end colValue
+	;; ++
+	; expValue
+	; end expValue
+	INC
+	UFITS 128
+	; colValue
+	; end colValue
+}
+REPEAT
+; end while
+;; returning named params
+BLKDROP 4
+TUPLE 1
+SETGLOB 8
+; end function getAllQueue
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	wrapGrams
+.public	wrapGrams
+.type	wrapGrams, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode destination
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: destination
+; modifier alwaysAccept
+ACCEPT
+; function wrapGrams
+;; get member sender
+GETGLOB 9
+;; decl: dexclient
+;; get member value
+CALLREF {
+	CALL $message_balance_macro$
+}
+;; decl: wrappedTONgrams
+;; if
+;; !
+;; map.exists
+;; push identifier dexclient
+PUSH S1
+;; push identifier tonwrapperclients
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+NOT
+PUSHCONT {
+	; expValue
+	;; fetch tonwrapperclientKeys
+	GETGLOB 13
+	; end expValue
+	;; push identifier dexclient
+	PUSH S2
+	;; array.push(..)
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSET
+	PAIR
+	; colValue
+	SETGLOB 13
+	; end colValue
+	;; push identifier dexclient
+	PUSH S1
+	;; push identifier destination
+	PUSH S3
+	;; push identifier wrappedTONgrams
+	PUSH S2
+	CALL $addDEXclientToQueue_internal$
+	DROP
+	;; push identifier ROOT_WRAPPED_TON
+	PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+	;; param: rootAddr
+	; function createDepositWallet
+	CALL $createWalletId_internal$
+	;; decl: walletId
+	;; push identifier rootAddr
+	PUSH S1
+	;; decl: creator
+	MYADDR
+	;; decl: owner
+	;; get member value
+	;; push identifier owner
+	DUP
+	PARSEMSGADDR
+	INDEX 3
+	PLDU 256
+	;; decl: ownerUINT
+	NEWC
+	STSLICECONST x0000000d
+	STSLICECONST x00000125
+	;; workchain_id
+	PUSHINT 0
+	STIR 8
+	;; pubkey
+	;; push identifier walletId
+	PUSH S4
+	STUR 256
+	;; internal_owner
+	;; push identifier ownerUINT
+	PUSH S1
+	STUR 256
+	;; grams
+	PUSHINT 500000000
+	STUR 128
+	ENDC
+	;; decl: body
+	;; transfer()
+	;; push identifier creator
+	PUSH S3
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x43b9aca00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier body
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	BLKDROP 6
+	; end function createDepositWallet
+}
+PUSHCONT {
+	NEWC
+	STSLICECONST x0000000f
+	;; tokens
+	;; push identifier wrappedTONgrams
+	PUSH S1
+	STUR 128
+	ENDC
+	;; decl: bodyM
+	;; transfer()
+	;; push identifier ROOT_WRAPPED_TON
+	PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x40d1cef00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier bodyM
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	NEWC
+	STSLICECONST x0000000e
+	;; dest
+	;; push identifier destination
+	PUSH S4
+	STSLICER
+	;; tokens
+	;; push identifier wrappedTONgrams
+	PUSH S2
+	STUR 128
+	;; grams
+	PUSHINT 120000000
+	STUR 128
+	ENDC
+	;; decl: bodyG
+	;; transfer()
+	;; push identifier ROOT_WRAPPED_TON
+	PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x40e4e1c00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier bodyG
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	DROP2
+}
+IFELSE
+;; end if
+DROP2
+; end function wrapGrams
+DROP
+; end modifier alwaysAccept
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	wrapGrams_internal
+.type	wrapGrams_internal, @function
+;; param: destination
+; modifier alwaysAccept
+ACCEPT
+; function wrapGrams
+;; get member sender
+GETGLOB 9
+;; decl: dexclient
+;; get member value
+CALLREF {
+	CALL $message_balance_macro$
+}
+;; decl: wrappedTONgrams
+;; if
+;; !
+;; map.exists
+;; push identifier dexclient
+PUSH S1
+;; push identifier tonwrapperclients
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+NOT
+PUSHCONT {
+	; expValue
+	;; fetch tonwrapperclientKeys
+	GETGLOB 13
+	; end expValue
+	;; push identifier dexclient
+	PUSH S2
+	;; array.push(..)
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSET
+	PAIR
+	; colValue
+	SETGLOB 13
+	; end colValue
+	;; push identifier dexclient
+	PUSH S1
+	;; push identifier destination
+	PUSH S3
+	;; push identifier wrappedTONgrams
+	PUSH S2
+	CALL $addDEXclientToQueue_internal$
+	DROP
+	;; push identifier ROOT_WRAPPED_TON
+	PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+	;; param: rootAddr
+	; function createDepositWallet
+	CALL $createWalletId_internal$
+	;; decl: walletId
+	;; push identifier rootAddr
+	PUSH S1
+	;; decl: creator
+	MYADDR
+	;; decl: owner
+	;; get member value
+	;; push identifier owner
+	DUP
+	PARSEMSGADDR
+	INDEX 3
+	PLDU 256
+	;; decl: ownerUINT
+	NEWC
+	STSLICECONST x0000000d
+	STSLICECONST x00000125
+	;; workchain_id
+	PUSHINT 0
+	STIR 8
+	;; pubkey
+	;; push identifier walletId
+	PUSH S4
+	STUR 256
+	;; internal_owner
+	;; push identifier ownerUINT
+	PUSH S1
+	STUR 256
+	;; grams
+	PUSHINT 500000000
+	STUR 128
+	ENDC
+	;; decl: body
+	;; transfer()
+	;; push identifier creator
+	PUSH S3
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x43b9aca00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier body
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	BLKDROP 6
+	; end function createDepositWallet
+}
+PUSHCONT {
+	NEWC
+	STSLICECONST x0000000f
+	;; tokens
+	;; push identifier wrappedTONgrams
+	PUSH S1
+	STUR 128
+	ENDC
+	;; decl: bodyM
+	;; transfer()
+	;; push identifier ROOT_WRAPPED_TON
+	PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x40d1cef00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier bodyM
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	NEWC
+	STSLICECONST x0000000e
+	;; dest
+	;; push identifier destination
+	PUSH S4
+	STSLICER
+	;; tokens
+	;; push identifier wrappedTONgrams
+	PUSH S2
+	STUR 128
+	;; grams
+	PUSHINT 120000000
+	STUR 128
+	ENDC
+	;; decl: bodyG
+	;; transfer()
+	;; push identifier ROOT_WRAPPED_TON
+	PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x40e4e1c00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier bodyG
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	DROP2
+}
+IFELSE
+;; end if
+DROP2
+; end function wrapGrams
+DROP
+; end modifier alwaysAccept
+
+.globl	setDepositWallet
+.public	setDepositWallet
+.type	setDepositWallet, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode value0
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: value0
+; modifier alwaysAccept
+ACCEPT
+; function setDepositWallet
+;; get member sender
+GETGLOB 9
+;; decl: root
+CALL $takeFirstFromQueue_internal$
+;; decl: dexclientQueueID
+;; index
+;; push identifier dexclientQueueID
+DUP
+;; push identifier queueRouter
+GETGLOB 14
+PUSHINT 256
+DICTUGET
+PUSHCONT {
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 3
+}
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 3
+}
+IFELSE
+;; decl: cq
+;; get member dexclient
+;; push identifier cq
+DUP
+INDEX 0
+;; decl: dexclient
+;; get member destination
+;; push identifier cq
+PUSH S1
+INDEX 1
+;; decl: destination
+;; get member qty
+;; push identifier cq
+PUSH S2
+INDEX 2
+;; decl: wrappedTONgrams
+; expValue
+;; fetch tonwrapperclients
+GETGLOB 12
+;; push identifier dexclient
+PUSH S3
+SWAP
+; end expValue
+;; push identifier value0
+PUSH S8
+; colValue
+ROTREV
+PUSHINT 267
+DICTSET
+SETGLOB 12
+; end colValue
+NEWC
+STSLICECONST x0000000f
+;; tokens
+;; push identifier wrappedTONgrams
+PUSH S1
+STUR 128
+ENDC
+;; decl: bodyM
+;; transfer()
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+NEWC
+STSLICECONST x42_
+STSLICE
+PUSHSLICE x40d1cef00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier bodyM
+PUSH S1
+STREFR
+ENDC
+PUSHINT 1
+SENDRAWMSG
+NEWC
+STSLICECONST x0000000e
+;; dest
+;; push identifier destination
+PUSH S3
+STSLICER
+;; tokens
+;; push identifier wrappedTONgrams
+PUSH S2
+STUR 128
+;; grams
+PUSHINT 120000000
+STUR 128
+ENDC
+;; decl: bodyG
+;; transfer()
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+NEWC
+STSLICECONST x42_
+STSLICE
+PUSHSLICE x40e4e1c00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier bodyG
+PUSH S1
+STREFR
+ENDC
+PUSHINT 1
+SENDRAWMSG
+NEWC
+STSLICECONST x00000089
+;; arg0
+;; push identifier root
+PUSH S8
+STSLICER
+;; arg1
+;; push identifier value0
+PUSH S9
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier dexclient
+PUSH S5
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x407270e00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 1
+SENDRAWMSG
+BLKDROP 9
+; end function setDepositWallet
+DROP
+; end modifier alwaysAccept
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	setDepositWallet_internal
+.type	setDepositWallet_internal, @function
+;; param: value0
+; modifier alwaysAccept
+ACCEPT
+; function setDepositWallet
+;; get member sender
+GETGLOB 9
+;; decl: root
+CALL $takeFirstFromQueue_internal$
+;; decl: dexclientQueueID
+;; index
+;; push identifier dexclientQueueID
+DUP
+;; push identifier queueRouter
+GETGLOB 14
+PUSHINT 256
+DICTUGET
+PUSHCONT {
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 3
+}
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 3
+}
+IFELSE
+;; decl: cq
+;; get member dexclient
+;; push identifier cq
+DUP
+INDEX 0
+;; decl: dexclient
+;; get member destination
+;; push identifier cq
+PUSH S1
+INDEX 1
+;; decl: destination
+;; get member qty
+;; push identifier cq
+PUSH S2
+INDEX 2
+;; decl: wrappedTONgrams
+; expValue
+;; fetch tonwrapperclients
+GETGLOB 12
+;; push identifier dexclient
+PUSH S3
+SWAP
+; end expValue
+;; push identifier value0
+PUSH S8
+; colValue
+ROTREV
+PUSHINT 267
+DICTSET
+SETGLOB 12
+; end colValue
+NEWC
+STSLICECONST x0000000f
+;; tokens
+;; push identifier wrappedTONgrams
+PUSH S1
+STUR 128
+ENDC
+;; decl: bodyM
+;; transfer()
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+NEWC
+STSLICECONST x42_
+STSLICE
+PUSHSLICE x40d1cef00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier bodyM
+PUSH S1
+STREFR
+ENDC
+PUSHINT 1
+SENDRAWMSG
+NEWC
+STSLICECONST x0000000e
+;; dest
+;; push identifier destination
+PUSH S3
+STSLICER
+;; tokens
+;; push identifier wrappedTONgrams
+PUSH S2
+STUR 128
+;; grams
+PUSHINT 120000000
+STUR 128
+ENDC
+;; decl: bodyG
+;; transfer()
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801fedb4f589191ab977340a026a816a4e13809ea8d9db0379e0aa7404f96098421_
+NEWC
+STSLICECONST x42_
+STSLICE
+PUSHSLICE x40e4e1c00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier bodyG
+PUSH S1
+STREFR
+ENDC
+PUSHINT 1
+SENDRAWMSG
+NEWC
+STSLICECONST x00000089
+;; arg0
+;; push identifier root
+PUSH S8
+STSLICER
+;; arg1
+;; push identifier value0
+PUSH S9
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier dexclient
+PUSH S5
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x407270e00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 1
+SENDRAWMSG
+BLKDROP 9
+; end function setDepositWallet
+DROP
+; end modifier alwaysAccept
+
+.globl	unwrapGrams
+.public	unwrapGrams
+.type	unwrapGrams, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+ENDS
+; modifier alwaysAccept
+ACCEPT
+; function unwrapGrams
+;; push identifier addressZero
+GETGLOB 10
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SDEQ
+NOT
+THROWIFNOT 104
+;; get member sender
+GETGLOB 9
+;; decl: dexclient
+;; map.exists
+;; push identifier dexclient
+DUP
+;; push identifier tonwrapperclients
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 103
+;; index
+;; push identifier dexclient
+DUP
+;; push identifier tonwrapperclients
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; decl: depositwallet
+NEWC
+STSLICECONST x0000000d
+STSLICECONST x00000152
+ENDC
+;; decl: bodyA
+;; transfer()
+;; push identifier depositwallet
+PUSH S1
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x4014fb180000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier bodyA
+PUSH S1
+STREFR
+ENDC
+PUSHINT 1
+SENDRAWMSG
+; expValue
+;; fetch processRouter
+GETGLOB 16
+;; push identifier depositwallet
+PUSH S2
+SWAP
+; end expValue
+;; push identifier dexclient
+PUSH S4
+; colValue
+ROTREV
+PUSHINT 267
+DICTSET
+SETGLOB 16
+; end colValue
+BLKDROP 3
+; end function unwrapGrams
+; end modifier alwaysAccept
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	unwrapGrams_internal
+.type	unwrapGrams_internal, @function
+; modifier alwaysAccept
+ACCEPT
+; function unwrapGrams
+;; push identifier addressZero
+GETGLOB 10
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SDEQ
+NOT
+THROWIFNOT 104
+;; get member sender
+GETGLOB 9
+;; decl: dexclient
+;; map.exists
+;; push identifier dexclient
+DUP
+;; push identifier tonwrapperclients
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 103
+;; index
+;; push identifier dexclient
+DUP
+;; push identifier tonwrapperclients
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; decl: depositwallet
+NEWC
+STSLICECONST x0000000d
+STSLICECONST x00000152
+ENDC
+;; decl: bodyA
+;; transfer()
+;; push identifier depositwallet
+PUSH S1
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x4014fb180000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier bodyA
+PUSH S1
+STREFR
+ENDC
+PUSHINT 1
+SENDRAWMSG
+; expValue
+;; fetch processRouter
+GETGLOB 16
+;; push identifier depositwallet
+PUSH S2
+SWAP
+; end expValue
+;; push identifier dexclient
+PUSH S4
+; colValue
+ROTREV
+PUSHINT 267
+DICTSET
+SETGLOB 16
+; end colValue
+BLKDROP 3
+; end function unwrapGrams
+; end modifier alwaysAccept
+
+.globl	balanceDepositWallet
+.public	balanceDepositWallet
+.type	balanceDepositWallet, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode value0
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: value0
+; modifier alwaysAccept
+ACCEPT
+; function balanceDepositWallet
+;; get member sender
+GETGLOB 9
+;; decl: depositwallet
+;; index
+;; push identifier depositwallet
+DUP
+;; push identifier processRouter
+GETGLOB 16
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; decl: dexclient
+;; push identifier value0
+PUSH S2
+;; decl: currentbalance
+;; !
+;; push identifier currentbalance
+DUP
+;; >
+;; get member balance
+GETPARAM 7
+INDEX 0
+GREATER
+NOT
+THROWIFNOT 103
+;; if
+;; push identifier currentbalance
+DUP
+GTINT 0
+PUSHCONT {
+	;; push identifier depositwallet
+	PUSH S2
+	;; push identifier addressZero
+	GETGLOB 10
+	;; push identifier currentbalance
+	PUSH S2
+	PUSHINT 300000000
+	;; param: from
+	;; param: to
+	;; param: tokens
+	;; param: grams
+	; function processTokens
+	;; push identifier from
+	PUSH S3
+	;; decl: transmitter
+	;; push identifier to
+	PUSH S3
+	;; decl: receiver
+	NEWC
+	STSLICECONST x0000000c
+	;; dest
+	;; push identifier receiver
+	PUSH S1
+	STSLICER
+	;; tokens
+	;; push identifier tokens
+	PUSH S4
+	STUR 128
+	;; grams
+	;; push identifier grams
+	PUSH S3
+	STUR 128
+	ENDC
+	;; decl: body
+	;; transfer()
+	;; push identifier transmitter
+	PUSH S2
+	NEWC
+	STSLICECONST x62_
+	STSLICE
+	PUSHSLICE x41dcd6500000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier body
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	BLKDROP 7
+	; end function processTokens
+	;; transfer()
+	;; push identifier currentbalance
+	DUP
+	;; push identifier dexclient
+	PUSH S2
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	SWAP
+	STGRAMS
+	PUSHINT 105
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	ENDC
+	PUSHINT 3
+	SENDRAWMSG
+}
+IF
+;; end if
+BLKDROP 3
+; end function balanceDepositWallet
+DROP
+; end modifier alwaysAccept
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	balanceDepositWallet_internal
+.type	balanceDepositWallet_internal, @function
+;; param: value0
+; modifier alwaysAccept
+ACCEPT
+; function balanceDepositWallet
+;; get member sender
+GETGLOB 9
+;; decl: depositwallet
+;; index
+;; push identifier depositwallet
+DUP
+;; push identifier processRouter
+GETGLOB 16
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; decl: dexclient
+;; push identifier value0
+PUSH S2
+;; decl: currentbalance
+;; !
+;; push identifier currentbalance
+DUP
+;; >
+;; get member balance
+GETPARAM 7
+INDEX 0
+GREATER
+NOT
+THROWIFNOT 103
+;; if
+;; push identifier currentbalance
+DUP
+GTINT 0
+PUSHCONT {
+	;; push identifier depositwallet
+	PUSH S2
+	;; push identifier addressZero
+	GETGLOB 10
+	;; push identifier currentbalance
+	PUSH S2
+	PUSHINT 300000000
+	;; param: from
+	;; param: to
+	;; param: tokens
+	;; param: grams
+	; function processTokens
+	;; push identifier from
+	PUSH S3
+	;; decl: transmitter
+	;; push identifier to
+	PUSH S3
+	;; decl: receiver
+	NEWC
+	STSLICECONST x0000000c
+	;; dest
+	;; push identifier receiver
+	PUSH S1
+	STSLICER
+	;; tokens
+	;; push identifier tokens
+	PUSH S4
+	STUR 128
+	;; grams
+	;; push identifier grams
+	PUSH S3
+	STUR 128
+	ENDC
+	;; decl: body
+	;; transfer()
+	;; push identifier transmitter
+	PUSH S2
+	NEWC
+	STSLICECONST x62_
+	STSLICE
+	PUSHSLICE x41dcd6500000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier body
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	BLKDROP 7
+	; end function processTokens
+	;; transfer()
+	;; push identifier currentbalance
+	DUP
+	;; push identifier dexclient
+	PUSH S2
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	SWAP
+	STGRAMS
+	PUSHINT 105
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	ENDC
+	PUSHINT 3
+	SENDRAWMSG
+}
+IF
+;; end if
+BLKDROP 3
+; end function balanceDepositWallet
+DROP
+; end modifier alwaysAccept
+
+.globl	getBalanceTONgrams
+.public	getBalanceTONgrams
+.type	getBalanceTONgrams, @function
+PUSH S1
+PUSHCONT {
+	LDU 32
+	GETGLOB 4
+	ROT
+	SETINDEXQ 5
+	SETGLOB 4
+}
+IFNOT
+; Decode input parameters
+ENDS
+; modifier alwaysAccept
+ACCEPT
+; function getBalanceTONgrams
+;; ret param: balanceTONgrams
+PUSHINT 0
+;; return
+;; get member balance
+GETPARAM 7
+INDEX 0
+NIP
+;; emitting 1 value(s)
+PUSH S1
+EQINT -1
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST x88c00ce9
+	PUSH S1
+	STUR 128
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+}
+PUSHCONT {
+	GETGLOB 4
+	DUP
+	INDEX 3
+	PUSH S1
+	INDEX 2
+	GETGLOB 9
+	BLKSWAP 1, 3
+	INDEX 1
+	NEWC
+	PUSHINT 2
+	STZEROES
+	STI 1
+	PUSHINT 3
+	STZEROES
+	STSLICE
+	SWAP
+	STGRAMS
+	STDICT
+	PUSHINT 104
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	GETGLOB 4
+	INDEX 5
+	STUR 32
+	PUSH S1
+	STUR 128
+	ENDC
+	GETGLOB 4
+	INDEX 4
+	SENDRAWMSG
+}
+IFELSE
+DROP
+; end function getBalanceTONgrams
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getBalanceTONgrams_internal
+.type	getBalanceTONgrams_internal, @function
+; modifier alwaysAccept
+ACCEPT
+; function getBalanceTONgrams
+;; ret param: balanceTONgrams
+PUSHINT 0
+;; return
+;; get member balance
+GETPARAM 7
+INDEX 0
+NIP
+TUPLE 1
+SETGLOB 8
+; end function getBalanceTONgrams
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	getDepositAddress
+.public	getDepositAddress
+.type	getDepositAddress, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+PUSH S1
+PUSHCONT {
+	LDU 32
+	GETGLOB 4
+	ROT
+	SETINDEXQ 5
+	SETGLOB 4
+}
+IFNOT
+; Decode input parameters
+; Decode dexclient
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: dexclient
+; modifier alwaysAccept
+ACCEPT
+; function getDepositAddress
+;; ret param: dexclientDepositAddress
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+; expValue
+; end expValue
+;; index
+;; push identifier dexclient
+PUSH S1
+;; push identifier tonwrapperclients
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+; colValue
+NIP
+; end colValue
+;; returning named params
+;; emitting 1 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST x8ddf2a3d
+	PUSH S1
+	STSLICER
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+}
+PUSHCONT {
+	GETGLOB 4
+	DUP
+	INDEX 3
+	PUSH S1
+	INDEX 2
+	GETGLOB 9
+	BLKSWAP 1, 3
+	INDEX 1
+	NEWC
+	PUSHINT 2
+	STZEROES
+	STI 1
+	PUSHINT 3
+	STZEROES
+	STSLICE
+	SWAP
+	STGRAMS
+	STDICT
+	PUSHINT 104
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	GETGLOB 4
+	INDEX 5
+	STUR 32
+	PUSH S1
+	STSLICER
+	ENDC
+	GETGLOB 4
+	INDEX 4
+	SENDRAWMSG
+}
+IFELSE
+DROP
+; end function getDepositAddress
+DROP
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getDepositAddress_internal
+.type	getDepositAddress_internal, @function
+;; param: dexclient
+; modifier alwaysAccept
+ACCEPT
+; function getDepositAddress
+;; ret param: dexclientDepositAddress
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+; expValue
+; end expValue
+;; index
+;; push identifier dexclient
+PUSH S1
+;; push identifier tonwrapperclients
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+; colValue
+NIP
+; end colValue
+;; returning named params
+TUPLE 1
+SETGLOB 8
+; end function getDepositAddress
+DROP
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 1
+
+.macro c7_to_c4
+GETGLOB 2
+NEWC
+STU 256
+GETGLOB 3
+STUR 64
+GETGLOB 6
+STUR 1
+NEWC
+GETGLOB 14
+GETGLOB 15
+XCHG s2
+STDICT
+STDICT
+GETGLOB 10
+GETGLOB 11
+GETGLOB 12
+GETGLOB 13
+UNTUPLE 2
+GETGLOB 16
+REVERSE 8, 0
+STBREF
+STSLICE
+STI 1
+STDICT
+STU 32
+STDICT
+STDICT
+ENDC
+POP C4
+
+.macro c4_to_c7
+PUSHROOT
+CTOS        ; c4
+LDU 256      ; pubkey c4
+LDU 64      ; pubkey timestamp c4
+LDU 1       ; pubkey [timestamp] constructor_flag memory
+LDREFRTOS
+LDDICT
+PLDDICT
+SETGLOB 15
+SETGLOB 14
+LDMSGADDR
+LDI 1
+LDDICT
+LDU 32
+LDDICT
+ROTREV
+PAIR
+SETGLOB 13
+PLDDICT
+SETGLOB 16
+SETGLOB 12
+SETGLOB 11
+SETGLOB 10
+TRUE
+SETGLOB 1   ; pubkey [timestamp] constructor_flag
+SETGLOB 6   ; pubkey [timestamp]
+SETGLOB 3   ; D
+SETGLOB 2
+
+.macro c4_to_c7_with_init_storage
+PUSHROOT
+CTOS        ; c4
+DUP        ; c4 c4
+SBITS      ; c4 bits
+GTINT 1    ; c4 bits>1
+PUSHCONT {
+	LDU 256      ; pubkey c4
+	LDU 64      ; pubkey timestamp c4
+	LDU 1       ; pubkey [timestamp] constructor_flag memory
+	LDREFRTOS
+	LDDICT
+	PLDDICT
+	SETGLOB 15
+	SETGLOB 14
+	LDMSGADDR
+	LDI 1
+	LDDICT
+	LDU 32
+	LDDICT
+	ROTREV
+	PAIR
+	SETGLOB 13
+	PLDDICT
+	SETGLOB 16
+	SETGLOB 12
+	SETGLOB 11
+	SETGLOB 10
+	TRUE
+	SETGLOB 1   ; pubkey [timestamp] constructor_flag
+	SETGLOB 6   ; pubkey [timestamp]
+	SETGLOB 3   ; D
+	SETGLOB 2
+}
+PUSHCONT {
+	PLDDICT   ; D
+	; init addressZero
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	SETGLOB 10
+	; init initStatus
+	PUSHINT 0
+	SETGLOB 11
+	; init tonwrapperclients
+	NEWDICT
+	SETGLOB 12
+	; init tonwrapperclientKeys
+	PUSHINT 0
+	NEWDICT
+	PAIR
+	SETGLOB 13
+	; init queueRouter
+	NEWDICT
+	SETGLOB 14
+	; init rootQueue
+	NEWDICT
+	SETGLOB 15
+	; init processRouter
+	NEWDICT
+	SETGLOB 16
+	; set contract pubkey
+	PUSHINT 0
+	SWAP
+	PUSHINT 64
+	DICTUGET
+	THROWIFNOT 61
+	PLDU 256
+	SETGLOB 2
+	PUSHINT 0 ; timestamp
+	SETGLOB 3
+	PUSHINT 0 ; constructor_flag
+	SETGLOB 6
+	TRUE
+	SETGLOB 1
+}
+IFELSE
+
+.internal-alias :main_internal,        0
+.internal	:main_internal
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Function: main_internal
+;; param: contract_balance
+;; param: msg_balance
+;; param: int_msg_info
+;; param: msg_body_slice
+PUSHINT 0  ; main_external trans id
+PUSH S2
+CTOS
+LDU 4       ; bounced tail
+LDMSGADDR   ; bounced src tail
+DROP
+SETGLOB 9
+MODPOW2 1
+GETGLOB 4
+TRUE
+SETINDEXQ 1
+PUSHINT 10000000
+SETINDEXQ 2
+NULL
+SETINDEXQ 3
+PUSHINT 1
+SETINDEXQ 4
+SETGLOB 4
+IFRET
+PUSH S1    ; body
+SEMPTY     ; isEmpty
+IFRET
+PUSH S1 ; body
+LDU 32  ; funcId body'
+PUSH S1 ; funcId body' funcId
+IFNOTRET
+PUSH S1 ; funcId body' funcId
+LESSINT 3            ; funcId body' funcId<3
+PUSH S2              ; funcId body' funcId<3 funcId
+PUSHINT 4294967293   ; funcId body' funcId<3 funcId 4294967293
+GREATER              ; funcId body' funcId<3 funcId>4294967293
+OR                   ; funcId body' funcId<3||funcId>4294967293
+PUSHCONT {
+	DROP2
+	THROW 60
+}
+IFJMP
+SWAP    ; body funcId
+CALL 1
+GETGLOB 7
+ISNULL
+PUSHCONT {
+	DROP
+	THROW 60
+}
+IF
+
+.internal-alias :main_external,        -1
+.internal	:main_external
+PUSHINT -1 ; main_external trans id
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SETGLOB 9
+PUSH S1
+CALL $c4_to_c7_with_init_storage$
+LDU 1 ; haveSign msgSlice
+SWAP
+PUSHCONT {
+	PUSHINT 512
+	LDSLICEX ; signatureSlice msgSlice
+	DUP      ; signatureSlice msgSlice msgSlice
+	HASHSU   ; signatureSlice msgSlice hashMsgSlice
+	SWAP  ; signatureSlice hashMsgSlice msgSlice
+	LDU 1 ; signatureSlice hashMsgSlice havePubkey msgSlice
+	SWAP  ; signatureSlice hashMsgSlice msgSlice havePubkey
+	PUSHCONT {
+		LDU 256       ; signatureSlice hashMsgSlice pubkey msgSlice
+		XCHG s3
+		SWAP
+	}
+	PUSHCONT {
+		XCHG s2
+		GETGLOB 2
+	}
+	IFELSE
+	DUP
+	SETGLOB 5
+	CHKSIGNU      ; msgSlice isSigned
+	THROWIFNOT 40 ; msgSlice
+}
+PUSHCONT {
+	LDU 1      ; havePubkey msgSlice
+	SWAP       ; msgSlice havePubkey
+	THROWIF 58 ; msgSlice
+}
+IFELSE
+LDU 64                         ; timestamp msgSlice
+SWAP                           ; msgSlice timestamp
+CALL $replay_protection_macro$ ; msgSlice
+LDU 32  ; expireAt msgSlice
+SWAP    ; msgSlice expireAt
+NOW     ; msgSlice expireAt now
+GREATER ; msgSlice expireAt>now
+THROWIFNOT 57
+LDU  32 ; funcId body
+PUSH S1 ; funcId body funcId
+LESSINT 3            ; funcId body' funcId<3
+PUSH S2              ; funcId body' funcId<3 funcId
+PUSHINT 4294967293   ; funcId body' funcId<3 funcId 4294967293
+GREATER              ; funcId body' funcId<3 funcId>4294967293
+OR                   ; funcId body' funcId<3||funcId>4294967293
+PUSHCONT {
+	DROP2
+	THROW 60
+}
+IFJMP
+SWAP    ; body funcId
+CALL 1
+GETGLOB 7
+ISNULL
+PUSHCONT {
+	DROP
+	THROW 60
+}
+IF
+

@@ -1,0 +1,154 @@
+solc DEXclienttest.sol
+tvm_linker compile DEXclienttest.code --lib ../../../../TVM/TON-Solidity-Compiler/lib/stdlib_sol.tvm
+tonos-cli genaddr DEXclienttest.tvc DEXclienttest.abi.json --genkey DEXclienttest.keys.json
+
+client
+0:303cfa9b8df043219c21a71715b124332b147f7398e0614616b55aae0f13bd10
+
+
+
+tonos-cli deploy DEXclienttest.tvc '{"DEXroot":"0:3b730bf0f73d7b9a1f79ded047d5936baa2f91d74407c1a35bb2114f79e86396"}' --sign DEXclienttest.keys.json --abi DEXclienttest.abi.json
+
+tonos-cli run 0:303cfa9b8df043219c21a71715b124332b147f7398e0614616b55aae0f13bd10 getCfg {} --abi DEXclienttest.abi.json
+
+	function getCfg() public view returns(address rootWrapper, address wrapper) {
+
+
+
+tonos-cli account 0:c7a8373167a9d1aa94652ca6de576fdc9d5d800e6d579bee13b10db14d7c4bc8
+
+
+tonos-cli call 0:c7a8373167a9d1aa94652ca6de576fdc9d5d800e6d579bee13b10db14d7c4bc8 askPairWalletsBalance '{"pairAddr":"0:31f6666a47d3852813cf236b12b2686cd7f75040f9719cef18165a3fe7959b52"}' --abi DEXclient.abi.json --sign DEXclient.keys.json
+
+tonos-cli run 0:0aebe912f0ed0330324ee009d3c741590769bd26898ececa0f899402ea088157 test2 {} --abi DEXcli.abi.json
+
+
+tonos-cli call 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 askBalanceAllTokens {} --abi DEXclient.abi.json --sign DEXclient.keys.json
+tonos-cli run 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 getBalanceTokenWallet '{"walletAddr":"0:bd6e061bd1d855354b2ed2b31a5c6e1becf3fdb97c1d1e3106fbf708fd52f139"}' --abi DEXclient.abi.json
+tonos-cli run 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 getBalanceTokenWallet '{"walletAddr":"0:ff5d81b96089aff89f9dbac9fe94b4a1266925f65b6fab048335abf72426090b"}' --abi DEXclient.abi.json
+
+
+tonos-cli call 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 makeABdepositToPair '{"pairAddr":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f", "qtyA":"3", "qtyB":"3"}' --abi DEXclient.abi.json --sign DEXclient.keys.json
+tonos-cli call 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 processSwapA '{"pairAddr":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f", "qtyA":"1"}' --abi DEXclient.abi.json --sign DEXclient.keys.json
+
+
+tonos-cli call 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 processLiquidity '{"pairAddr":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f", "qtyA":"5", "qtyB":"5"}' --abi DEXclient.abi.json --sign DEXclient.keys.json
+tonos-cli call 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 returnDepositFromPair '{"pairAddr":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f"}' --abi DEXclient.abi.json --sign DEXclient.keys.json
+
+
+
+tonos-cli run 0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f getClient '{"dexclient":"0:fbfe2385e577f0329c12e5514b99a0a38e5eaf10b6cf9a0576295fb563150f66"}' --abi DEXpair.abi.json
+
+tonos-cli run 0:bfd9c9f619b11ce1f3f9520af60dd64a5d4773116afab5e4fcd177208a9c7358 getTotalSupply {} --abi RootTokenContract.abi
+tonos-cli run 0:95f08c717d720bd7fa626b064673f9544b47cef60657ea2e23966dfe6dd329c3 getTotalSupply {} --abi RootTokenContract.abi
+
+tonos-cli run 0:bfd9c9f619b11ce1f3f9520af60dd64a5d4773116afab5e4fcd177208a9c7358 getTotalGranted {} --abi RootTokenContract.abi
+tonos-cli run 0:95f08c717d720bd7fa626b064673f9544b47cef60657ea2e23966dfe6dd329c3 getTotalGranted {} --abi RootTokenContract.abi
+
+tonos-cli call 0:bfd9c9f619b11ce1f3f9520af60dd64a5d4773116afab5e4fcd177208a9c7358 grant '{"dest":"0:dd8fbe7d4a09fd70d532ed3a90962928b72b183622976485c8db74f4ec8ac8eb","tokens":"200000","grams":"20000000"}' --sign deploy2.keys.json --abi RootTokenContract.abi
+tonos-cli call 0:95f08c717d720bd7fa626b064673f9544b47cef60657ea2e23966dfe6dd329c3 grant '{"dest":"0:b59b7774d5eb7db91ad230972efecd3b0dc51cd1d1b57be611c576dfc8f41d4e","tokens":"200000","grams":"20000000"}' --sign deploy3.keys.json --abi RootTokenContract.abi
+
+tonos-cli call 0:bfd9c9f619b11ce1f3f9520af60dd64a5d4773116afab5e4fcd177208a9c7358 mint '{"tokens":"1000"}' --sign deploy2.keys.json --abi RootTokenContract.abi
+tonos-cli call 0:95f08c717d720bd7fa626b064673f9544b47cef60657ea2e23966dfe6dd329c3 mint '{"tokens":"1000"}' --sign deploy3.keys.json --abi RootTokenContract.abi
+
+tonos-cli call 0:4b55098b5acd39f17cf37369ab84320401221c88e612d308054724e19929d1ad processSwapA '{"pairAddr":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f", "qtyA":"2"}' --abi DEXclient.abi.json --sign t.keys.json
+
+
+tonos-cli run 0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f getClientsArr {} --abi DEXpair.abi.json
+
+deposit
+tonos-cli run 0:233b6e56466e9d0f0e2fccdc44278624b3f693e16dd2d12324f4ce6963443755 getBalance {} --abi TONTokenWallet.abi
+tonos-cli run 0:d6e7781e58b0895d4d256708af3e5bd015d160a7fcdfb6f872e083e8bed3b9c7 getBalance {} --abi TONTokenWallet.abi
+
+reserves
+tonos-cli run 0:c4eb2ddd1bc1c76e00f951e623b06d83d51b7f75159ddb516566d7a69bd744a1 getBalance {} --abi TONTokenWallet.abi
+tonos-cli run 0:c617ea04da9b25bcf77dd2e54da5f45055e669834f76938997ae9c9d1a90bbad getBalance {} --abi TONTokenWallet.abi
+
+client wallets
+tonos-cli run 0:0379e7cefb45d9acbeb79f22fe2247c82c32d8bc6f385f2b4b07e20bc641a59a getBalance {} --abi TONTokenWallet.abi
+tonos-cli run 0:f689ec71ad68b069db7654d55f34f10643f5f49bae53979ddde30af6a4e7b596 getBalance {} --abi TONTokenWallet.abi
+
+tonos-cli call 0:3fbf0752a710d56aa5e319aa3fa0aa5ec64ba27dd3686d1c55a85371fa032759 processSwapA '{"pairAddr":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f", "qtyA":"2"}' --abi DEXclient.abi.json --sign t.keys.json
+
+tonos-cli run 0:0fd8112fea6eac8216ac442a88823fc00af60129f1fe5dd3fbfa2991decfb753 getName {} --abi TONTokenWallet.abi
+tonos-cli run 0:993dc36c2a4501661e8a0c268ba8dd9ab42e3a6e8591f9d237599f4bbbc8098d getName {} --abi TONTokenWallet.abi
+
+tonos-cli run 0:c32fdf5a019292a5042d488aca64f3f4631d19fa6f74755f4a8f0037230aa1da getRootAddress {} --abi TONTokenWallet.abi
+
+tonos-cli run 0:672cbf0f067d1414bc41d60fb0cc83dacb06d0c9e456d121002d08787e5698b2 getPair '{"value0":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f"}' --abi DEXclient.abi.json
+
+
+tonos-cli run 0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f getReservesBalance {} --abi DEXpair.abi.json
+
+Result: {
+  "pairRootA": "0:bfd9c9f619b11ce1f3f9520af60dd64a5d4773116afab5e4fcd177208a9c7358",
+  "pairReserveA": "0:c4eb2ddd1bc1c76e00f951e623b06d83d51b7f75159ddb516566d7a69bd744a1",
+  "clientDepositA": "0:3fbf0752a710d56aa5e319aa3fa0aa5ec64ba27dd3686d1c55a85371fa032759",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:95f08c717d720bd7fa626b064673f9544b47cef60657ea2e23966dfe6dd329c3",
+  "pairReserveB": "0:c617ea04da9b25bcf77dd2e54da5f45055e669834f76938997ae9c9d1a90bbad",
+  "clientDepositB": "0:c013a8d12bc65cc578a3e99126a27c80cbc850be2ac711d31f06371e66fc55d7",
+  "clientAllowanceB": "0"
+}
+
+tonos-cli run 0:69230ab0e97b306a0f95b8ce67ae6da6997c4cf3d2ed181d8027f4f835f29eb4 getPairClientWallets '{"pairAddr":"0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"}' --abi DEXclient.abi.json
+	function connectPair(address pairAddr) public checkOwnerAndAccept view returns (bool statusConnection) {
+
+client addr
+tonos-cli account 0:fbfe2385e577f0329c12e5514b99a0a38e5eaf10b6cf9a0576295fb563150f66
+
+pair adddr
+tonos-cli account 0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f
+
+deposits
+tonos-cli account 0:233b6e56466e9d0f0e2fccdc44278624b3f693e16dd2d12324f4ce6963443755
+tonos-cli account 0:d6e7781e58b0895d4d256708af3e5bd015d160a7fcdfb6f872e083e8bed3b9c7
+
+
+wallets
+tonos-cli account 0:0379e7cefb45d9acbeb79f22fe2247c82c32d8bc6f385f2b4b07e20bc641a59a
+tonos-cli account 0:f689ec71ad68b069db7654d55f34f10643f5f49bae53979ddde30af6a4e7b596
+
+reserv
+tonos-cli account 0:c4eb2ddd1bc1c76e00f951e623b06d83d51b7f75159ddb516566d7a69bd744a1
+tonos-cli account 0:c617ea04da9b25bcf77dd2e54da5f45055e669834f76938997ae9c9d1a90bbad
+
+
+
+
+tonos-cli run 0:bd6e061bd1d855354b2ed2b31a5c6e1becf3fdb97c1d1e3106fbf708fd52f139 getRootAddress {} --abi TONTokenWallet.abi
+tonos-cli run 0:ff5d81b96089aff89f9dbac9fe94b4a1266925f65b6fab048335abf72426090b getRootAddress {} --abi TONTokenWallet.abi
+
+
+
+tonos-cli run 0:bfd9c9f619b11ce1f3f9520af60dd64a5d4773116afab5e4fcd177208a9c7358 getTotalSupply {} --abi RootTokenContract.abi
+tonos-cli run 0:bfd9c9f619b11ce1f3f9520af60dd64a5d4773116afab5e4fcd177208a9c7358 getTotalGranted {} --abi RootTokenContract.abi
+
+
+tonos-cli account 0:9950bc2b82ae3b2803c58ab54cadc535d08c4920f2ae505e315cc1dabd3d606f
+tonos-cli account 0:217e041af9efe945f01ade70f7a8cc7cc002021df0754c12345b19d9372d5025
+
+
+solc DEXpair.sol
+tvm_linker compile DEXpair.code --lib ../../TVM/TON-Solidity-Compiler/lib/stdlib_sol.tvm
+tonos-cli genaddr DEXpair.tvc DEXpair.abi.json --genkey DEXpair.keys.json
+
+trumpet air idea sweet column stone action thing memory width topple where
+0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f
+
+
+tonos-cli run 0:fd08f9a6bcc1be026ab94ec6746833c98db18880de23796a56a8ff40aa938099 getAllDataPreparation {} --abi DEXclient.abi.json
+
+
+tonos-cli deploy DEXpair.tvc '{"root0":"0:bfd9c9f619b11ce1f3f9520af60dd64a5d4773116afab5e4fcd177208a9c7358","root1":"0:95f08c717d720bd7fa626b064673f9544b47cef60657ea2e23966dfe6dd329c3"}' --sign DEXpair.keys.json --abi DEXpair.abi.json
+
+
+tonos-cli account 0:2f5d2bb0afd0c8c2e6ce326c3703a90b9d8803d879aed984bbbea270e7a732b2
+
+tonos-cli run 0:fd08f9a6bcc1be026ab94ec6746833c98db18880de23796a56a8ff40aa938099 getPair '{"value0":"0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"}' --abi DEXclient.abi.json
+
+tonos-cli call 0:69230ab0e97b306a0f95b8ce67ae6da6997c4cf3d2ed181d8027f4f835f29eb4 connectPair '{"pairAddr":"0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"}' --abi DEXclient.abi.json --sign ar.keys.json
+tonos-cli run 0:04b6fe31a7a0f5838ea3d80c311e6be4ed9f7db833492706130ddd87bbb33002 getAllDataPreparation {} --abi DEXclient.abi.json --sign DEXclient.keys.json
+
+
+

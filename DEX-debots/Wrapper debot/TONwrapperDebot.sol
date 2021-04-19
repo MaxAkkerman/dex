@@ -1,4 +1,4 @@
-pragma ton-solidity >=0.36.0;
+pragma ton-solidity ^0.40.0;
 pragma AbiHeader expire;
 pragma AbiHeader time;
 pragma AbiHeader pubkey;
@@ -20,6 +20,9 @@ interface IDEXroot {
 interface IDEXpair {
    function getReservesBalance() external returns (uint128 balanceReserveA, uint128 balanceReserveB);
 }
+interface IcoreDebot {
+    function mainmenu() external;
+}
 interface IDEXclient {
     function createNewEmptyWalletByOwner(address rootAddr) external returns (bool createStatus);
     function wrapTON(uint128 qtyTONgrams) external returns (bool processWrapStatus);
@@ -40,7 +43,7 @@ interface IDEXclient {
     function makeABdepositToPair(address pairAddr, uint128 qtyA, uint128 qtyB) external returns (bool makeDepositStatus);
 }
 
-contract DEXDebot is Debot {
+contract DEXWrapDebot is Debot {
     uint128 m_clientBalanceTon;
     address m_Client;
     address constant ROOT_WRAPPED_TON = address(0xff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210);
@@ -66,7 +69,6 @@ contract DEXDebot is Debot {
         address wallet2;
     }
     mapping(address => PairWallet) PairWallets;
-    bool statusTONwallet = false;
     mapping(address => Pair) pairs;
     address m_DexRootAddress;
 
@@ -158,11 +160,8 @@ contract DEXDebot is Debot {
 */
 
     function createWTONwallet(uint32 index) public {
-        if(statusTONwallet){
+
             Terminal.print(tvm.functionId(mainmenu), "You already have WTON wallet...");
-        }else{
-        createWTONwallet1();
-        }
     }
 
     function createWTONwallet1() public {
@@ -180,7 +179,6 @@ contract DEXDebot is Debot {
     }
     function scCreareTonW(bool createStatus) public {
         Terminal.print(tvm.functionId(mainmenu), "Success create WTON wallet");
-        bool statusTONwallet = true;
     }
     function errCreareTonW(uint32 sdkError, uint32 exitCode) public {
         createWTONwallet1();
@@ -411,6 +409,47 @@ uint128 bb;
             Terminal.print(tvm.functionId(unwrapTON), "");
         }else{
             mainmenu();
+        }
+    }
+    /*
+    Wrap tons externall
+*/
+    address m_ClientExt;
+    address m_sender;
+    function wrapTonsStepExternall(address m_Client1) public {
+        m_sender = msg.sender;
+        m_ClientExt = m_Client1;
+        Terminal.inputUint(tvm.functionId(wrapTonsStep2Externall), "Set amount of nanotokens to wrap...");
+    }
+    //TODO check amount
+    function wrapTonsStep2Externall(uint256 value) public {
+        uint128 tonsFOrWrap = uint128(value);
+        optional(uint256) pubkey;
+        IDEXclient(m_ClientExt).wrapTON{
+        abiVer : 2,
+        extMsg : true,
+        sign : true,
+        pubkey : pubkey,
+        time : uint64(now),
+        expire: 0x123,
+        callbackId : tvm.functionId(scWrapExternall),
+        onErrorId : tvm.functionId(errWrapExternall)
+        }(tonsFOrWrap);
+    }
+    function scWrapExternall(bool processWrapStatus) public {
+        Terminal.print(0, "Success, check wrappedTON wallet balance");
+        IcoreDebot(m_sender).mainmenu();
+        m_sender = address(0);
+    }
+    function errWrapExternall(uint32 sdkError, uint32 exitCode) public {
+        Terminal.inputBoolean(tvm.functionId(retryWrapExternall), format("sdkError: {}\nexitCOde:{}\nRetry?", sdkError, exitCode));
+    }
+    function retryWrapExternall(bool value) public {
+        if (value){
+            Terminal.print(tvm.functionId(wrapTonsStep2Externall), "Retry...");
+        }else{
+            IcoreDebot(m_sender).mainmenu();
+            m_sender = address(0);
         }
     }
 /*

@@ -1,28 +1,58 @@
-# Freeton DEX Debot interface
+# DeBot smart contract readme
 
-If you want to test the DEX functionality go to "Testing the DEX functionality with debots" below.
+# Introduction
 
-## How to use
+DeBot (Decentralized Bot) is an intuitive, chat-based user interface for smart contracts on TON Blockchain. DeBot interface consists of a DeBot browser, which has to support [DEngine](https://github.com/tonlabs/debot-engine) and DeBot smart contract, which acts as an intermediary between the user and the target smart contract the user wants to access.
+
+This repository contains the following DeBot smart contracts:
+
+## Multisig DeBot
+
+Multisig DeBot enables the user to work with any of the Multisig wallet contracts ([SafeMultisig](https://github.com/tonlabs/ton-labs-contracts/tree/master/solidity/safemultisig) or [SetcodeMultisig](https://github.com/tonlabs/ton-labs-contracts/tree/master/solidity/setcodemultisig)) in a chat-based interface.
+
+It supports the following actions with a multisig wallet contract:
+
+- wallet deployment
+- checking wallet balance
+- checking wallet custodian list
+- checking pending transactions in the wallet
+- making transactions
+- confirming transactions
+
+## Magister Ludi DeBot
+
+Magister Ludi DeBot is a specialized DeBot created to help winners of the validator contest deploy their wallets to the FreeTON network.
+
+It supports the following functions:
+
+- checking public keys provided by the user against a list of contest winners
+- configuring the wallet to be deployed
+- verifying that all wallet custodian keys are in possession of the user
+- deploying the configured SafeMultisig wallet
+
+# How to use
 
 When [compiling](https://docs.ton.dev/86757ecb2/v/0/p/950f8a-write-smart-contract-in-solidity/t/1620b2) DeBot smart contract, make sure to place the Debot.sol file into the folder with your DeBot contract code.
 
 [Deploy](https://docs.ton.dev/86757ecb2/v/0/p/8080e6-tonos-cli/t/478a51) DeBot smart contract to the blockchain with at least 1 token balance.
 
-### DeBot deployment
-To deploy DEX DeBot:
+## Multisig DeBot deployment
+To deploy Multisig DeBot:
 
-1. Generate address and deployment keys for the DeBot contract:
+1. Download Multisig DeBot contract files from this repository (`msigDebot.tvc` and `msigDebot.abi.json`).
+2. Download the ABI file of the target Multisig contract (either [SafeMultisigWallet.abi.json](https://raw.githubusercontent.com/tonlabs/ton-labs-contracts/master/solidity/safemultisig/SafeMultisigWallet.abi.json) or [SetcodeMultisigWallet.abi.json](https://raw.githubusercontent.com/tonlabs/ton-labs-contracts/master/solidity/setcodemultisig/SetcodeMultisigWallet.abi.json)).
+3. Place all three files into a single folder.
+4. Generate address and deployment keys for the DeBot contract:
 
     ```jsx
-    tonos-cli genaddr <YOURDEXDEBOT>.tvc <YOURDEXDEBOT>.abi.json --genkey debot.keys.json
+    tonos-cli genaddr msigDebot.tvc msigDebot.abi.json --genkey debot.keys.json
     ```
 
-2. Transfer at least 1 token to the generated contract address.
-
-3. Deploy and configure the Multisig DeBot contract. The best way to do it is with a single script. Here is an example of the script for Linux: 
+5. Transfer at least 1 token to the generated contract address.
+6. Deploy and configure the Multisig DeBot contract. The best way to do it is with a single script. Here is an example of the script for Linux:
 
     ```jsx
-    debot_abi=$(cat <YOURDEXDEBOT>.abi.json | xxd -ps -c 20000)
+    smc_abi=$(cat <msig.abi.json> | xxd -ps -c 20000)
     debot_abi=$(cat msigDebot.abi.json | xxd -ps -c 20000)
     zero_address=0:0000000000000000000000000000000000000000000000000000000000000000
     ./tonos-cli deploy msigDebot.tvc "{\"options\":0,\"debotAbi\":\"\",\"targetAddr\":\"$zero_address\",\"targetAbi\":\"\"}" --sign debot.keys.json --abi msigDebot.abi.json
@@ -30,21 +60,25 @@ To deploy DEX DeBot:
     ./tonos-cli call <debot_address> setTargetABI "{\"tabi\":\"$smc_abi\"}" --sign debot.keys.json --abi msigDebot.abi.json
     ```
 
-    where
+   where
 
-    `<YOURDEXDEBOT>.abi.json` - ABI of the target contract.
+   `<msig.abi.json>` - ABI of the target contract (either `SafeMultisigWallet.abi.json` or `SetcodeMultisigWallet.abi.json`).
 
-    `<debot_address>` - address of the DeBot contract, generated at step 1.
+   `<debot_address>` - address of the DeBot contract, generated at step 4.
 
-    `debot.keys.json` - the DeBot deployment keyfile generated at step 1.
+   `debot.keys.json` - the DeBot deployment keyfile generated at step 4.
 
-    The script performs the following actions:
+   The script performs the following actions:
 
     - stores the content of the ABI files required for DeBot operation as variables
     - calls the DeBot constructor function leaving its options empty, or setting them to zero.
     - calls DeBot's `SetABI` and `setTargetABI` configuration functions, uploading the content of the necessary ABI files to it
-    
-### Call DeBot
+
+   **Note**: Three separate functions are required in case of Multisig DeBot due to the large size of the contract and the ABI files. Combining all three into a single message would exceed message size limits of the blockchain.
+
+   **Note**: There is no need to specify a valid `targetAddr` during deploy: Multisig DeBot asks the user for the target address at the beginning of each session. Zero address is used instead.
+
+## Call DeBot
 
 Call deployed DeBot in any DeBot browser.
 
@@ -53,64 +87,3 @@ Call deployed DeBot in any DeBot browser.
 ```
 tonos-cli debot fetch <debot_address>
 ```
-
-## Testing the DEX functionality with debots
-
-### Deploying a new TIP-3 Client wallet
-
-1. Generate a new seed phrase (`tonos-cli genphrase`), create a new keypair file (`tonos-cli getkeypair “your_keypair_filename.keys.json” “seed-phrase”`)
-
-2. Start the Wrapper debot 
-
-3. Choose [2] to create a new client wallet
-
-4. Insert the public key from the keypair file from step 1 right after “0x” for correct format 
-
-5. Enter seed phrase or path to your newly created keypair file
-
-6. After you have deployed a new client wallet wait a few seconds, refresh your client wallet data and display it
-
-7. Copy your wallet address and fill it up with TONs. Required amount is around 20 TONs
-
-8. Check your balance again, when you have enough TONs, you can create a wallet for wTONs using debot menu command and wrap your TONs into TIP-3 tokens for future use in other DEX debots
-
-
-After this you can launch Swapper Debot and Liquidity Provider Debot and follow the instructions to operate the DEX. Below is the list of debot addresses and pair addresses for trading. You can connect each pair inside the debot interface and start trading using available liquidity. Note that 1 nanoToken = 0,000 000 001 wTON/wBTC/wETH/wUSDT.
-
-Debots:
-
-**TONwrapperDebot**
-
-tonos-cli debot fetch 0:35980ae219f15a716e9a0e5562c5c3ec9029adddb6fcb221f2aa6f64a8c38aa4
-
-**Swapper**
-
-tonos-cli debot fetch 0:dbc0f2367ab70fb845c44e596ee1b061bae15562f937768f6c7c27edef139a22
-
-**Liquidity Provider**
-
-tonos-cli debot fetch 0:08b76ddf6c8e3d8b4f6e7f57c1eec01c65b9e3e2d6f82edb113dac82b2100e81
-
-
-PAIRS for debot:
-
-
-WTON-USDT
-0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892
-
-
-WTON-BTC
-0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35
-
-
-TON-ETH
-0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9
-
-
-ETH-BTC
-0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5
-
-
-BTC-USDT
-0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3
-

@@ -1,0 +1,52 @@
+solc TONwrapperDebot.sol
+tvm_linker compile TONwrapperDebot.code --lib ../../../../TVM/TON-Solidity-Compiler/lib/stdlib_sol.tvm
+tonos-cli genaddr TONwrapperDebot.tvc TONwrapperDebot.abi.json --genkey TONwrapperDebot.keys.json
+
+0:9b79b0e15797b10223a02717f6929df19df5f3e41825364047caec3fa2291f80
+intact latin dance hole feel puzzle circle ignore upset mind earn legend
+
+debot_abi=$(cat TONwrapperDebot.abi.json | xxd -ps -c 20000)
+
+//REDEPLOY DEXROOTADDRESS FOR DEPLOY CLIENT
+tonos-cli deploy TONwrapperDebot.tvc '{"debotAbi":"", "DexRootAddress":"0:0c3427febed3b30d548f6e76a481bd90786fe7a509929e66b3a0cc23594be735"}' --sign TONwrapperDebot.keys.json --abi TONwrapperDebot.abi.json
+tonos-cli call 0:9b79b0e15797b10223a02717f6929df19df5f3e41825364047caec3fa2291f80 setABI "{\"dabi\":\"$debot_abi\"}" --sign TONwrapperDebot.keys.json --abi TONwrapperDebot.abi.json
+
+TONwrapperDebot.sol
+tonos-cli debot fetch 0:9b79b0e15797b10223a02717f6929df19df5f3e41825364047caec3fa2291f80
+
+0:8c2f6fcaa54a552cc09cea02efbc4c26554fb3837a772f50ab2388e13d22ae17
+
+вdex client
+0:c7a8373167a9d1aa94652ca6de576fdc9d5d800e6d579bee13b10db14d7c4bc8
+
+last client address
+0:c7a8373167a9d1aa94652ca6de576fdc9d5d800e6d579bee13b10db14d7c4bc8
+
+tonos-cli debot fetch 0:31d4992e6eeab5061e9fc0545b2cbba17b4142ea50e6c993184ee10fa85edef5
+
+tonos-cli 0:b068f516c17a08e2cb9db5b8efa4898b4eb53040fb3c2322925ac568ea45ca07
+
+tonos-cli run 0:c7a8373167a9d1aa94652ca6de576fdc9d5d800e6d579bee13b10db14d7c4bc8 getPair '{"value0":"0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"}' --abi DEXclient.abi.json
+WTON-USDT
+0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892
+WTON-BTC
+0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35
+TON-ETH
+0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9
+ETH-BTC
+0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5
+BTC-USDT
+0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3
+
+tonos-cli account 0:0c3427febed3b30d548f6e76a481bd90786fe7a509929e66b3a0cc23594be735
+
+
+tonos-cli run 0:6939a2f77fc15d74b0c077ab8d31496c4c78e4c74710b8d2ef44f3760a4fd98c getPair '{"value0":"0:3ab2fe81e0f1438cf7be1132fbfd77abaf8e82e395bc2205d0f5312fff532274"}' --abi DEXclient2.abi.json
+
+DEX Pair address tokenA tokenB
+0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f
+
+DEX Pair address uni usdt normal
+0:ad53cb283c8e6ba548763623e55a03807851aac6fa212f8abf9a411a713fc76c
+
+tonos-cli run 0:fbfe2385e577f0329c12e5514b99a0a38e5eaf10b6cf9a0576295fb563150f66 getPair '{"value0":"0:ad53cb283c8e6ba548763623e55a03807851aac6fa212f8abf9a411a713fc76c"}' --abi DEXclient.abi.json

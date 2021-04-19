@@ -1,0 +1,9236 @@
+.globl	constructor
+.public	constructor
+.type	constructor, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7_with_init_storage$
+}
+;; constructor protection
+GETGLOB 6
+THROWIF 51
+PUSHINT 1
+SETGLOB 6
+;; end constructor protection
+; Decode input parameters
+ENDS
+; constructor DEXclient
+GETGLOB 2
+;; ==
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+EQUAL
+THROWIFNOT 102
+ACCEPT
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801790cbb81644bd8ebc2b145c7f0c59cd44731ee67261bc7f8c4cc87bfb59f6f31_
+CALL $createNewEmptyWallet_internal$
+DROP
+; end constructor DEXclient
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	sendTransfer
+.public	sendTransfer
+.type	sendTransfer, @function
+; Decode input parameters
+; Decode dest
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode value
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+; Decode bounce
+LDIQ 1
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDI 1
+}
+IFNOT
+ENDS
+;; param: dest
+;; param: value
+;; param: bounce
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function sendTransfer
+;; transfer()
+;; push identifier value
+PUSH S1
+;; push identifier dest
+PUSH S3
+;; push identifier bounce
+PUSH S2
+NEWC
+STSLICECONST x6_
+STI 1
+PUSHINT 3
+STZEROES
+STSLICE
+SWAP
+STGRAMS
+PUSHINT 105
+STZEROES
+STSLICECONST 0
+STSLICECONST 0
+ENDC
+PUSHINT 3
+SENDRAWMSG
+; end function sendTransfer
+BLKDROP 3
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	sendTransfer_internal
+.type	sendTransfer_internal, @function
+;; param: dest
+;; param: value
+;; param: bounce
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function sendTransfer
+;; transfer()
+;; push identifier value
+PUSH S1
+;; push identifier dest
+PUSH S3
+;; push identifier bounce
+PUSH S2
+NEWC
+STSLICECONST x6_
+STI 1
+PUSHINT 3
+STZEROES
+STSLICE
+SWAP
+STGRAMS
+PUSHINT 105
+STZEROES
+STSLICECONST 0
+STSLICECONST 0
+ENDC
+PUSHINT 3
+SENDRAWMSG
+; end function sendTransfer
+BLKDROP 3
+; end modifier checkOwnerAndAccept
+
+.globl	connectPair
+.public	connectPair
+.type	connectPair, @function
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: pairAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function connectPair
+;; ret param: statusConnection
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+NEWC
+STSLICECONST x00000005
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S2
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x483215600000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+;; emitting 1 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xf10d9446
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function connectPair
+DROP
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	connectPair_internal
+.type	connectPair_internal, @function
+;; param: pairAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function connectPair
+;; ret param: statusConnection
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+NEWC
+STSLICECONST x00000005
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S2
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x483215600000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+TUPLE 1
+SETGLOB 8
+; end function connectPair
+DROP
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	createNewEmptyWallet_internal
+.type	createNewEmptyWallet_internal, @function
+;; param: rootAddr
+; modifier alwaysAccept
+ACCEPT
+; function createNewEmptyWallet
+;; ret param: createStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; if
+;; !
+;; map.exists
+;; push identifier rootAddr
+PUSH S1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+PUSHCONT {
+	;; push identifier rootAddr
+	PUSH S1
+	;; decl: creator
+	MYADDR
+	;; decl: owner
+	;; get member value
+	;; push identifier owner
+	DUP
+	PARSEMSGADDR
+	INDEX 3
+	PLDU 256
+	;; decl: ownerUINT
+	NEWC
+	STSLICECONST x0000000d
+	;; _answer_id
+	PUSHINT 7
+	STUR 32
+	;; workchain_id
+	PUSHINT 0
+	STIR 8
+	;; pubkey
+	PUSHINT 0
+	STUR 256
+	;; internal_owner
+	;; push identifier ownerUINT
+	PUSH S1
+	STUR 256
+	;; grams
+	PUSHINT 500000000
+	STUR 128
+	ENDC
+	;; decl: body
+	;; transfer()
+	;; push identifier creator
+	PUSH S3
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x43b9aca00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier body
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+	; expValue
+	; end expValue
+	TRUE
+	; colValue
+	POP S5
+	; end colValue
+	BLKDROP 4
+}
+IFNOT
+;; end if
+;; returning named params
+TUPLE 1
+SETGLOB 8
+; end function createNewEmptyWallet
+DROP
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	createNewEmptyWalletByOwner
+.public	createNewEmptyWalletByOwner
+.type	createNewEmptyWalletByOwner, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode rootAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: rootAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function createNewEmptyWalletByOwner
+;; ret param: createStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; if
+;; !
+;; map.exists
+;; push identifier rootAddr
+PUSH S1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+PUSHCONT {
+	;; push identifier rootAddr
+	PUSH S1
+	;; decl: creator
+	MYADDR
+	;; decl: owner
+	;; get member value
+	;; push identifier owner
+	DUP
+	PARSEMSGADDR
+	INDEX 3
+	PLDU 256
+	;; decl: ownerUINT
+	NEWC
+	STSLICECONST x0000000d
+	;; _answer_id
+	PUSHINT 7
+	STUR 32
+	;; workchain_id
+	PUSHINT 0
+	STIR 8
+	;; pubkey
+	PUSHINT 0
+	STUR 256
+	;; internal_owner
+	;; push identifier ownerUINT
+	PUSH S1
+	STUR 256
+	;; grams
+	PUSHINT 500000000
+	STUR 128
+	ENDC
+	;; decl: body
+	;; transfer()
+	;; push identifier creator
+	PUSH S3
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x43b9aca00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier body
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+	; expValue
+	; end expValue
+	TRUE
+	; colValue
+	POP S5
+	; end colValue
+	BLKDROP 4
+}
+IFNOT
+;; end if
+;; returning named params
+;; emitting 1 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xb5303714
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function createNewEmptyWalletByOwner
+DROP
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	createNewEmptyWalletByOwner_internal
+.type	createNewEmptyWalletByOwner_internal, @function
+;; param: rootAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function createNewEmptyWalletByOwner
+;; ret param: createStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; if
+;; !
+;; map.exists
+;; push identifier rootAddr
+PUSH S1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+PUSHCONT {
+	;; push identifier rootAddr
+	PUSH S1
+	;; decl: creator
+	MYADDR
+	;; decl: owner
+	;; get member value
+	;; push identifier owner
+	DUP
+	PARSEMSGADDR
+	INDEX 3
+	PLDU 256
+	;; decl: ownerUINT
+	NEWC
+	STSLICECONST x0000000d
+	;; _answer_id
+	PUSHINT 7
+	STUR 32
+	;; workchain_id
+	PUSHINT 0
+	STIR 8
+	;; pubkey
+	PUSHINT 0
+	STUR 256
+	;; internal_owner
+	;; push identifier ownerUINT
+	PUSH S1
+	STUR 256
+	;; grams
+	PUSHINT 500000000
+	STUR 128
+	ENDC
+	;; decl: body
+	;; transfer()
+	;; push identifier creator
+	PUSH S3
+	NEWC
+	STSLICECONST x42_
+	STSLICE
+	PUSHSLICE x43b9aca00000000000000000000000000004_
+	STSLICER
+	STSLICECONST 0
+	STSLICECONST 1
+	;; push identifier body
+	PUSH S1
+	STREFR
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+	; expValue
+	; end expValue
+	TRUE
+	; colValue
+	POP S5
+	; end colValue
+	BLKDROP 4
+}
+IFNOT
+;; end if
+;; returning named params
+TUPLE 1
+SETGLOB 8
+; end function createNewEmptyWalletByOwner
+DROP
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	setNewEmptyWallet
+.public	setNewEmptyWallet
+.type	setNewEmptyWallet, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode value0
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: value0
+; modifier alwaysAccept
+ACCEPT
+; function setNewEmptyWallet
+;; get member sender
+GETGLOB 9
+;; decl: root
+;; push identifier value0
+PUSH S1
+;; decl: wallet
+;; if
+;; !
+;; map.exists
+;; push identifier root
+PUSH S1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+PUSHCONT {
+	; expValue
+	;; fetch roots
+	GETGLOB 12
+	;; push identifier root
+	PUSH S2
+	SWAP
+	; end expValue
+	;; push identifier wallet
+	PUSH S2
+	; colValue
+	ROTREV
+	PUSHINT 267
+	DICTSET
+	SETGLOB 12
+	; end colValue
+	; expValue
+	;; fetch rootKeys
+	GETGLOB 13
+	; end expValue
+	;; push identifier root
+	PUSH S2
+	;; array.push(..)
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSET
+	PAIR
+	; colValue
+	SETGLOB 13
+	; end colValue
+	; expValue
+	;; fetch walletKeys
+	GETGLOB 11
+	; end expValue
+	;; push identifier wallet
+	PUSH S1
+	;; array.push(..)
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSET
+	PAIR
+	; colValue
+	SETGLOB 11
+	; end colValue
+	;; index
+	;; push identifier wallet
+	DUP
+	;; push identifier wallets
+	GETGLOB 10
+	PUSHINT 267
+	DICTGET
+	PUSHCONT {
+		LDU 256
+		LDMSGADDR
+		PLDU 128
+		TUPLE 3
+	}
+	PUSHCONT {
+		PUSHINT 0
+		PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+		PUSHINT 0
+		TUPLE 3
+	}
+	IFELSE
+	;; decl: wc
+	; expValue
+	DUP
+	; end expValue
+	;; get member length
+	;; push identifier walletKeys
+	GETGLOB 11
+	INDEX 0
+	; colValue
+	SETINDEX 0
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier root
+	PUSH S3
+	; colValue
+	SETINDEX 1
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	PUSHINT 0
+	; colValue
+	SETINDEX 2
+	NIP
+	; end colValue
+	; expValue
+	;; fetch wallets
+	GETGLOB 10
+	;; push identifier wallet
+	PUSH S2
+	SWAP
+	; end expValue
+	;; push identifier wc
+	PUSH S2
+	; colValue
+	UNTUPLE 3
+	NEWC
+	PUSH S3
+	STUR 256
+	PUSH S2
+	STSLICER
+	PUSH S1
+	STUR 128
+	XCHG s3
+	BLKDROP 3
+	ROTREV
+	PUSHINT 267
+	DICTSETB
+	SETGLOB 10
+	; end colValue
+	DROP
+}
+IFNOT
+;; end if
+DROP2
+; end function setNewEmptyWallet
+DROP
+; end modifier alwaysAccept
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	setNewEmptyWallet_internal
+.type	setNewEmptyWallet_internal, @function
+;; param: value0
+; modifier alwaysAccept
+ACCEPT
+; function setNewEmptyWallet
+;; get member sender
+GETGLOB 9
+;; decl: root
+;; push identifier value0
+PUSH S1
+;; decl: wallet
+;; if
+;; !
+;; map.exists
+;; push identifier root
+PUSH S1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+PUSHCONT {
+	; expValue
+	;; fetch roots
+	GETGLOB 12
+	;; push identifier root
+	PUSH S2
+	SWAP
+	; end expValue
+	;; push identifier wallet
+	PUSH S2
+	; colValue
+	ROTREV
+	PUSHINT 267
+	DICTSET
+	SETGLOB 12
+	; end colValue
+	; expValue
+	;; fetch rootKeys
+	GETGLOB 13
+	; end expValue
+	;; push identifier root
+	PUSH S2
+	;; array.push(..)
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSET
+	PAIR
+	; colValue
+	SETGLOB 13
+	; end colValue
+	; expValue
+	;; fetch walletKeys
+	GETGLOB 11
+	; end expValue
+	;; push identifier wallet
+	PUSH S1
+	;; array.push(..)
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSET
+	PAIR
+	; colValue
+	SETGLOB 11
+	; end colValue
+	;; index
+	;; push identifier wallet
+	DUP
+	;; push identifier wallets
+	GETGLOB 10
+	PUSHINT 267
+	DICTGET
+	PUSHCONT {
+		LDU 256
+		LDMSGADDR
+		PLDU 128
+		TUPLE 3
+	}
+	PUSHCONT {
+		PUSHINT 0
+		PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+		PUSHINT 0
+		TUPLE 3
+	}
+	IFELSE
+	;; decl: wc
+	; expValue
+	DUP
+	; end expValue
+	;; get member length
+	;; push identifier walletKeys
+	GETGLOB 11
+	INDEX 0
+	; colValue
+	SETINDEX 0
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier root
+	PUSH S3
+	; colValue
+	SETINDEX 1
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	PUSHINT 0
+	; colValue
+	SETINDEX 2
+	NIP
+	; end colValue
+	; expValue
+	;; fetch wallets
+	GETGLOB 10
+	;; push identifier wallet
+	PUSH S2
+	SWAP
+	; end expValue
+	;; push identifier wc
+	PUSH S2
+	; colValue
+	UNTUPLE 3
+	NEWC
+	PUSH S3
+	STUR 256
+	PUSH S2
+	STSLICER
+	PUSH S1
+	STUR 128
+	XCHG s3
+	BLKDROP 3
+	ROTREV
+	PUSHINT 267
+	DICTSETB
+	SETGLOB 10
+	; end colValue
+	DROP
+}
+IFNOT
+;; end if
+DROP2
+; end function setNewEmptyWallet
+DROP
+; end modifier alwaysAccept
+
+.globl	getWalletByRoot
+.public	getWalletByRoot
+.type	getWalletByRoot, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode rootAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: rootAddr
+; modifier alwaysAccept
+ACCEPT
+; function getWalletByRoot
+;; ret param: wallet
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+; expValue
+; end expValue
+;; index
+;; push identifier rootAddr
+PUSH S1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+; colValue
+NIP
+; end colValue
+;; returning named params
+;; emitting 1 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xe691c94a
+	PUSH S1
+	STSLICER
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function getWalletByRoot
+DROP
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getWalletByRoot_internal
+.type	getWalletByRoot_internal, @function
+;; param: rootAddr
+; modifier alwaysAccept
+ACCEPT
+; function getWalletByRoot
+;; ret param: wallet
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+; expValue
+; end expValue
+;; index
+;; push identifier rootAddr
+PUSH S1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+; colValue
+NIP
+; end colValue
+;; returning named params
+TUPLE 1
+SETGLOB 8
+; end function getWalletByRoot
+DROP
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	getAddressWTON
+.public	getAddressWTON
+.type	getAddressWTON, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+ENDS
+; modifier alwaysAccept
+ACCEPT
+; function getAddressWTON
+;; ret param: wallet
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801790cbb81644bd8ebc2b145c7f0c59cd44731ee67261bc7f8c4cc87bfb59f6f31_
+CALL $getWalletByRoot_internal$
+; expValue
+; end expValue
+; colValue
+NIP
+; end colValue
+;; returning named params
+;; emitting 1 value(s)
+PUSH S1
+EQINT -1
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xb0e93367
+	PUSH S1
+	STSLICER
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function getAddressWTON
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getAddressWTON_internal
+.type	getAddressWTON_internal, @function
+; modifier alwaysAccept
+ACCEPT
+; function getAddressWTON
+;; ret param: wallet
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801790cbb81644bd8ebc2b145c7f0c59cd44731ee67261bc7f8c4cc87bfb59f6f31_
+CALL $getWalletByRoot_internal$
+; expValue
+; end expValue
+; colValue
+NIP
+; end colValue
+;; returning named params
+TUPLE 1
+SETGLOB 8
+; end function getAddressWTON
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	setPair
+.public	setPair
+.type	setPair, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode arg0
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode arg1
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode arg2
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode arg3
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode arg4
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode arg5
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: arg0
+;; param: arg1
+;; param: arg2
+;; param: arg3
+;; param: arg4
+;; param: arg5
+; modifier alwaysAccept
+ACCEPT
+; function setPair
+;; get member sender
+GETGLOB 9
+;; decl: dexpair
+;; index
+;; push identifier dexpair
+DUP
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; if
+;; !
+;; map.exists
+;; push identifier dexpair
+PUSH S1
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+PUSHCONT {
+	; expValue
+	;; fetch pairKeys
+	GETGLOB 17
+	; end expValue
+	;; push identifier dexpair
+	PUSH S2
+	;; array.push(..)
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSET
+	PAIR
+	; colValue
+	SETGLOB 17
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; get member length
+	;; push identifier pairKeys
+	GETGLOB 17
+	INDEX 0
+	; colValue
+	SETINDEX 0
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg0
+	PUSH S8
+	; colValue
+	SETINDEX 1
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg1
+	PUSH S7
+	; colValue
+	SETINDEX 2
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg2
+	PUSH S6
+	; colValue
+	SETINDEX 3
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	PUSHINT 0
+	; colValue
+	SETINDEX 4
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg3
+	PUSH S5
+	; colValue
+	SETINDEX 5
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg4
+	PUSH S4
+	; colValue
+	SETINDEX 6
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg5
+	PUSH S3
+	; colValue
+	SETINDEX 7
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	PUSHINT 0
+	; colValue
+	SETINDEX 8
+	NIP
+	; end colValue
+	;; get member rootA
+	;; push identifier cp
+	DUP
+	INDEX 1
+	CALL $createNewEmptyWallet_internal$
+	DROP
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	CALL $createNewEmptyWallet_internal$
+	DROP
+	; expValue
+	;; fetch pairs
+	GETGLOB 16
+	;; push identifier dexpair
+	PUSH S2
+	SWAP
+	; end expValue
+	;; push identifier cp
+	PUSH S2
+	; colValue
+	UNTUPLE 9
+	NEWC
+	NEWC
+	PUSH S7
+	STSLICER
+	PUSH S6
+	STUR 128
+	PUSH S5
+	STSLICER
+	STBREFR
+	NEWC
+	PUSH S4
+	STSLICER
+	PUSH S3
+	STSLICER
+	PUSH S2
+	STUR 128
+	STBREFR
+	PUSH S9
+	STUR 256
+	PUSH S8
+	STSLICER
+	PUSH S7
+	STSLICER
+	XCHG s9
+	BLKDROP 9
+	ENDC
+	ROTREV
+	PUSHINT 267
+	DICTSETREF
+	SETGLOB 16
+	; end colValue
+}
+IFNOT
+;; end if
+DROP2
+; end function setPair
+BLKDROP 6
+; end modifier alwaysAccept
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	setPair_internal
+.type	setPair_internal, @function
+;; param: arg0
+;; param: arg1
+;; param: arg2
+;; param: arg3
+;; param: arg4
+;; param: arg5
+; modifier alwaysAccept
+ACCEPT
+; function setPair
+;; get member sender
+GETGLOB 9
+;; decl: dexpair
+;; index
+;; push identifier dexpair
+DUP
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; if
+;; !
+;; map.exists
+;; push identifier dexpair
+PUSH S1
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+PUSHCONT {
+	; expValue
+	;; fetch pairKeys
+	GETGLOB 17
+	; end expValue
+	;; push identifier dexpair
+	PUSH S2
+	;; array.push(..)
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSET
+	PAIR
+	; colValue
+	SETGLOB 17
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; get member length
+	;; push identifier pairKeys
+	GETGLOB 17
+	INDEX 0
+	; colValue
+	SETINDEX 0
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg0
+	PUSH S8
+	; colValue
+	SETINDEX 1
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg1
+	PUSH S7
+	; colValue
+	SETINDEX 2
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg2
+	PUSH S6
+	; colValue
+	SETINDEX 3
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	PUSHINT 0
+	; colValue
+	SETINDEX 4
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg3
+	PUSH S5
+	; colValue
+	SETINDEX 5
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg4
+	PUSH S4
+	; colValue
+	SETINDEX 6
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg5
+	PUSH S3
+	; colValue
+	SETINDEX 7
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	PUSHINT 0
+	; colValue
+	SETINDEX 8
+	NIP
+	; end colValue
+	;; get member rootA
+	;; push identifier cp
+	DUP
+	INDEX 1
+	CALL $createNewEmptyWallet_internal$
+	DROP
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	CALL $createNewEmptyWallet_internal$
+	DROP
+	; expValue
+	;; fetch pairs
+	GETGLOB 16
+	;; push identifier dexpair
+	PUSH S2
+	SWAP
+	; end expValue
+	;; push identifier cp
+	PUSH S2
+	; colValue
+	UNTUPLE 9
+	NEWC
+	NEWC
+	PUSH S7
+	STSLICER
+	PUSH S6
+	STUR 128
+	PUSH S5
+	STSLICER
+	STBREFR
+	NEWC
+	PUSH S4
+	STSLICER
+	PUSH S3
+	STSLICER
+	PUSH S2
+	STUR 128
+	STBREFR
+	PUSH S9
+	STUR 256
+	PUSH S8
+	STSLICER
+	PUSH S7
+	STSLICER
+	XCHG s9
+	BLKDROP 9
+	ENDC
+	ROTREV
+	PUSHINT 267
+	DICTSETREF
+	SETGLOB 16
+	; end colValue
+}
+IFNOT
+;; end if
+DROP2
+; end function setPair
+BLKDROP 6
+; end modifier alwaysAccept
+
+.globl	setPairDepositA
+.public	setPairDepositA
+.type	setPairDepositA, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode arg0
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: arg0
+; modifier alwaysAccept
+ACCEPT
+; function setPairDepositA
+;; get member sender
+GETGLOB 9
+;; decl: dexpair
+;; index
+;; push identifier dexpair
+DUP
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+; expValue
+DUP
+; end expValue
+;; push identifier arg0
+PUSH S3
+; colValue
+SETINDEX 3
+NIP
+; end colValue
+; expValue
+;; fetch pairs
+GETGLOB 16
+;; push identifier dexpair
+PUSH S2
+SWAP
+; end expValue
+;; push identifier cp
+PUSH S2
+; colValue
+UNTUPLE 9
+NEWC
+NEWC
+PUSH S7
+STSLICER
+PUSH S6
+STUR 128
+PUSH S5
+STSLICER
+STBREFR
+NEWC
+PUSH S4
+STSLICER
+PUSH S3
+STSLICER
+PUSH S2
+STUR 128
+STBREFR
+PUSH S9
+STUR 256
+PUSH S8
+STSLICER
+PUSH S7
+STSLICER
+XCHG s9
+BLKDROP 9
+ENDC
+ROTREV
+PUSHINT 267
+DICTSETREF
+SETGLOB 16
+; end colValue
+DROP2
+; end function setPairDepositA
+DROP
+; end modifier alwaysAccept
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	setPairDepositA_internal
+.type	setPairDepositA_internal, @function
+;; param: arg0
+; modifier alwaysAccept
+ACCEPT
+; function setPairDepositA
+;; get member sender
+GETGLOB 9
+;; decl: dexpair
+;; index
+;; push identifier dexpair
+DUP
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+; expValue
+DUP
+; end expValue
+;; push identifier arg0
+PUSH S3
+; colValue
+SETINDEX 3
+NIP
+; end colValue
+; expValue
+;; fetch pairs
+GETGLOB 16
+;; push identifier dexpair
+PUSH S2
+SWAP
+; end expValue
+;; push identifier cp
+PUSH S2
+; colValue
+UNTUPLE 9
+NEWC
+NEWC
+PUSH S7
+STSLICER
+PUSH S6
+STUR 128
+PUSH S5
+STSLICER
+STBREFR
+NEWC
+PUSH S4
+STSLICER
+PUSH S3
+STSLICER
+PUSH S2
+STUR 128
+STBREFR
+PUSH S9
+STUR 256
+PUSH S8
+STSLICER
+PUSH S7
+STSLICER
+XCHG s9
+BLKDROP 9
+ENDC
+ROTREV
+PUSHINT 267
+DICTSETREF
+SETGLOB 16
+; end colValue
+DROP2
+; end function setPairDepositA
+DROP
+; end modifier alwaysAccept
+
+.globl	setPairDepositB
+.public	setPairDepositB
+.type	setPairDepositB, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode arg0
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: arg0
+; modifier alwaysAccept
+ACCEPT
+; function setPairDepositB
+;; get member sender
+GETGLOB 9
+;; decl: dexpair
+;; index
+;; push identifier dexpair
+DUP
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+; expValue
+DUP
+; end expValue
+;; push identifier arg0
+PUSH S3
+; colValue
+SETINDEX 7
+NIP
+; end colValue
+; expValue
+;; fetch pairs
+GETGLOB 16
+;; push identifier dexpair
+PUSH S2
+SWAP
+; end expValue
+;; push identifier cp
+PUSH S2
+; colValue
+UNTUPLE 9
+NEWC
+NEWC
+PUSH S7
+STSLICER
+PUSH S6
+STUR 128
+PUSH S5
+STSLICER
+STBREFR
+NEWC
+PUSH S4
+STSLICER
+PUSH S3
+STSLICER
+PUSH S2
+STUR 128
+STBREFR
+PUSH S9
+STUR 256
+PUSH S8
+STSLICER
+PUSH S7
+STSLICER
+XCHG s9
+BLKDROP 9
+ENDC
+ROTREV
+PUSHINT 267
+DICTSETREF
+SETGLOB 16
+; end colValue
+DROP2
+; end function setPairDepositB
+DROP
+; end modifier alwaysAccept
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	setPairDepositB_internal
+.type	setPairDepositB_internal, @function
+;; param: arg0
+; modifier alwaysAccept
+ACCEPT
+; function setPairDepositB
+;; get member sender
+GETGLOB 9
+;; decl: dexpair
+;; index
+;; push identifier dexpair
+DUP
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+; expValue
+DUP
+; end expValue
+;; push identifier arg0
+PUSH S3
+; colValue
+SETINDEX 7
+NIP
+; end colValue
+; expValue
+;; fetch pairs
+GETGLOB 16
+;; push identifier dexpair
+PUSH S2
+SWAP
+; end expValue
+;; push identifier cp
+PUSH S2
+; colValue
+UNTUPLE 9
+NEWC
+NEWC
+PUSH S7
+STSLICER
+PUSH S6
+STUR 128
+PUSH S5
+STSLICER
+STBREFR
+NEWC
+PUSH S4
+STSLICER
+PUSH S3
+STSLICER
+PUSH S2
+STUR 128
+STBREFR
+PUSH S9
+STUR 256
+PUSH S8
+STSLICER
+PUSH S7
+STSLICER
+XCHG s9
+BLKDROP 9
+ENDC
+ROTREV
+PUSHINT 267
+DICTSETREF
+SETGLOB 16
+; end colValue
+DROP2
+; end function setPairDepositB
+DROP
+; end modifier alwaysAccept
+
+.globl	getPair
+.public	getPair
+.type	getPair, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode value0
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: value0
+; modifier alwaysAccept
+ACCEPT
+; function getPair
+;; ret param: pairRootA
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: pairReserveA
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: clientDepositA
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: clientAllowanceA
+PUSHINT 0
+;; ret param: pairRootB
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: pairReserveB
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: clientDepositB
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: clientAllowanceB
+PUSHINT 0
+;; ret param: curPair
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; index
+;; push identifier value0
+PUSH S9
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+; expValue
+; end expValue
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+; colValue
+POP S10
+; end colValue
+; expValue
+; end expValue
+;; get member pairWalletA
+;; push identifier cp
+DUP
+INDEX 2
+; colValue
+POP S9
+; end colValue
+; expValue
+; end expValue
+;; get member depositWalletA
+;; push identifier cp
+DUP
+INDEX 3
+; colValue
+POP S8
+; end colValue
+; expValue
+; end expValue
+;; get member allowanceA
+;; push identifier cp
+DUP
+INDEX 4
+; colValue
+POP S7
+; end colValue
+; expValue
+; end expValue
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+; colValue
+POP S6
+; end colValue
+; expValue
+; end expValue
+;; get member pairWalletB
+;; push identifier cp
+DUP
+INDEX 6
+; colValue
+POP S5
+; end colValue
+; expValue
+; end expValue
+;; get member depositWalletB
+;; push identifier cp
+DUP
+INDEX 7
+; colValue
+POP S4
+; end colValue
+; expValue
+; end expValue
+;; get member allowanceB
+;; push identifier cp
+DUP
+INDEX 8
+; colValue
+POP S3
+; end colValue
+; expValue
+; end expValue
+;; push identifier value0
+PUSH S10
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+;; emitting 9 value(s)
+PUSH S10
+EQINT -1
+PUSHCONT {
+	PUSH S12
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 1
+	NEWC
+	STSLICECONST xe625dfd6
+	PUSH S10
+	STSLICER
+	PUSH S9
+	STSLICER
+	PUSH S8
+	STSLICER
+	NEWC
+	PUSH S8
+	STUR 128
+	PUSH S7
+	STSLICER
+	PUSH S6
+	STSLICER
+	NEWC
+	PUSH S6
+	STSLICER
+	PUSH S5
+	STUR 128
+	PUSH S4
+	STSLICER
+	STBREFR
+	STBREFR
+	STBREFR
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+BLKDROP 9
+; end function getPair
+DROP
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getPair_internal
+.type	getPair_internal, @function
+;; param: value0
+; modifier alwaysAccept
+ACCEPT
+; function getPair
+;; ret param: pairRootA
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: pairReserveA
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: clientDepositA
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: clientAllowanceA
+PUSHINT 0
+;; ret param: pairRootB
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: pairReserveB
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: clientDepositB
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: clientAllowanceB
+PUSHINT 0
+;; ret param: curPair
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; index
+;; push identifier value0
+PUSH S9
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+; expValue
+; end expValue
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+; colValue
+POP S10
+; end colValue
+; expValue
+; end expValue
+;; get member pairWalletA
+;; push identifier cp
+DUP
+INDEX 2
+; colValue
+POP S9
+; end colValue
+; expValue
+; end expValue
+;; get member depositWalletA
+;; push identifier cp
+DUP
+INDEX 3
+; colValue
+POP S8
+; end colValue
+; expValue
+; end expValue
+;; get member allowanceA
+;; push identifier cp
+DUP
+INDEX 4
+; colValue
+POP S7
+; end colValue
+; expValue
+; end expValue
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+; colValue
+POP S6
+; end colValue
+; expValue
+; end expValue
+;; get member pairWalletB
+;; push identifier cp
+DUP
+INDEX 6
+; colValue
+POP S5
+; end colValue
+; expValue
+; end expValue
+;; get member depositWalletB
+;; push identifier cp
+DUP
+INDEX 7
+; colValue
+POP S4
+; end colValue
+; expValue
+; end expValue
+;; get member allowanceB
+;; push identifier cp
+DUP
+INDEX 8
+; colValue
+POP S3
+; end colValue
+; expValue
+; end expValue
+;; push identifier value0
+PUSH S10
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+TUPLE 9
+SETGLOB 8
+; end function getPair
+DROP
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 9
+
+.globl	sendTokens
+.public	sendTokens
+.type	sendTokens, @function
+; Decode input parameters
+; Decode from
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode to
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode tokens
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+; Decode grams
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: from
+;; param: to
+;; param: tokens
+;; param: grams
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function sendTokens
+;; ret param: transmitter
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: receiver
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: body
+NEWC
+ENDC
+; expValue
+; end expValue
+;; push identifier from
+PUSH S6
+; colValue
+POP S3
+; end colValue
+; expValue
+; end expValue
+;; push identifier to
+PUSH S5
+; colValue
+POP S2
+; end colValue
+NEWC
+STSLICECONST x0000000c
+;; dest
+;; push identifier receiver
+PUSH S2
+STSLICER
+;; tokens
+;; push identifier tokens
+PUSH S5
+STUR 128
+;; grams
+;; push identifier grams
+PUSH S4
+STUR 128
+ENDC
+; expValue
+; end expValue
+; colValue
+NIP
+; end colValue
+;; transfer()
+;; push identifier transmitter
+PUSH S2
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x41dcd6500000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+;; returning named params
+;; emitting 3 value(s)
+PUSH S7
+EQINT -1
+PUSHCONT {
+	PUSH S9
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 1
+	NEWC
+	STSLICECONST xf32e7bbe
+	PUSH S4
+	STSLICER
+	PUSH S3
+	STSLICER
+	PUSH S2
+	STREFR
+	STBREFR
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+BLKDROP 3
+; end function sendTokens
+BLKDROP 4
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	sendTokens_internal
+.type	sendTokens_internal, @function
+;; param: from
+;; param: to
+;; param: tokens
+;; param: grams
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function sendTokens
+;; ret param: transmitter
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: receiver
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: body
+NEWC
+ENDC
+; expValue
+; end expValue
+;; push identifier from
+PUSH S6
+; colValue
+POP S3
+; end colValue
+; expValue
+; end expValue
+;; push identifier to
+PUSH S5
+; colValue
+POP S2
+; end colValue
+NEWC
+STSLICECONST x0000000c
+;; dest
+;; push identifier receiver
+PUSH S2
+STSLICER
+;; tokens
+;; push identifier tokens
+PUSH S5
+STUR 128
+;; grams
+;; push identifier grams
+PUSH S4
+STUR 128
+ENDC
+; expValue
+; end expValue
+; colValue
+NIP
+; end colValue
+;; transfer()
+;; push identifier transmitter
+PUSH S2
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x41dcd6500000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+;; returning named params
+TUPLE 3
+SETGLOB 8
+; end function sendTokens
+BLKDROP 4
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 3
+
+.globl	sendTokens2
+.public	sendTokens2
+.type	sendTokens2, @function
+; Decode input parameters
+; Decode from
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode to
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode tokens
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+; Decode grams
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: from
+;; param: to
+;; param: tokens
+;; param: grams
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function sendTokens2
+;; ret param: transmitter
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: receiver
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+; expValue
+; end expValue
+;; push identifier from
+PUSH S5
+; colValue
+POP S2
+; end colValue
+; expValue
+; end expValue
+;; push identifier to
+PUSH S4
+; colValue
+NIP
+; end colValue
+;; Remote call ITONTokenWallet.transfer
+;; push identifier transmitter
+PUSH S1
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x41dcd6500000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+NEWC
+STSLICECONST x0000000c
+;; dest
+;; push identifier receiver
+PUSH S2
+STSLICER
+;; tokens
+;; push identifier tokens
+PUSH S5
+STUR 128
+;; grams
+;; push identifier grams
+PUSH S4
+STUR 128
+STBREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+;; returning named params
+;; emitting 2 value(s)
+PUSH S6
+EQINT -1
+PUSHCONT {
+	PUSH S8
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 1
+	NEWC
+	STSLICECONST xd33a4dec
+	PUSH S3
+	STSLICER
+	PUSH S2
+	STSLICER
+	STBREFR
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP2
+; end function sendTokens2
+BLKDROP 4
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	sendTokens2_internal
+.type	sendTokens2_internal, @function
+;; param: from
+;; param: to
+;; param: tokens
+;; param: grams
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function sendTokens2
+;; ret param: transmitter
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: receiver
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+; expValue
+; end expValue
+;; push identifier from
+PUSH S5
+; colValue
+POP S2
+; end colValue
+; expValue
+; end expValue
+;; push identifier to
+PUSH S4
+; colValue
+NIP
+; end colValue
+;; Remote call ITONTokenWallet.transfer
+;; push identifier transmitter
+PUSH S1
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x41dcd6500000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+NEWC
+STSLICECONST x0000000c
+;; dest
+;; push identifier receiver
+PUSH S2
+STSLICER
+;; tokens
+;; push identifier tokens
+PUSH S5
+STUR 128
+;; grams
+;; push identifier grams
+PUSH S4
+STUR 128
+STBREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+;; returning named params
+TUPLE 2
+SETGLOB 8
+; end function sendTokens2
+BLKDROP 4
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 2
+
+.globl	sendTokens3
+.public	sendTokens3
+.type	sendTokens3, @function
+; Decode input parameters
+; Decode from
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode to
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode tokens
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: from
+;; param: to
+;; param: tokens
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function sendTokens3
+;; ret param: transmitter
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: receiver
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: body
+NEWC
+ENDC
+; expValue
+; end expValue
+;; push identifier from
+PUSH S5
+; colValue
+POP S3
+; end colValue
+; expValue
+; end expValue
+;; push identifier to
+PUSH S4
+; colValue
+POP S2
+; end colValue
+NEWC
+STSLICECONST x0000000c
+;; dest
+;; push identifier receiver
+PUSH S2
+STSLICER
+;; tokens
+;; push identifier tokens
+PUSH S4
+STUR 128
+;; grams
+PUSHINT 300000000
+STUR 128
+ENDC
+; expValue
+; end expValue
+; colValue
+NIP
+; end colValue
+;; transfer()
+;; push identifier transmitter
+PUSH S2
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x41dcd6500000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+;; returning named params
+;; emitting 3 value(s)
+PUSH S6
+EQINT -1
+PUSHCONT {
+	PUSH S8
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 1
+	NEWC
+	STSLICECONST x9ffef87b
+	PUSH S4
+	STSLICER
+	PUSH S3
+	STSLICER
+	PUSH S2
+	STREFR
+	STBREFR
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+BLKDROP 3
+; end function sendTokens3
+BLKDROP 3
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	sendTokens3_internal
+.type	sendTokens3_internal, @function
+;; param: from
+;; param: to
+;; param: tokens
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function sendTokens3
+;; ret param: transmitter
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: receiver
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: body
+NEWC
+ENDC
+; expValue
+; end expValue
+;; push identifier from
+PUSH S5
+; colValue
+POP S3
+; end colValue
+; expValue
+; end expValue
+;; push identifier to
+PUSH S4
+; colValue
+POP S2
+; end colValue
+NEWC
+STSLICECONST x0000000c
+;; dest
+;; push identifier receiver
+PUSH S2
+STSLICER
+;; tokens
+;; push identifier tokens
+PUSH S4
+STUR 128
+;; grams
+PUSHINT 300000000
+STUR 128
+ENDC
+; expValue
+; end expValue
+; colValue
+NIP
+; end colValue
+;; transfer()
+;; push identifier transmitter
+PUSH S2
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x41dcd6500000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+;; returning named params
+TUPLE 3
+SETGLOB 8
+; end function sendTokens3
+BLKDROP 3
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 3
+
+.globl	askBalanceToken
+.public	askBalanceToken
+.type	askBalanceToken, @function
+; Decode input parameters
+; Decode walletAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: walletAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function askBalanceToken
+;; push identifier walletAddr
+DUP
+;; decl: transmitter
+NEWC
+STSLICECONST x0000000d
+;; _answer_id
+PUSHINT 4
+STUR 32
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier transmitter
+PUSH S1
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x40d1cef00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+DROP2
+; end function askBalanceToken
+DROP
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	askBalanceToken_internal
+.type	askBalanceToken_internal, @function
+;; param: walletAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function askBalanceToken
+;; push identifier walletAddr
+DUP
+;; decl: transmitter
+NEWC
+STSLICECONST x0000000d
+;; _answer_id
+PUSHINT 4
+STUR 32
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier transmitter
+PUSH S1
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x40d1cef00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+DROP2
+; end function askBalanceToken
+DROP
+; end modifier checkOwnerAndAccept
+
+.globl	askBalanceAllTokens
+.public	askBalanceAllTokens
+.type	askBalanceAllTokens, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+ENDS
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function askBalanceAllTokens
+PUSHINT 0
+;; decl: count
+; while
+;; get member length
+;; push identifier walletKeys
+GETGLOB 11
+INDEX 0
+PUSHCONT {
+	;; index
+	;; push identifier count
+	DUP
+	;; push identifier walletKeys
+	GETGLOB 11
+	INDEX 1
+	PUSHINT 32
+	DICTUGET
+	THROWIFNOT 50
+	CALL $askBalanceToken_internal$
+	;; ++
+	; expValue
+	; end expValue
+	INC
+	UFITS 128
+	; colValue
+	; end colValue
+}
+REPEAT
+; end while
+DROP
+; end function askBalanceAllTokens
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	askBalanceAllTokens_internal
+.type	askBalanceAllTokens_internal, @function
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function askBalanceAllTokens
+PUSHINT 0
+;; decl: count
+; while
+;; get member length
+;; push identifier walletKeys
+GETGLOB 11
+INDEX 0
+PUSHCONT {
+	;; index
+	;; push identifier count
+	DUP
+	;; push identifier walletKeys
+	GETGLOB 11
+	INDEX 1
+	PUSHINT 32
+	DICTUGET
+	THROWIFNOT 50
+	CALL $askBalanceToken_internal$
+	;; ++
+	; expValue
+	; end expValue
+	INC
+	UFITS 128
+	; colValue
+	; end colValue
+}
+REPEAT
+; end while
+DROP
+; end function askBalanceAllTokens
+; end modifier checkOwnerAndAccept
+
+.globl	setBalanceToken
+.public	setBalanceToken
+.type	setBalanceToken, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode value0
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: value0
+; modifier alwaysAccept
+ACCEPT
+; function setBalanceToken
+;; index
+;; get member sender
+GETGLOB 9
+;; push identifier wallets
+GETGLOB 10
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	LDU 256
+	LDMSGADDR
+	PLDU 128
+	TUPLE 3
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 3
+}
+IFELSE
+;; decl: wc
+; expValue
+DUP
+; end expValue
+;; push identifier value0
+PUSH S2
+; colValue
+SETINDEX 2
+NIP
+; end colValue
+; expValue
+;; fetch wallets
+GETGLOB 10
+;; get member sender
+GETGLOB 9
+SWAP
+; end expValue
+;; push identifier wc
+PUSH S2
+; colValue
+UNTUPLE 3
+NEWC
+PUSH S3
+STUR 256
+PUSH S2
+STSLICER
+PUSH S1
+STUR 128
+XCHG s3
+BLKDROP 3
+ROTREV
+PUSHINT 267
+DICTSETB
+SETGLOB 10
+; end colValue
+DROP
+; end function setBalanceToken
+DROP
+; end modifier alwaysAccept
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	setBalanceToken_internal
+.type	setBalanceToken_internal, @function
+;; param: value0
+; modifier alwaysAccept
+ACCEPT
+; function setBalanceToken
+;; index
+;; get member sender
+GETGLOB 9
+;; push identifier wallets
+GETGLOB 10
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	LDU 256
+	LDMSGADDR
+	PLDU 128
+	TUPLE 3
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 3
+}
+IFELSE
+;; decl: wc
+; expValue
+DUP
+; end expValue
+;; push identifier value0
+PUSH S2
+; colValue
+SETINDEX 2
+NIP
+; end colValue
+; expValue
+;; fetch wallets
+GETGLOB 10
+;; get member sender
+GETGLOB 9
+SWAP
+; end expValue
+;; push identifier wc
+PUSH S2
+; colValue
+UNTUPLE 3
+NEWC
+PUSH S3
+STUR 256
+PUSH S2
+STSLICER
+PUSH S1
+STUR 128
+XCHG s3
+BLKDROP 3
+ROTREV
+PUSHINT 267
+DICTSETB
+SETGLOB 10
+; end colValue
+DROP
+; end function setBalanceToken
+DROP
+; end modifier alwaysAccept
+
+.globl	getBalanceTokenWallet
+.public	getBalanceTokenWallet
+.type	getBalanceTokenWallet, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode walletAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: walletAddr
+; modifier alwaysAccept
+ACCEPT
+; function getBalanceTokenWallet
+;; ret param: walletBal
+PUSHINT 0
+;; index
+;; push identifier walletAddr
+PUSH S1
+;; push identifier wallets
+GETGLOB 10
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	LDU 256
+	LDMSGADDR
+	PLDU 128
+	TUPLE 3
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 3
+}
+IFELSE
+;; decl: wc
+; expValue
+; end expValue
+;; get member balance
+;; push identifier wc
+DUP
+INDEX 2
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+;; emitting 1 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xfc82c53f
+	PUSH S1
+	STUR 128
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function getBalanceTokenWallet
+DROP
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getBalanceTokenWallet_internal
+.type	getBalanceTokenWallet_internal, @function
+;; param: walletAddr
+; modifier alwaysAccept
+ACCEPT
+; function getBalanceTokenWallet
+;; ret param: walletBal
+PUSHINT 0
+;; index
+;; push identifier walletAddr
+PUSH S1
+;; push identifier wallets
+GETGLOB 10
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	LDU 256
+	LDMSGADDR
+	PLDU 128
+	TUPLE 3
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 3
+}
+IFELSE
+;; decl: wc
+; expValue
+; end expValue
+;; get member balance
+;; push identifier wc
+DUP
+INDEX 2
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+TUPLE 1
+SETGLOB 8
+; end function getBalanceTokenWallet
+DROP
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	getPairClientWallets
+.public	getPairClientWallets
+.type	getPairClientWallets, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: pairAddr
+; modifier alwaysAccept
+ACCEPT
+; function getPairClientWallets
+;; ret param: walletA
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: walletB
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: pairReturn
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; index
+;; push identifier pairAddr
+PUSH S3
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+; expValue
+; end expValue
+;; index
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+; colValue
+POP S4
+; end colValue
+; expValue
+; end expValue
+;; index
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+; colValue
+POP S3
+; end colValue
+; expValue
+; end expValue
+;; push identifier pairAddr
+PUSH S4
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+;; emitting 3 value(s)
+PUSH S4
+EQINT -1
+PUSHCONT {
+	PUSH S6
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 1
+	NEWC
+	STSLICECONST x842ac9fb
+	PUSH S4
+	STSLICER
+	PUSH S3
+	STSLICER
+	PUSH S2
+	STSLICER
+	STBREFR
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+BLKDROP 3
+; end function getPairClientWallets
+DROP
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getPairClientWallets_internal
+.type	getPairClientWallets_internal, @function
+;; param: pairAddr
+; modifier alwaysAccept
+ACCEPT
+; function getPairClientWallets
+;; ret param: walletA
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: walletB
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: pairReturn
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; index
+;; push identifier pairAddr
+PUSH S3
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+; expValue
+; end expValue
+;; index
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+; colValue
+POP S4
+; end colValue
+; expValue
+; end expValue
+;; index
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+; colValue
+POP S3
+; end colValue
+; expValue
+; end expValue
+;; push identifier pairAddr
+PUSH S4
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+TUPLE 3
+SETGLOB 8
+; end function getPairClientWallets
+DROP
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 3
+
+.globl	askPairWalletsBalance
+.public	askPairWalletsBalance
+.type	askPairWalletsBalance, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: pairAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function askPairWalletsBalance
+;; index
+;; push identifier pairAddr
+DUP
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; index
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+CALL $askBalanceToken_internal$
+;; index
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+CALL $askBalanceToken_internal$
+DROP
+; end function askPairWalletsBalance
+DROP
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	askPairWalletsBalance_internal
+.type	askPairWalletsBalance_internal, @function
+;; param: pairAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function askPairWalletsBalance
+;; index
+;; push identifier pairAddr
+DUP
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; index
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+CALL $askBalanceToken_internal$
+;; index
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+CALL $askBalanceToken_internal$
+DROP
+; end function askPairWalletsBalance
+DROP
+; end modifier checkOwnerAndAccept
+
+.globl	getPairWalletsBalance
+.public	getPairWalletsBalance
+.type	getPairWalletsBalance, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: pairAddr
+; modifier alwaysAccept
+ACCEPT
+; function getPairWalletsBalance
+;; ret param: balanceWalletA
+PUSHINT 0
+;; ret param: balanceWalletB
+PUSHINT 0
+;; index
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; index
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+CALL $getBalanceTokenWallet_internal$
+; expValue
+; end expValue
+; colValue
+POP S3
+; end colValue
+;; index
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+CALL $getBalanceTokenWallet_internal$
+; expValue
+; end expValue
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+;; emitting 2 value(s)
+PUSH S3
+EQINT -1
+PUSHCONT {
+	PUSH S5
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xcdd7d64e
+	PUSH S2
+	STUR 128
+	PUSH S1
+	STUR 128
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP2
+; end function getPairWalletsBalance
+DROP
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getPairWalletsBalance_internal
+.type	getPairWalletsBalance_internal, @function
+;; param: pairAddr
+; modifier alwaysAccept
+ACCEPT
+; function getPairWalletsBalance
+;; ret param: balanceWalletA
+PUSHINT 0
+;; ret param: balanceWalletB
+PUSHINT 0
+;; index
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; index
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+CALL $getBalanceTokenWallet_internal$
+; expValue
+; end expValue
+; colValue
+POP S3
+; end colValue
+;; index
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+CALL $getBalanceTokenWallet_internal$
+; expValue
+; end expValue
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+TUPLE 2
+SETGLOB 8
+; end function getPairWalletsBalance
+DROP
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 2
+
+.globl	getAllDataPreparation
+.public	getAllDataPreparation
+.type	getAllDataPreparation, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+ENDS
+; modifier alwaysAccept
+ACCEPT
+; function getAllDataPreparation
+;; ret param: pairKeysR
+PUSHINT 0
+NEWDICT
+PAIR
+;; ret param: walletKeysR
+PUSHINT 0
+NEWDICT
+PAIR
+; expValue
+; end expValue
+;; push identifier pairKeys
+GETGLOB 17
+; colValue
+POP S2
+; end colValue
+; expValue
+; end expValue
+;; push identifier walletKeys
+GETGLOB 11
+; colValue
+NIP
+; end colValue
+;; returning named params
+;; emitting 2 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST x9516b1f8
+	PUSH S2
+	UNPAIR
+	XCHG s2
+	STU 32
+	STDICT
+	PUSH S1
+	UNPAIR
+	XCHG s2
+	STU 32
+	STDICT
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP2
+; end function getAllDataPreparation
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getAllDataPreparation_internal
+.type	getAllDataPreparation_internal, @function
+; modifier alwaysAccept
+ACCEPT
+; function getAllDataPreparation
+;; ret param: pairKeysR
+PUSHINT 0
+NEWDICT
+PAIR
+;; ret param: walletKeysR
+PUSHINT 0
+NEWDICT
+PAIR
+; expValue
+; end expValue
+;; push identifier pairKeys
+GETGLOB 17
+; colValue
+POP S2
+; end colValue
+; expValue
+; end expValue
+;; push identifier walletKeys
+GETGLOB 11
+; colValue
+NIP
+; end colValue
+;; returning named params
+TUPLE 2
+SETGLOB 8
+; end function getAllDataPreparation
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 2
+
+.globl	showContractAddress
+.public	showContractAddress
+.type	showContractAddress, @function
+; Decode input parameters
+ENDS
+; modifier alwaysAccept
+ACCEPT
+; function showContractAddress
+;; ret param: dexclient
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: dexclientUINT256
+PUSHINT 0
+MYADDR
+; expValue
+; end expValue
+; colValue
+POP S2
+; end colValue
+; expValue
+; end expValue
+;; get member value
+;; push identifier dexclient
+PUSH S1
+PARSEMSGADDR
+INDEX 3
+PLDU 256
+; colValue
+NIP
+; end colValue
+;; returning named params
+;; emitting 2 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST x9978cbab
+	PUSH S2
+	STSLICER
+	PUSH S1
+	STUR 256
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP2
+; end function showContractAddress
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	showContractAddress_internal
+.type	showContractAddress_internal, @function
+; modifier alwaysAccept
+ACCEPT
+; function showContractAddress
+;; ret param: dexclient
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+;; ret param: dexclientUINT256
+PUSHINT 0
+MYADDR
+; expValue
+; end expValue
+; colValue
+POP S2
+; end colValue
+; expValue
+; end expValue
+;; get member value
+;; push identifier dexclient
+PUSH S1
+PARSEMSGADDR
+INDEX 3
+PLDU 256
+; colValue
+NIP
+; end colValue
+;; returning named params
+TUPLE 2
+SETGLOB 8
+; end function showContractAddress
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 2
+
+.globl	makeABdepositToPair
+.public	makeABdepositToPair
+.type	makeABdepositToPair, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode qtyA
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+; Decode qtyB
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: pairAddr
+;; param: qtyA
+;; param: qtyB
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function makeABdepositToPair
+;; ret param: makeDepositStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S3
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S3
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SDEQ
+NOT
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; get member depositWalletA
+	;; push identifier cp
+	DUP
+	INDEX 3
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	SDEQ
+	NOT
+}
+IF
+THROWIFNOT 104
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SDEQ
+NOT
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; get member depositWalletB
+	;; push identifier cp
+	DUP
+	INDEX 7
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	SDEQ
+	NOT
+}
+IF
+THROWIFNOT 105
+;; index
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; get member depositWalletA
+;; push identifier cp
+PUSH S1
+INDEX 3
+;; push identifier qtyA
+PUSH S5
+PUSHINT 300000000
+CALL $sendTokens_internal$
+BLKDROP 3
+;; index
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; get member depositWalletB
+;; push identifier cp
+PUSH S1
+INDEX 7
+;; push identifier qtyB
+PUSH S4
+PUSHINT 300000000
+CALL $sendTokens_internal$
+BLKDROP 3
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+;; emitting 1 value(s)
+PUSH S4
+EQINT -1
+PUSHCONT {
+	PUSH S6
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xea40dd11
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function makeABdepositToPair
+BLKDROP 3
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	makeABdepositToPair_internal
+.type	makeABdepositToPair_internal, @function
+;; param: pairAddr
+;; param: qtyA
+;; param: qtyB
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function makeABdepositToPair
+;; ret param: makeDepositStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S3
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S3
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SDEQ
+NOT
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; get member depositWalletA
+	;; push identifier cp
+	DUP
+	INDEX 3
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	SDEQ
+	NOT
+}
+IF
+THROWIFNOT 104
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SDEQ
+NOT
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; get member depositWalletB
+	;; push identifier cp
+	DUP
+	INDEX 7
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	SDEQ
+	NOT
+}
+IF
+THROWIFNOT 105
+;; index
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; get member depositWalletA
+;; push identifier cp
+PUSH S1
+INDEX 3
+;; push identifier qtyA
+PUSH S5
+PUSHINT 300000000
+CALL $sendTokens_internal$
+BLKDROP 3
+;; index
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; get member depositWalletB
+;; push identifier cp
+PUSH S1
+INDEX 7
+;; push identifier qtyB
+PUSH S4
+PUSHINT 300000000
+CALL $sendTokens_internal$
+BLKDROP 3
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+TUPLE 1
+SETGLOB 8
+; end function makeABdepositToPair
+BLKDROP 3
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	makeAdepositToPair
+.public	makeAdepositToPair
+.type	makeAdepositToPair, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode qtyA
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: pairAddr
+;; param: qtyA
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function makeAdepositToPair
+;; ret param: makeDepositStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SDEQ
+NOT
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; get member depositWalletA
+	;; push identifier cp
+	DUP
+	INDEX 3
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	SDEQ
+	NOT
+}
+IF
+THROWIFNOT 104
+;; index
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; get member depositWalletA
+;; push identifier cp
+PUSH S1
+INDEX 3
+;; push identifier qtyA
+PUSH S4
+PUSHINT 300000000
+CALL $sendTokens_internal$
+BLKDROP 3
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+;; emitting 1 value(s)
+PUSH S3
+EQINT -1
+PUSHCONT {
+	PUSH S5
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xbb860518
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function makeAdepositToPair
+DROP2
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	makeAdepositToPair_internal
+.type	makeAdepositToPair_internal, @function
+;; param: pairAddr
+;; param: qtyA
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function makeAdepositToPair
+;; ret param: makeDepositStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SDEQ
+NOT
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; get member depositWalletA
+	;; push identifier cp
+	DUP
+	INDEX 3
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	SDEQ
+	NOT
+}
+IF
+THROWIFNOT 104
+;; index
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; get member depositWalletA
+;; push identifier cp
+PUSH S1
+INDEX 3
+;; push identifier qtyA
+PUSH S4
+PUSHINT 300000000
+CALL $sendTokens_internal$
+BLKDROP 3
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+TUPLE 1
+SETGLOB 8
+; end function makeAdepositToPair
+DROP2
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	makeBdepositToPair
+.public	makeBdepositToPair
+.type	makeBdepositToPair, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode qtyB
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: pairAddr
+;; param: qtyB
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function makeBdepositToPair
+;; ret param: makeDepositStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SDEQ
+NOT
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; get member depositWalletB
+	;; push identifier cp
+	DUP
+	INDEX 7
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	SDEQ
+	NOT
+}
+IF
+THROWIFNOT 105
+;; index
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; get member depositWalletB
+;; push identifier cp
+PUSH S1
+INDEX 7
+;; push identifier qtyB
+PUSH S4
+PUSHINT 300000000
+CALL $sendTokens_internal$
+BLKDROP 3
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+;; emitting 1 value(s)
+PUSH S3
+EQINT -1
+PUSHCONT {
+	PUSH S5
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xae379d5f
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function makeBdepositToPair
+DROP2
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	makeBdepositToPair_internal
+.type	makeBdepositToPair_internal, @function
+;; param: pairAddr
+;; param: qtyB
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function makeBdepositToPair
+;; ret param: makeDepositStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SDEQ
+NOT
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; get member depositWalletB
+	;; push identifier cp
+	DUP
+	INDEX 7
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	SDEQ
+	NOT
+}
+IF
+THROWIFNOT 105
+;; index
+;; get member rootB
+;; push identifier cp
+DUP
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; get member depositWalletB
+;; push identifier cp
+PUSH S1
+INDEX 7
+;; push identifier qtyB
+PUSH S4
+PUSHINT 300000000
+CALL $sendTokens_internal$
+BLKDROP 3
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+TUPLE 1
+SETGLOB 8
+; end function makeBdepositToPair
+DROP2
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	returnDepositFromPair
+.public	returnDepositFromPair
+.type	returnDepositFromPair, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: pairAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function returnDepositFromPair
+;; ret param: returnDepositStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S1
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S1
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; map.exists
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; map.exists
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	;; push identifier roots
+	GETGLOB 12
+	PUSHINT 267
+	DICTGET
+	DUP
+	PUSHCONT {
+		NIP
+	}
+	IF
+}
+IF
+THROWIFNOT 103
+NEWC
+STSLICECONST x00000018
+;; returnAddrA
+;; index
+;; get member rootA
+;; push identifier cp
+PUSH S1
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+;; returnAddrB
+;; index
+;; get member rootB
+;; push identifier cp
+PUSH S1
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S3
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x40d1cef00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+;; emitting 1 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xb81cfc00
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function returnDepositFromPair
+DROP
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	returnDepositFromPair_internal
+.type	returnDepositFromPair_internal, @function
+;; param: pairAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function returnDepositFromPair
+;; ret param: returnDepositStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S1
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S1
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; map.exists
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; map.exists
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	;; push identifier roots
+	GETGLOB 12
+	PUSHINT 267
+	DICTGET
+	DUP
+	PUSHCONT {
+		NIP
+	}
+	IF
+}
+IF
+THROWIFNOT 103
+NEWC
+STSLICECONST x00000018
+;; returnAddrA
+;; index
+;; get member rootA
+;; push identifier cp
+PUSH S1
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+;; returnAddrB
+;; index
+;; get member rootB
+;; push identifier cp
+PUSH S1
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S3
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x40d1cef00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+TUPLE 1
+SETGLOB 8
+; end function returnDepositFromPair
+DROP
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	processLiquidity
+.public	processLiquidity
+.type	processLiquidity, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode qtyA
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+; Decode qtyB
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: pairAddr
+;; param: qtyA
+;; param: qtyB
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function processLiquidity
+;; ret param: processLiquidityStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S3
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S3
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; map.exists
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; map.exists
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	;; push identifier roots
+	GETGLOB 12
+	PUSHINT 267
+	DICTGET
+	DUP
+	PUSHCONT {
+		NIP
+	}
+	IF
+}
+IF
+THROWIFNOT 103
+NEWC
+STSLICECONST x00000011
+;; qtyA
+;; push identifier qtyA
+PUSH S4
+STUR 128
+;; qtyB
+;; push identifier qtyB
+PUSH S3
+STUR 128
+;; returnAddrA
+;; index
+;; get member rootA
+;; push identifier cp
+PUSH S1
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+;; returnAddrB
+;; index
+;; get member rootB
+;; push identifier cp
+PUSH S1
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S5
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x483215600000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+;; emitting 1 value(s)
+PUSH S4
+EQINT -1
+PUSHCONT {
+	PUSH S6
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xf270c783
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function processLiquidity
+BLKDROP 3
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	processLiquidity_internal
+.type	processLiquidity_internal, @function
+;; param: pairAddr
+;; param: qtyA
+;; param: qtyB
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function processLiquidity
+;; ret param: processLiquidityStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S3
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S3
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; map.exists
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; map.exists
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	;; push identifier roots
+	GETGLOB 12
+	PUSHINT 267
+	DICTGET
+	DUP
+	PUSHCONT {
+		NIP
+	}
+	IF
+}
+IF
+THROWIFNOT 103
+NEWC
+STSLICECONST x00000011
+;; qtyA
+;; push identifier qtyA
+PUSH S4
+STUR 128
+;; qtyB
+;; push identifier qtyB
+PUSH S3
+STUR 128
+;; returnAddrA
+;; index
+;; get member rootA
+;; push identifier cp
+PUSH S1
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+;; returnAddrB
+;; index
+;; get member rootB
+;; push identifier cp
+PUSH S1
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S5
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x483215600000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+TUPLE 1
+SETGLOB 8
+; end function processLiquidity
+BLKDROP 3
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	returnAllLiquidity
+.public	returnAllLiquidity
+.type	returnAllLiquidity, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: pairAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function returnAllLiquidity
+;; ret param: returnLiquidityStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S1
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S1
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; map.exists
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; map.exists
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	;; push identifier roots
+	GETGLOB 12
+	PUSHINT 267
+	DICTGET
+	DUP
+	PUSHCONT {
+		NIP
+	}
+	IF
+}
+IF
+THROWIFNOT 103
+NEWC
+STSLICECONST x00000019
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S3
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x483215600000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+;; emitting 1 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xac678f71
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function returnAllLiquidity
+DROP
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	returnAllLiquidity_internal
+.type	returnAllLiquidity_internal, @function
+;; param: pairAddr
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function returnAllLiquidity
+;; ret param: returnLiquidityStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S1
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S1
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; map.exists
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; map.exists
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	;; push identifier roots
+	GETGLOB 12
+	PUSHINT 267
+	DICTGET
+	DUP
+	PUSHCONT {
+		NIP
+	}
+	IF
+}
+IF
+THROWIFNOT 103
+NEWC
+STSLICECONST x00000019
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S3
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x483215600000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+TUPLE 1
+SETGLOB 8
+; end function returnAllLiquidity
+DROP
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	processSwapA
+.public	processSwapA
+.type	processSwapA, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode qtyA
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: pairAddr
+;; param: qtyA
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function processSwapA
+;; ret param: processSwapStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; map.exists
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; map.exists
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	;; push identifier roots
+	GETGLOB 12
+	PUSHINT 267
+	DICTGET
+	DUP
+	PUSHCONT {
+		NIP
+	}
+	IF
+}
+IF
+THROWIFNOT 103
+NEWC
+STSLICECONST x00000012
+;; qtyA
+;; push identifier qtyA
+PUSH S3
+STUR 128
+;; returnAddrA
+;; index
+;; get member rootA
+;; push identifier cp
+PUSH S1
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+;; returnAddrB
+;; index
+;; get member rootB
+;; push identifier cp
+PUSH S1
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S4
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x45f5e1000000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+;; emitting 1 value(s)
+PUSH S3
+EQINT -1
+PUSHCONT {
+	PUSH S5
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xcca446f4
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function processSwapA
+DROP2
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	processSwapA_internal
+.type	processSwapA_internal, @function
+;; param: pairAddr
+;; param: qtyA
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function processSwapA
+;; ret param: processSwapStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; map.exists
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; map.exists
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	;; push identifier roots
+	GETGLOB 12
+	PUSHINT 267
+	DICTGET
+	DUP
+	PUSHCONT {
+		NIP
+	}
+	IF
+}
+IF
+THROWIFNOT 103
+NEWC
+STSLICECONST x00000012
+;; qtyA
+;; push identifier qtyA
+PUSH S3
+STUR 128
+;; returnAddrA
+;; index
+;; get member rootA
+;; push identifier cp
+PUSH S1
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+;; returnAddrB
+;; index
+;; get member rootB
+;; push identifier cp
+PUSH S1
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S4
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x45f5e1000000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+TUPLE 1
+SETGLOB 8
+; end function processSwapA
+DROP2
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	processSwapB
+.public	processSwapB
+.type	processSwapB, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode pairAddr
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode qtyB
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: pairAddr
+;; param: qtyB
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function processSwapB
+;; ret param: processSwapStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; map.exists
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; map.exists
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	;; push identifier roots
+	GETGLOB 12
+	PUSHINT 267
+	DICTGET
+	DUP
+	PUSHCONT {
+		NIP
+	}
+	IF
+}
+IF
+THROWIFNOT 103
+NEWC
+STSLICECONST x00000021
+;; qtyB
+;; push identifier qtyB
+PUSH S3
+STUR 128
+;; returnAddrA
+;; index
+;; get member rootA
+;; push identifier cp
+PUSH S1
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+;; returnAddrB
+;; index
+;; get member rootB
+;; push identifier cp
+PUSH S1
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S4
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x45f5e1000000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+;; emitting 1 value(s)
+PUSH S3
+EQINT -1
+PUSHCONT {
+	PUSH S5
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xf26796ed
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function processSwapB
+DROP2
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	processSwapB_internal
+.type	processSwapB_internal, @function
+;; param: pairAddr
+;; param: qtyB
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function processSwapB
+;; ret param: processSwapStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; map.exists
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 102
+;; index
+;; push identifier pairAddr
+PUSH S2
+;; push identifier pairs
+GETGLOB 16
+PUSHINT 267
+DICTGETREF
+PUSHCONT {
+	CTOS
+	LDREF
+	LDREF
+	LDU 256
+	LDMSGADDR
+	LDMSGADDR
+	DROP
+	BLKSWAP 1, 4
+	CTOS
+	LDMSGADDR
+	LDU 128
+	BLKSWAP 1, 6
+	CTOS
+	LDMSGADDR
+	LDMSGADDR
+	PLDU 128
+	TUPLE 9
+}
+PUSHCONT {
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHINT 0
+	TUPLE 9
+}
+IFELSE
+;; decl: cp
+;; map.exists
+;; get member rootA
+;; push identifier cp
+DUP
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+;; short-circuiting &&
+DUP
+PUSHCONT {
+	DROP
+	;; map.exists
+	;; get member rootB
+	;; push identifier cp
+	DUP
+	INDEX 5
+	;; push identifier roots
+	GETGLOB 12
+	PUSHINT 267
+	DICTGET
+	DUP
+	PUSHCONT {
+		NIP
+	}
+	IF
+}
+IF
+THROWIFNOT 103
+NEWC
+STSLICECONST x00000021
+;; qtyB
+;; push identifier qtyB
+PUSH S3
+STUR 128
+;; returnAddrA
+;; index
+;; get member rootA
+;; push identifier cp
+PUSH S1
+INDEX 1
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+;; returnAddrB
+;; index
+;; get member rootB
+;; push identifier cp
+PUSH S1
+INDEX 5
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier pairAddr
+PUSH S4
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x45f5e1000000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S3
+; end colValue
+;; returning named params
+DROP2
+TUPLE 1
+SETGLOB 8
+; end function processSwapB
+DROP2
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	getBalanceTONgrams
+.public	getBalanceTONgrams
+.type	getBalanceTONgrams, @function
+; Decode input parameters
+ENDS
+; modifier alwaysAccept
+ACCEPT
+; function getBalanceTONgrams
+;; ret param: balanceTONgrams
+PUSHINT 0
+;; return
+;; get member balance
+GETPARAM 7
+INDEX 0
+NIP
+;; emitting 1 value(s)
+PUSH S1
+EQINT -1
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST x88c00ce9
+	PUSH S1
+	STUR 128
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function getBalanceTONgrams
+; end modifier alwaysAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	getBalanceTONgrams_internal
+.type	getBalanceTONgrams_internal, @function
+; modifier alwaysAccept
+ACCEPT
+; function getBalanceTONgrams
+;; ret param: balanceTONgrams
+PUSHINT 0
+;; return
+;; get member balance
+GETPARAM 7
+INDEX 0
+NIP
+TUPLE 1
+SETGLOB 8
+; end function getBalanceTONgrams
+; end modifier alwaysAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	setWrapper
+.public	setWrapper
+.type	setWrapper, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode arg0
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+; Decode arg1
+LDMSGADDRQ
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDMSGADDR
+}
+IFNOT
+ENDS
+;; param: arg0
+;; param: arg1
+; modifier alwaysAccept
+ACCEPT
+; function setWrapper
+;; get member sender
+GETGLOB 9
+;; decl: wrapper
+;; if
+;; !
+;; map.exists
+;; push identifier wrapper
+DUP
+;; push identifier wrappers
+GETGLOB 14
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+PUSHCONT {
+	;; index
+	;; push identifier wrapper
+	DUP
+	;; push identifier wrappers
+	GETGLOB 14
+	PUSHINT 267
+	DICTGET
+	PUSHCONT {
+		LDMSGADDR
+		TUPLE 2
+	}
+	PUSHCONT {
+		PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+		PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+		TUPLE 2
+	}
+	IFELSE
+	;; decl: cw
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg0
+	PUSH S4
+	; colValue
+	SETINDEX 0
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg1
+	PUSH S3
+	; colValue
+	SETINDEX 1
+	NIP
+	; end colValue
+	; expValue
+	;; fetch wrappers
+	GETGLOB 14
+	;; push identifier wrapper
+	PUSH S2
+	SWAP
+	; end expValue
+	;; push identifier cw
+	PUSH S2
+	; colValue
+	UNTUPLE 2
+	NEWC
+	PUSH S2
+	STSLICER
+	PUSH S1
+	STSLICER
+	NIP
+	NIP
+	ROTREV
+	PUSHINT 267
+	DICTSETB
+	SETGLOB 14
+	; end colValue
+	; expValue
+	;; fetch wrappersKeys
+	GETGLOB 15
+	; end expValue
+	;; push identifier wrapper
+	PUSH S2
+	;; array.push(..)
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSET
+	PAIR
+	; colValue
+	SETGLOB 15
+	; end colValue
+	DROP
+}
+IFNOT
+;; end if
+DROP
+; end function setWrapper
+DROP2
+; end modifier alwaysAccept
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	setWrapper_internal
+.type	setWrapper_internal, @function
+;; param: arg0
+;; param: arg1
+; modifier alwaysAccept
+ACCEPT
+; function setWrapper
+;; get member sender
+GETGLOB 9
+;; decl: wrapper
+;; if
+;; !
+;; map.exists
+;; push identifier wrapper
+DUP
+;; push identifier wrappers
+GETGLOB 14
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+PUSHCONT {
+	;; index
+	;; push identifier wrapper
+	DUP
+	;; push identifier wrappers
+	GETGLOB 14
+	PUSHINT 267
+	DICTGET
+	PUSHCONT {
+		LDMSGADDR
+		TUPLE 2
+	}
+	PUSHCONT {
+		PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+		PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+		TUPLE 2
+	}
+	IFELSE
+	;; decl: cw
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg0
+	PUSH S4
+	; colValue
+	SETINDEX 0
+	NIP
+	; end colValue
+	; expValue
+	DUP
+	; end expValue
+	;; push identifier arg1
+	PUSH S3
+	; colValue
+	SETINDEX 1
+	NIP
+	; end colValue
+	; expValue
+	;; fetch wrappers
+	GETGLOB 14
+	;; push identifier wrapper
+	PUSH S2
+	SWAP
+	; end expValue
+	;; push identifier cw
+	PUSH S2
+	; colValue
+	UNTUPLE 2
+	NEWC
+	PUSH S2
+	STSLICER
+	PUSH S1
+	STSLICER
+	NIP
+	NIP
+	ROTREV
+	PUSHINT 267
+	DICTSETB
+	SETGLOB 14
+	; end colValue
+	; expValue
+	;; fetch wrappersKeys
+	GETGLOB 15
+	; end expValue
+	;; push identifier wrapper
+	PUSH S2
+	;; array.push(..)
+	SWAP
+	UNPAIR
+	PUSH S1
+	INC
+	XCHG s3
+	ROTREV
+	PUSHINT 32
+	DICTUSET
+	PAIR
+	; colValue
+	SETGLOB 15
+	; end colValue
+	DROP
+}
+IFNOT
+;; end if
+DROP
+; end function setWrapper
+DROP2
+; end modifier alwaysAccept
+
+.globl	wrapTON
+.public	wrapTON
+.type	wrapTON, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode qtyTONgrams
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: qtyTONgrams
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function wrapTON
+;; ret param: processWrapStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; !
+;; push identifier qtyTONgrams
+PUSH S1
+;; >
+;; get member balance
+GETPARAM 7
+INDEX 0
+GREATER
+NOT
+THROWIFNOT 106
+NEWC
+STSLICECONST x00000025
+;; destination
+;; index
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801790cbb81644bd8ebc2b145c7f0c59cd44731ee67261bc7f8c4cc87bfb59f6f31_
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier qtyTONgrams
+PUSH S2
+;; push identifier WRAPPER_TON
+PUSHSLICE x801f24ffedbdd2dc0a3f6a3ce30782708d46edca9355c534f4b6d338fd8d153a427_
+NEWC
+STSLICECONST x62_
+STSLICE
+SWAP
+STGRAMS
+PUSHINT 105
+STZEROES
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+;; emitting 1 value(s)
+PUSH S2
+EQINT -1
+PUSHCONT {
+	PUSH S4
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST xd86d1a16
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function wrapTON
+DROP
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	wrapTON_internal
+.type	wrapTON_internal, @function
+;; param: qtyTONgrams
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function wrapTON
+;; ret param: processWrapStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; !
+;; push identifier qtyTONgrams
+PUSH S1
+;; >
+;; get member balance
+GETPARAM 7
+INDEX 0
+GREATER
+NOT
+THROWIFNOT 106
+NEWC
+STSLICECONST x00000025
+;; destination
+;; index
+;; push identifier ROOT_WRAPPED_TON
+PUSHSLICE x801790cbb81644bd8ebc2b145c7f0c59cd44731ee67261bc7f8c4cc87bfb59f6f31_
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+STSLICER
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier qtyTONgrams
+PUSH S2
+;; push identifier WRAPPER_TON
+PUSHSLICE x801f24ffedbdd2dc0a3f6a3ce30782708d46edca9355c534f4b6d338fd8d153a427_
+NEWC
+STSLICECONST x62_
+STSLICE
+SWAP
+STGRAMS
+PUSHINT 105
+STZEROES
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S2
+; end colValue
+;; returning named params
+DROP
+TUPLE 1
+SETGLOB 8
+; end function wrapTON
+DROP
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	unwrapTON
+.public	unwrapTON
+.type	unwrapTON, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+ENDS
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function unwrapTON
+;; ret param: processUnwrapStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; index
+;; push identifier WRAPPER_TON
+PUSHSLICE x801f24ffedbdd2dc0a3f6a3ce30782708d46edca9355c534f4b6d338fd8d153a427_
+;; push identifier wrappers
+GETGLOB 14
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	LDMSGADDR
+	TUPLE 2
+}
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	TUPLE 2
+}
+IFELSE
+;; decl: cw
+;; index
+;; get member root
+;; push identifier cw
+DUP
+INDEX 0
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; decl: transmitter
+NEWC
+STSLICECONST x0000000d
+;; _answer_id
+PUSHINT 36
+STUR 32
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier transmitter
+PUSH S1
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x40d1cef00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S4
+; end colValue
+;; returning named params
+BLKDROP 3
+;; emitting 1 value(s)
+PUSH S1
+EQINT -1
+PUSHCONT {
+	PUSH S3
+	CTOS
+	LDU 2
+	LDMSGADDR
+	DROP
+	NIP
+	NEWC
+	STSLICECONST xc
+	STSLICE
+	PUSHINT 96
+	STZEROES
+	STSLICECONST 0
+	STSLICECONST 0
+	STSLICECONST x9036602b
+	PUSH S1
+	STIR 1
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+}
+IF
+DROP
+; end function unwrapTON
+; end modifier checkOwnerAndAccept
+IFREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	unwrapTON_internal
+.type	unwrapTON_internal, @function
+; modifier checkOwnerAndAccept
+GETGLOB 5
+DUP
+ISNULL
+PUSHCONT {
+	DROP
+	PUSHINT 0
+}
+IF
+;; ==
+GETGLOB 2
+EQUAL
+THROWIFNOT 101
+ACCEPT
+; function unwrapTON
+;; ret param: processUnwrapStatus
+PUSHINT 0
+; expValue
+; end expValue
+FALSE
+; colValue
+NIP
+; end colValue
+;; index
+;; push identifier WRAPPER_TON
+PUSHSLICE x801f24ffedbdd2dc0a3f6a3ce30782708d46edca9355c534f4b6d338fd8d153a427_
+;; push identifier wrappers
+GETGLOB 14
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	LDMSGADDR
+	TUPLE 2
+}
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	TUPLE 2
+}
+IFELSE
+;; decl: cw
+;; index
+;; get member root
+;; push identifier cw
+DUP
+INDEX 0
+;; push identifier roots
+GETGLOB 12
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+}
+IFNOT
+;; decl: transmitter
+NEWC
+STSLICECONST x0000000d
+;; _answer_id
+PUSHINT 36
+STUR 32
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier transmitter
+PUSH S1
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x40d1cef00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+; expValue
+; end expValue
+TRUE
+; colValue
+POP S4
+; end colValue
+;; returning named params
+BLKDROP 3
+TUPLE 1
+SETGLOB 8
+; end function unwrapTON
+; end modifier checkOwnerAndAccept
+GETGLOB 8
+UNTUPLE 1
+
+.globl	callbackUnwrapTON
+.public	callbackUnwrapTON
+.type	callbackUnwrapTON, @function
+GETGLOB 1
+ISNULL
+IFREF {
+	CALL $c4_to_c7$
+}
+; Decode input parameters
+; Decode value0
+LDUQ 128
+PUSHCONT {
+	;; load next cell
+	LDREF
+	ENDS
+	CTOS
+	LDU 128
+}
+IFNOT
+ENDS
+;; param: value0
+; modifier onlyOwnerWallets
+;; map.exists
+;; get member sender
+GETGLOB 9
+;; push identifier wallets
+GETGLOB 10
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 107
+ACCEPT
+; function callbackUnwrapTON
+;; get member sender
+GETGLOB 9
+;; decl: clientWallet
+;; index
+;; push identifier WRAPPER_TON
+PUSHSLICE x801f24ffedbdd2dc0a3f6a3ce30782708d46edca9355c534f4b6d338fd8d153a427_
+;; push identifier wrappers
+GETGLOB 14
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	LDMSGADDR
+	TUPLE 2
+}
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	TUPLE 2
+}
+IFELSE
+;; decl: cw
+;; get member depositWallet
+;; push identifier cw
+DUP
+INDEX 1
+;; decl: wrapperDepositWallet
+;; push identifier clientWallet
+PUSH S2
+;; push identifier wrapperDepositWallet
+PUSH S1
+;; push identifier value0
+PUSH S5
+PUSHINT 300000000
+;; param: from
+;; param: to
+;; param: tokens
+;; param: grams
+; function processTokens
+;; push identifier from
+PUSH S3
+;; decl: transmitter
+;; push identifier to
+PUSH S3
+;; decl: receiver
+NEWC
+STSLICECONST x0000000c
+;; dest
+;; push identifier receiver
+PUSH S1
+STSLICER
+;; tokens
+;; push identifier tokens
+PUSH S4
+STUR 128
+;; grams
+;; push identifier grams
+PUSH S3
+STUR 128
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier transmitter
+PUSH S2
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x41dcd6500000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+BLKDROP 7
+; end function processTokens
+NEWC
+STSLICECONST x00000052
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier WRAPPER_TON
+PUSHSLICE x801f24ffedbdd2dc0a3f6a3ce30782708d46edca9355c534f4b6d338fd8d153a427_
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x40d1cef00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+BLKDROP 4
+; end function callbackUnwrapTON
+DROP
+; end modifier onlyOwnerWallets
+CALLREF {
+	CALL $c7_to_c4$
+}
+TRUE
+SETGLOB 7
+
+.globl	callbackUnwrapTON_internal
+.type	callbackUnwrapTON_internal, @function
+;; param: value0
+; modifier onlyOwnerWallets
+;; map.exists
+;; get member sender
+GETGLOB 9
+;; push identifier wallets
+GETGLOB 10
+PUSHINT 267
+DICTGET
+DUP
+PUSHCONT {
+	NIP
+}
+IF
+THROWIFNOT 107
+ACCEPT
+; function callbackUnwrapTON
+;; get member sender
+GETGLOB 9
+;; decl: clientWallet
+;; index
+;; push identifier WRAPPER_TON
+PUSHSLICE x801f24ffedbdd2dc0a3f6a3ce30782708d46edca9355c534f4b6d338fd8d153a427_
+;; push identifier wrappers
+GETGLOB 14
+PUSHINT 267
+DICTGET
+PUSHCONT {
+	LDMSGADDR
+	TUPLE 2
+}
+PUSHCONT {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	TUPLE 2
+}
+IFELSE
+;; decl: cw
+;; get member depositWallet
+;; push identifier cw
+DUP
+INDEX 1
+;; decl: wrapperDepositWallet
+;; push identifier clientWallet
+PUSH S2
+;; push identifier wrapperDepositWallet
+PUSH S1
+;; push identifier value0
+PUSH S5
+PUSHINT 300000000
+;; param: from
+;; param: to
+;; param: tokens
+;; param: grams
+; function processTokens
+;; push identifier from
+PUSH S3
+;; decl: transmitter
+;; push identifier to
+PUSH S3
+;; decl: receiver
+NEWC
+STSLICECONST x0000000c
+;; dest
+;; push identifier receiver
+PUSH S1
+STSLICER
+;; tokens
+;; push identifier tokens
+PUSH S4
+STUR 128
+;; grams
+;; push identifier grams
+PUSH S3
+STUR 128
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier transmitter
+PUSH S2
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x41dcd6500000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+BLKDROP 7
+; end function processTokens
+NEWC
+STSLICECONST x00000052
+ENDC
+;; decl: body
+;; transfer()
+;; push identifier WRAPPER_TON
+PUSHSLICE x801f24ffedbdd2dc0a3f6a3ce30782708d46edca9355c534f4b6d338fd8d153a427_
+NEWC
+STSLICECONST x62_
+STSLICE
+PUSHSLICE x40d1cef00000000000000000000000000004_
+STSLICER
+STSLICECONST 0
+STSLICECONST 1
+;; push identifier body
+PUSH S1
+STREFR
+ENDC
+PUSHINT 0
+SENDRAWMSG
+BLKDROP 4
+; end function callbackUnwrapTON
+DROP
+; end modifier onlyOwnerWallets
+
+.macro c7_to_c4
+GETGLOB 2
+NEWC
+STU 256
+GETGLOB 3
+STUR 64
+GETGLOB 6
+STUR 1
+NEWC
+GETGLOB 12
+GETGLOB 13
+UNTUPLE 2
+GETGLOB 14
+GETGLOB 17
+UNTUPLE 2
+REVERSE 7, 0
+STDICT
+STU 32
+STDICT
+STDICT
+STU 32
+STDICT
+NEWC
+GETGLOB 15
+UNTUPLE 2
+GETGLOB 16
+REVERSE 4, 0
+STU 32
+STDICT
+STDICT
+GETGLOB 10
+GETGLOB 11
+UNTUPLE 2
+REVERSE 6, 0
+STBREF
+STBREF
+STDICT
+STU 32
+STDICT
+ENDC
+POP C4
+
+.macro c4_to_c7
+PUSHROOT
+CTOS        ; c4
+LDU 256      ; pubkey c4
+LDU 64      ; pubkey timestamp c4
+LDU 1       ; pubkey [timestamp] constructor_flag memory
+LDREFRTOS
+LDDICT
+LDU 32
+LDDICT
+ROTREV
+PAIR
+SETGLOB 13
+LDDICT
+LDU 32
+PLDDICT
+PAIR
+SETGLOB 17
+SETGLOB 14
+SETGLOB 12
+LDREFRTOS
+LDU 32
+LDDICT
+ROTREV
+PAIR
+SETGLOB 15
+PLDDICT
+SETGLOB 16
+LDDICT
+LDU 32
+PLDDICT
+PAIR
+SETGLOB 11
+SETGLOB 10
+TRUE
+SETGLOB 1   ; pubkey [timestamp] constructor_flag
+SETGLOB 6   ; pubkey [timestamp]
+SETGLOB 3   ; D
+SETGLOB 2
+
+.macro c4_to_c7_with_init_storage
+PUSHROOT
+CTOS        ; c4
+DUP        ; c4 c4
+SBITS      ; c4 bits
+GTINT 1    ; c4 bits>1
+PUSHCONT {
+	LDU 256      ; pubkey c4
+	LDU 64      ; pubkey timestamp c4
+	LDU 1       ; pubkey [timestamp] constructor_flag memory
+	LDREFRTOS
+	LDDICT
+	LDU 32
+	LDDICT
+	ROTREV
+	PAIR
+	SETGLOB 13
+	LDDICT
+	LDU 32
+	PLDDICT
+	PAIR
+	SETGLOB 17
+	SETGLOB 14
+	SETGLOB 12
+	LDREFRTOS
+	LDU 32
+	LDDICT
+	ROTREV
+	PAIR
+	SETGLOB 15
+	PLDDICT
+	SETGLOB 16
+	LDDICT
+	LDU 32
+	PLDDICT
+	PAIR
+	SETGLOB 11
+	SETGLOB 10
+	TRUE
+	SETGLOB 1   ; pubkey [timestamp] constructor_flag
+	SETGLOB 6   ; pubkey [timestamp]
+	SETGLOB 3   ; D
+	SETGLOB 2
+}
+PUSHCONT {
+	PLDDICT   ; D
+	; init wallets
+	NEWDICT
+	SETGLOB 10
+	; init walletKeys
+	PUSHINT 0
+	NEWDICT
+	PAIR
+	SETGLOB 11
+	; init roots
+	NEWDICT
+	SETGLOB 12
+	; init rootKeys
+	PUSHINT 0
+	NEWDICT
+	PAIR
+	SETGLOB 13
+	; init wrappers
+	NEWDICT
+	SETGLOB 14
+	; init wrappersKeys
+	PUSHINT 0
+	NEWDICT
+	PAIR
+	SETGLOB 15
+	; init pairs
+	NEWDICT
+	SETGLOB 16
+	; init pairKeys
+	PUSHINT 0
+	NEWDICT
+	PAIR
+	SETGLOB 17
+	; set contract pubkey
+	PUSHINT 0
+	SWAP
+	PUSHINT 64
+	DICTUGET
+	THROWIFNOT 61
+	PLDU 256
+	SETGLOB 2
+	PUSHINT 0 ; timestamp
+	SETGLOB 3
+	PUSHINT 0 ; constructor_flag
+	SETGLOB 6
+	TRUE
+	SETGLOB 1
+}
+IFELSE
+
+.internal-alias :main_internal,        0
+.internal	:main_internal
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Function: main_internal
+;; param: contract_balance
+;; param: msg_balance
+;; param: int_msg_info
+;; param: msg_body_slice
+PUSHINT 0  ; main_external trans id
+PUSH S2
+CTOS
+LDU 4       ; bounced tail
+LDMSGADDR   ; bounced src tail
+DROP
+SETGLOB 9
+MODPOW2 1
+IFRET
+PUSH S1    ; body
+SEMPTY     ; isEmpty
+IFRET
+PUSH S1 ; body
+LDU 32  ; funcId body'
+PUSH S1 ; funcId body' funcId
+IFNOTRET
+PUSH S1 ; funcId body' funcId
+LESSINT 3            ; funcId body' funcId<3
+PUSH S2              ; funcId body' funcId<3 funcId
+PUSHINT 4294967293   ; funcId body' funcId<3 funcId 4294967293
+GREATER              ; funcId body' funcId<3 funcId>4294967293
+OR                   ; funcId body' funcId<3||funcId>4294967293
+PUSHCONT {
+	DROP2
+	THROW 60
+}
+IFJMP
+SWAP    ; body funcId
+CALL 1
+GETGLOB 7
+ISNULL
+PUSHCONT {
+	DROP
+	THROW 60
+}
+IF
+
+.internal-alias :main_external,        -1
+.internal	:main_external
+PUSHINT -1 ; main_external trans id
+PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+SETGLOB 9
+PUSH S1
+CALL $c4_to_c7_with_init_storage$
+LDU 1 ; haveSign msgSlice
+SWAP
+PUSHCONT {
+	PUSHINT 512
+	LDSLICEX ; signatureSlice msgSlice
+	DUP      ; signatureSlice msgSlice msgSlice
+	HASHSU   ; signatureSlice msgSlice hashMsgSlice
+	SWAP  ; signatureSlice hashMsgSlice msgSlice
+	LDU 1 ; signatureSlice hashMsgSlice havePubkey msgSlice
+	SWAP  ; signatureSlice hashMsgSlice msgSlice havePubkey
+	PUSHCONT {
+		LDU 256       ; signatureSlice hashMsgSlice pubkey msgSlice
+		XCHG s3
+		SWAP
+	}
+	PUSHCONT {
+		XCHG s2
+		GETGLOB 2
+	}
+	IFELSE
+	DUP
+	SETGLOB 5
+	CHKSIGNU      ; msgSlice isSigned
+	THROWIFNOT 40 ; msgSlice
+}
+PUSHCONT {
+	LDU 1      ; havePubkey msgSlice
+	SWAP       ; msgSlice havePubkey
+	THROWIF 58 ; msgSlice
+}
+IFELSE
+LDU 64                         ; timestamp msgSlice
+SWAP                           ; msgSlice timestamp
+CALL $replay_protection_macro$ ; msgSlice
+LDU 32  ; expireAt msgSlice
+SWAP    ; msgSlice expireAt
+NOW     ; msgSlice expireAt now
+GREATER ; msgSlice expireAt>now
+THROWIFNOT 57
+LDU  32 ; funcId body
+PUSH S1 ; funcId body funcId
+LESSINT 3            ; funcId body' funcId<3
+PUSH S2              ; funcId body' funcId<3 funcId
+PUSHINT 4294967293   ; funcId body' funcId<3 funcId 4294967293
+GREATER              ; funcId body' funcId<3 funcId>4294967293
+OR                   ; funcId body' funcId<3||funcId>4294967293
+PUSHCONT {
+	DROP2
+	THROW 60
+}
+IFJMP
+SWAP    ; body funcId
+CALL 1
+GETGLOB 7
+ISNULL
+PUSHCONT {
+	DROP
+	THROW 60
+}
+IF
+

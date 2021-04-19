@@ -1,0 +1,27 @@
+solc TONwrapper.sol
+tvm_linker compile TONwrapper.code --lib ../../../TVM/TON-Solidity-Compiler/lib/stdlib_sol.tvm
+tonos-cli genaddr TONwrapper.tvc TONwrapper.abi.json --genkey TONwrapper.keys.json
+
+0:a39cbd7030558f6a65ff6c988c2077e464670d57308e908f6a0a3f860e631280
+"trend crumble mutual rib busy pepper area razor chicken erode diagram possible"
+
+
+tonos-cli account 0:a39cbd7030558f6a65ff6c988c2077e464670d57308e908f6a0a3f860e631280
+tonos-cli deploy TONwrapper.tvc {} --sign TONwrapper.keys.json --abi TONwrapper.abi.json
+
+tonos-cli run 0:7d98a8035d24870510c8905cbcdcbd7e86bdceacb6cf4f712c2ec78df5822c11 getDepositAddress '{"dexclient":"0:6866e5e12cdc15ef064620f4ca8c22d8c8f168a865a3c873a4582bb5ae314797"}' --abi TONwrapper.abi.json
+tonos-cli call 0:7d98a8035d24870510c8905cbcdcbd7e86bdceacb6cf4f712c2ec78df5822c11 getDepositAddress '{"dexclient":"0:6866e5e12cdc15ef064620f4ca8c22d8c8f168a865a3c873a4582bb5ae314797"}' --abi TONwrapper.abi.json
+
+
+tonos-cli run 0:6aa756c8ef76363dd60a15f1e68be550efbc7a605a42a4637db49a98161d165f getBalance {} --abi TONTokenWallet.abi.json
+
+tonos-cli run 0:a39cbd7030558f6a65ff6c988c2077e464670d57308e908f6a0a3f860e631280 getZeroAddress {} --abi TONwrapper.abi.json
+tonos-cli account 0:7d98a8035d24870510c8905cbcdcbd7e86bdceacb6cf4f712c2ec78df5822c11
+createZeroWallet
+getDepositAddress
+
+tonos-cli run 0:a39cbd7030558f6a65ff6c988c2077e464670d57308e908f6a0a3f860e631280 isRoot '{"arg0":"0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210"}' --abi TONwrapper.abi.json
+
+
+
+tonos-cli call 0:a39cbd7030558f6a65ff6c988c2077e464670d57308e908f6a0a3f860e631280 createZeroWallet {} --abi TONwrapper.abi.json --sign TONwrapper.keys.json

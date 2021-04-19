@@ -1,0 +1,26 @@
+solc core.sol
+tvm_linker compile core.code --lib ../../../../TVM/TON-Solidity-Compiler/lib/stdlib_sol.tvm
+tonos-cli genaddr core.tvc core.abi.json --genkey core.keys.json
+
+
+0:38ae412ab2177d96c739148c20989131eb72a20ea7c51396290ec1cfac56737c
+spare noodle sea olympic vendor winner put wreck above fatal culture modify
+
+debot_abi=$(cat core.abi.json | xxd -ps -c 20000)
+
+tvm_linker decode --tvc DEXroot.tvc > code.txt
+export clientCode=`cat code.txt`
+
+
+tonos-cli deploy core.tvc '{"debotAbi":"", "DexRootAddress":"0:b925e457a728cbadee1562f49899506d2ee71dd40b14c2d310c2950c24fe9732", "DEXclientStorage1":"0:370e406297517a8874a920339233d2c2dcf4b6b00522d2ed54a1db53266469d8", "m_wrapperDebotAddress1": "0:9b79b0e15797b10223a02717f6929df19df5f3e41825364047caec3fa2291f80"}' --sign core.keys.json --abi core.abi.json
+tonos-cli call 0:38ae412ab2177d96c739148c20989131eb72a20ea7c51396290ec1cfac56737c setABI "{\"dabi\":\"$debot_abi\"}" --sign core.keys.json --abi core.abi.json
+
+
+core
+tonos-cli debot fetch 0:38ae412ab2177d96c739148c20989131eb72a20ea7c51396290ec1cfac56737c
+
+client
+dance token doll imitate sustain beef clock student pitch cheese delay kiss
+
+0:a120d4337c2c9b5e7f7e43dd9e77d1ed190960717b281f9b28a185d6126a5409
+split spell stamp erode park swing approve tilt leopard dust absorb lemon

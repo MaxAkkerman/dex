@@ -1,0 +1,75 @@
+solc DexSwapDebot.sol
+tvm_linker compile DexSwapDebot.code --lib ../../TVM/TON-Solidity-Compiler/lib/stdlib_sol.tvm
+tonos-cli genaddr DexSwapDebot.tvc DexSwapDebot.abi.json --genkey DexSwapDebot.keys.json
+
+0:d9e7071e0e110e1d939fca1c00e92044ae2a720f8229fec729ceee1de0651154
+
+
+debot_abi=$(cat DexSwapDebot.abi.json | xxd -ps -c 20000)
+
+0:fd08f9a6bcc1be026ab94ec6746833c98db18880de23796a56a8ff40aa938099
+tonos-cli deploy DexSwapDebot.tvc '{"debotAbi":"", "DexRootAddress":"0:29c4927c1f14d633231c92e0c7eb108a8bce72bc6ce113c5303a694f4a550e1b"}' --sign DexSwapDebot.keys.json --abi DexSwapDebot.abi.json
+tonos-cli call 0:d9e7071e0e110e1d939fca1c00e92044ae2a720f8229fec729ceee1de0651154 setABI "{\"dabi\":\"$debot_abi\"}" --sign DexSwapDebot.keys.json --abi DexSwapDebot.abi.json
+
+Swap debot
+tonos-cli debot fetch 0:d9e7071e0e110e1d939fca1c00e92044ae2a720f8229fec729ceee1de0651154
+
+0:c7a8373167a9d1aa94652ca6de576fdc9d5d800e6d579bee13b10db14d7c4bc8
+
+
+debot_abi=$(cat <YOURDEXDEBOT>.abi.json | xxd -ps -c 20000)
+tonos-cli deploy <YOURDEXDEBOT>.tvc '{"debotAbi":"", "DexRootAddress":"0:0c3427febed3b30d548f6e76a481bd90786fe7a509929e66b3a0cc23594be735"}' --sign <YOURDEXDEBOT>.keys.json --abi <YOURDEXDEBOT>.abi.json
+tonos-cli call <generated debot address>> setABI "{\"dabi\":\"$debot_abi\"}" --sign <YOURDEXDEBOT>.keys.json --abi <YOURDEXDEBOT>.abi.json
+
+
+
+tonos-cli run 0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f getReservesBalance {} --abi DEXpair.abi.json
+   tonos-cli run 0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f getReservesBalance {} --abi DEXpair.abi.json
+
+tonos-cli run 0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f getReservesBalance {} --abi DEXpair.abi.json --sign DEXpair.keys.json
+
+  "walletA": "0:bd6e061bd1d855354b2ed2b31a5c6e1becf3fdb97c1d1e3106fbf708fd52f139",
+  "walletB": "0:ff5d81b96089aff89f9dbac9fe94b4a1266925f65b6fab048335abf72426090b"
+
+
+tonos-cli run 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 connect '{"pairAddr":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f"}' --abi DEXclient.abi.json
+
+tonos-cli run 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 getPairClientWallets '{"pairAddr":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f"}' --abi DEXclient.abi.json
+
+tonos-cli run 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 getPair '{"value0":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f"}' --abi DEXclient.abi.json
+
+
+Result: {
+  "pairRootA": "0:bfd9c9f619b11ce1f3f9520af60dd64a5d4773116afab5e4fcd177208a9c7358",
+  "pairReserveA": "0:c4eb2ddd1bc1c76e00f951e623b06d83d51b7f75159ddb516566d7a69bd744a1",
+  "clientDepositA": "0:9950bc2b82ae3b2803c58ab54cadc535d08c4920f2ae505e315cc1dabd3d606f",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:95f08c717d720bd7fa626b064673f9544b47cef60657ea2e23966dfe6dd329c3",
+  "pairReserveB": "0:c617ea04da9b25bcf77dd2e54da5f45055e669834f76938997ae9c9d1a90bbad",
+  "clientDepositB": "0:217e041af9efe945f01ade70f7a8cc7cc002021df0754c12345b19d9372d5025",
+  "clientAllowanceB": "0"
+}
+
+tonos-cli run 0:e6417dabec181e8a76dfca456aaa732e4f851a36201af5900f589fbe8ed4feb9 getAddress {} --abi DEXrootClient.abi.json
+tonos-cli call 0:e6417dabec181e8a76dfca456aaa732e4f851a36201af5900f589fbe8ed4feb9 deployNewDexClient '{"pukey":"0x2e38f2c96db23a48340a9dd7e6f73aec4f243d3127d6e172c6b19507cca60fe7"}' --abi DEXrootClient.abi.json --sign DEXrootClient.keys.json
+
+
+
+tonos-cli call 0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003 processLiquidity '{"pairAddr":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f", "qtyA":"1", "qtyB":"1"}' --abi DEXclient.abi.json --sign DEXclient.keys.json
+
+tonos-cli call 0:bfd9c9f619b11ce1f3f9520af60dd64a5d4773116afab5e4fcd177208a9c7358 grant '{"addr":"0:37741ab710daff3be515a3c84f17cf63976942ade665330ceee79c17049780e6"}' --abi DEXclient.abi.json --sign DEXclient.keys.json
+
+DEXrootClient
+0:a323ce4a78531c5689ef038f5299fca4554d710dac751a50c16250e1e0070edd
+
+DexClient address
+0:69a4da93a943bc544132c5796cf1386ad266743ef8c19ac838c93925211f0003
+
+g.keys.json - client
+0:c61f8f9f414ac21efdbd6deb99f932c8053fbc1a79c1e305bb6920826340457b
+
+DEX Pair address
+0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f
+
+from yaroslav
+0:663cf33044871292fb3ae98e72fcba741b0cf741dca4854ecdebd07958aec11e

@@ -1,0 +1,452 @@
+------------DEBOTS------------
+
+TONwrapperDebot.sol
+tonos-cli debot fetch 0:5944542ccc5260413a4292e5604c38f5335bb4b97af64a9956cb60565bc461bb
+
+Swap debot
+tonos-cli debot fetch 0:d9e7071e0e110e1d939fca1c00e92044ae2a720f8229fec729ceee1de0651154
+
+ProDebot.sol
+tonos-cli debot fetch 0:5375182921343052a1f15479ddb5ebb0d65c141561932bcd4f01169155418ade
+
+-------------PAIRS-------------
+
+WTON-USDT
+0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892
+
+WTON-BTC
+0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35
+
+TON-ETH
+0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9
+
+ETH-BTC
+0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5
+
+BTC-USDT
+0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3
+
+------------CLIENTS------------
+
+
+-----------------------------------client1-------
+client1 - DEXclient1.keys.json
+0:10ae1efb6867aae67f3d5df6d905c3f38341014b794c868cdfed80f86be3b208
+{
+  "public": "6c1a190fe88557fb4a8661b9fd9c8c8e3a88d1f675ae5323faa1d8d31b19d147",
+  "secret": "b24693c50754a6432d4da047978add8f4440aa289b881b66fcd98e6784df7a6f"
+}
+"response review cigar bird embody prosper build power record curve palm banana"
+sudo tondev tonos-cli getkeypair DEXclientContract.json "term abuse rose huge inmate observe echo embody bulk draft inch armor"
+
+
+WTON-USDT
+../../tonos-cli run 0:10ae1efb6867aae67f3d5df6d905c3f38341014b794c868cdfed80f86be3b208 getPair '{"value0":"0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:f56a30101e4694a00448671c0aa5cd35c9f4cf3b69bacefa9d8c93369a3d94fd",
+  "clientDepositA": "0:ae64cbaa5353bd6e82307cd6f5d94fa1ad0feded3f727bf2034ef31836302a33",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:f6c574ef2400730ae6f14d0a3e402a34ffd246e529b044ebee1ac64b95b02764",
+  "clientDepositB": "0:d351eb1c513cf710e95742deccc23e00069ca797d79ccd8c6b956e671fb5360d",
+  "clientAllowanceB": "0",
+  "curPair": "0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892"
+}
+
+
+WTON-BTC
+../../tonos-cli run 0:10ae1efb6867aae67f3d5df6d905c3f38341014b794c868cdfed80f86be3b208 getPair '{"value0":"0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:ab5af2eb1a986d77c3f1dbf6574e4bc452e9363d0fcc91531ff7022075380677",
+  "clientDepositA": "0:7b2b90ed5aba77aaad91882d3f6b651360953ad9a9266fe55516b3ae9761d44b",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac",
+  "pairReserveB": "0:a66d8ae28d22f75edbff2e08fe4afbedaeff170f3a813dcb99928fd8c28fe11f",
+  "clientDepositB": "0:a506e4a8de925b148f5915ba0cacf7fd6e5795a45aeb75ef5892eaefb84161f6",
+  "clientAllowanceB": "0",
+  "curPair": "0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"
+}
+
+TON-ETH
+../../tonos-cli run 0:10ae1efb6867aae67f3d5df6d905c3f38341014b794c868cdfed80f86be3b208 getPair '{"value0":"0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:f9522862cf4414dbc7112d0ea4883de33f23277d86d0a9960e5cd8c4a2b36bc1",
+  "clientDepositA": "0:1eb4cf74a2e8c19a0269daac4e316ac4f49aef17a998d060d0d8f326cbfc0d25",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa",
+  "pairReserveB": "0:acc694529722ae077ceb22e6711fabf1321bb31630b5da74422f872398e81e93",
+  "clientDepositB": "0:d6ef35ede2866a2f037dcc68d34b89e0e287840a36d04bc2c93a0bb4e7634af5",
+  "clientAllowanceB": "0",
+  "curPair": "0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9"
+}
+
+ETH-BTC
+../../tonos-cli run 0:10ae1efb6867aae67f3d5df6d905c3f38341014b794c868cdfed80f86be3b208 getPair '{"value0":"0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa",
+  "pairReserveA": "0:d0ab26448b377a815c2dc357d5a828c0e32bf90d6ca08bcc7273a2100e7a83ef",
+  "clientDepositA": "0:b017d55faa15426a039acc4ef406f2f22c0a4fba456e87152483c152c195651c",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:8395cbbe8ed28788fffa1930a5b6466b7da350f9ee010fb46a6341608472d107",
+  "clientDepositB": "0:5ea1043d7228825abde2fd7af446940b98eae243bd78e2900ff9490abe993168",
+  "clientAllowanceB": "0",
+  "curPair": "0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"
+}
+
+BTC-USDT
+../../tonos-cli run 0:10ae1efb6867aae67f3d5df6d905c3f38341014b794c868cdfed80f86be3b208 getPair '{"value0":"0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac",
+  "pairReserveA": "0:94edb7cb542a12a32c3ca8dc31993622e1b37e4b13d1d5ce974c48e8d9424415",
+  "clientDepositA": "0:4fdbd99b3100b2713c53869d65c6219df3d32fa422ce0f25facc783a35ed9358",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:fc9305c116c11ff27f3b6394ea97e7eea780bed26976f0f6746889f67252482a",
+  "clientDepositB": "0:ace0ddc17e387389fe9484ec30c5ccc234cc5955dbf730efd209745ee5beed4d",
+  "clientAllowanceB": "0",
+  "curPair": "0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"
+}
+
+-------------------------------------------------
+
+-----------------------------------client2---------
+client2 - DEXclient2.keys.json
+0:87957ff50a8aa3938de341a0f1d0e8990bfca3a90c3dde2f10b7e82dbd7a2290
+"term abuse rose huge inmate observe echo embody bulk draft inch armor"
+sudo tondev tonos-cli getkeypair DEXclientContract.json "term abuse rose huge inmate observe echo embody bulk draft inch armor"
+
+
+WTON-USDT
+../../tonos-cli run 0:87957ff50a8aa3938de341a0f1d0e8990bfca3a90c3dde2f10b7e82dbd7a2290 getPair '{"value0":"0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:f56a30101e4694a00448671c0aa5cd35c9f4cf3b69bacefa9d8c93369a3d94fd",
+  "clientDepositA": "0:9b062122a1ece3003ad86e10cfd4289074de0c8192e6d26fabf2bf2c7024bb58",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:f6c574ef2400730ae6f14d0a3e402a34ffd246e529b044ebee1ac64b95b02764",
+  "clientDepositB": "0:f356859aea38230ceab36506c2b8f9bca90c88f978e47da46b0dd710575ce1a4",
+  "clientAllowanceB": "0",
+  "curPair": "0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892"
+}
+
+WTON-BTC
+../../tonos-cli run 0:87957ff50a8aa3938de341a0f1d0e8990bfca3a90c3dde2f10b7e82dbd7a2290 getPair '{"value0":"0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:ab5af2eb1a986d77c3f1dbf6574e4bc452e9363d0fcc91531ff7022075380677",
+  "clientDepositA": "0:071041c7adbfe67f87b5816664678d0292e50916c10226e2980c2a56923bf610",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac",
+  "pairReserveB": "0:a66d8ae28d22f75edbff2e08fe4afbedaeff170f3a813dcb99928fd8c28fe11f",
+  "clientDepositB": "0:a7e6ce63fe3ccc1e39d85f226c940e98dbad5e2c854576737e495fde5e105157",
+  "clientAllowanceB": "0",
+  "curPair": "0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"
+}
+
+TON-ETH
+../../tonos-cli run 0:87957ff50a8aa3938de341a0f1d0e8990bfca3a90c3dde2f10b7e82dbd7a2290 getPair '{"value0":"0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:f9522862cf4414dbc7112d0ea4883de33f23277d86d0a9960e5cd8c4a2b36bc1",
+  "clientDepositA": "0:8059a85a553f153794dea04249a6df7aa5731963a91f7a1a0e92de408b677293",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa",
+  "pairReserveB": "0:acc694529722ae077ceb22e6711fabf1321bb31630b5da74422f872398e81e93",
+  "clientDepositB": "0:3bf1a6f1a1c8e9a1813f11f490f673411f480623569af7b7378bda7e82a58619",
+  "clientAllowanceB": "0",
+  "curPair": "0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9"
+}
+
+ETH-BTC
+../../tonos-cli run 0:87957ff50a8aa3938de341a0f1d0e8990bfca3a90c3dde2f10b7e82dbd7a2290 getPair '{"value0":"0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa",
+  "pairReserveA": "0:d0ab26448b377a815c2dc357d5a828c0e32bf90d6ca08bcc7273a2100e7a83ef",
+  "clientDepositA": "0:e8912f1a077b16c269fc94ed4c81d4c20566f393e919772eb5e4aa077a3d941d",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:8395cbbe8ed28788fffa1930a5b6466b7da350f9ee010fb46a6341608472d107",
+  "clientDepositB": "0:61c38370c74ab4cffdef07bf7e3c6059357ce3ab851b5360db948ee0f48ccbe1",
+  "clientAllowanceB": "0",
+  "curPair": "0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"
+}
+
+BTC-USDT
+../../tonos-cli run 0:87957ff50a8aa3938de341a0f1d0e8990bfca3a90c3dde2f10b7e82dbd7a2290 getPair '{"value0":"0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac",
+  "pairReserveA": "0:94edb7cb542a12a32c3ca8dc31993622e1b37e4b13d1d5ce974c48e8d9424415",
+  "clientDepositA": "0:06692704ceca11682b210ef0ff7a50929c823760bd8164ba1b7cc8791d2dffe2",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:fc9305c116c11ff27f3b6394ea97e7eea780bed26976f0f6746889f67252482a",
+  "clientDepositB": "0:e9011a903d712d6c2e7c837ee35d4c7323ced17ba67dfb7e3e8e23f95e3ea73a",
+  "clientAllowanceB": "0",
+  "curPair": "0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"
+}
+
+---------------------------------------------------
+
+------------------------------------client3---------
+client3 - DEXclient3.keys.json
+0:42851230c0f49bda84a23ffc35711538f6a563c0a29dde67d75883addc03a196
+"pride jump town artwork convince question action add grid arrange ahead still"
+sudo tondev tonos-cli getkeypair DEXclientContract.json "pride jump town artwork convince question action add grid arrange ahead still"
+
+WTON-USDT
+../../tonos-cli run 0:42851230c0f49bda84a23ffc35711538f6a563c0a29dde67d75883addc03a196 getPair '{"value0":"0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:f56a30101e4694a00448671c0aa5cd35c9f4cf3b69bacefa9d8c93369a3d94fd",
+  "clientDepositA": "0:fe6ad90c48c401667a2282b198615dfe56085200741e7a24f7b4c2886c6401e9",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:f6c574ef2400730ae6f14d0a3e402a34ffd246e529b044ebee1ac64b95b02764",
+  "clientDepositB": "0:5d2d71fe0f89aae194b526881a8aad3adea9a1a2a79ac08832611cd51cebb0f9",
+  "clientAllowanceB": "0",
+  "curPair": "0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892"
+}
+
+WTON-BTC
+../../tonos-cli run 0:42851230c0f49bda84a23ffc35711538f6a563c0a29dde67d75883addc03a196 getPair '{"value0":"0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:ab5af2eb1a986d77c3f1dbf6574e4bc452e9363d0fcc91531ff7022075380677",
+  "clientDepositA": "0:8766be9848d38ff1d6c403aa135e58790dc1f0952c17aa72a8b52fba5b5174fa",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac",
+  "pairReserveB": "0:a66d8ae28d22f75edbff2e08fe4afbedaeff170f3a813dcb99928fd8c28fe11f",
+  "clientDepositB": "0:55573a871628d7d598d9708c6191f979c97c917c31357a3080357150dc2969ce",
+  "clientAllowanceB": "0",
+  "curPair": "0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"
+}
+
+TON-ETH
+../../tonos-cli run 0:42851230c0f49bda84a23ffc35711538f6a563c0a29dde67d75883addc03a196 getPair '{"value0":"0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:f9522862cf4414dbc7112d0ea4883de33f23277d86d0a9960e5cd8c4a2b36bc1",
+  "clientDepositA": "0:e2a9abf67f3ba74bbd04416de68cb881cfd2402e36dcbcbdb81d09ea9c9e986e",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa",
+  "pairReserveB": "0:acc694529722ae077ceb22e6711fabf1321bb31630b5da74422f872398e81e93",
+  "clientDepositB": "0:3c44f25fee72c146cb02ab35f577b2eb22e6d8c42ce401b8e956a44d01fb812c",
+  "clientAllowanceB": "0",
+  "curPair": "0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9"
+}
+
+ETH-BTC
+../../tonos-cli run 0:42851230c0f49bda84a23ffc35711538f6a563c0a29dde67d75883addc03a196 getPair '{"value0":"0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa",
+  "pairReserveA": "0:d0ab26448b377a815c2dc357d5a828c0e32bf90d6ca08bcc7273a2100e7a83ef",
+  "clientDepositA": "0:3f3ede8eefb6c49700f6f630dec4f6382656ad77f398f1184a1a29f0bc361c1d",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:8395cbbe8ed28788fffa1930a5b6466b7da350f9ee010fb46a6341608472d107",
+  "clientDepositB": "0:c798c674dde0afbe43583b399efc8364f6726c32fadddd927492a6e46ffb2ea4",
+  "clientAllowanceB": "0",
+  "curPair": "0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"
+}
+
+BTC-USDT
+../../tonos-cli run 0:42851230c0f49bda84a23ffc35711538f6a563c0a29dde67d75883addc03a196 getPair '{"value0":"0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac",
+  "pairReserveA": "0:94edb7cb542a12a32c3ca8dc31993622e1b37e4b13d1d5ce974c48e8d9424415",
+  "clientDepositA": "0:77eb2b0891f89c36bfebfc9ee3a9d2e9e716103b062e9733e56f326fd4d55407",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:fc9305c116c11ff27f3b6394ea97e7eea780bed26976f0f6746889f67252482a",
+  "clientDepositB": "0:fbe8a4462f8dda667cdea056c8e8136966f59866b12333b97973bb889e794c9e",
+  "clientAllowanceB": "0",
+  "curPair": "0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"
+}
+
+-----------------------------------------------------
+
+------------------------------------client4----------
+client4 - DEXclient4.keys.json
+0:acd7e69f6ab1d1235b7918a46c51b9312c0e0c4191f15363060df79fcac8291a
+"excite treat select rack section mistake family beach edit chaos exact myself"
+sudo tondev tonos-cli getkeypair DEXclientContract.json "excite treat select rack section mistake family beach edit chaos exact myself"
+
+WTON-USDT
+../../tonos-cli run 0:acd7e69f6ab1d1235b7918a46c51b9312c0e0c4191f15363060df79fcac8291a getPair '{"value0":"0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:f56a30101e4694a00448671c0aa5cd35c9f4cf3b69bacefa9d8c93369a3d94fd",
+  "clientDepositA": "0:4f7b51baec4a25f1f1012befd5c2a9885feca2bdce6943ad8610eead8841519a",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:f6c574ef2400730ae6f14d0a3e402a34ffd246e529b044ebee1ac64b95b02764",
+  "clientDepositB": "0:6af8fb6ee6d7daa5ca306645f181c761621d8c1b9f25cc348a7e7523954592ce",
+  "clientAllowanceB": "0",
+  "curPair": "0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892"
+}
+
+WTON-BTC
+../../tonos-cli run 0:acd7e69f6ab1d1235b7918a46c51b9312c0e0c4191f15363060df79fcac8291a getPair '{"value0":"0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:ab5af2eb1a986d77c3f1dbf6574e4bc452e9363d0fcc91531ff7022075380677",
+  "clientDepositA": "0:7c069fc56eb4aecfde7c83a9d1de7752be6a5b41c6221f7123401e2000183c5e",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac",
+  "pairReserveB": "0:a66d8ae28d22f75edbff2e08fe4afbedaeff170f3a813dcb99928fd8c28fe11f",
+  "clientDepositB": "0:e8b3d84bfd87da04e2264cce48beaf2e46c62b93081cc1855479d47d0a299ddc",
+  "clientAllowanceB": "0",
+  "curPair": "0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"
+}
+
+TON-ETH
+../../tonos-cli run 0:acd7e69f6ab1d1235b7918a46c51b9312c0e0c4191f15363060df79fcac8291a getPair '{"value0":"0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:f9522862cf4414dbc7112d0ea4883de33f23277d86d0a9960e5cd8c4a2b36bc1",
+  "clientDepositA": "0:ad12cae79b861b2aa672894be0fbf642e9b7d47d338528c7db85b860bd373a00",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa",
+  "pairReserveB": "0:acc694529722ae077ceb22e6711fabf1321bb31630b5da74422f872398e81e93",
+  "clientDepositB": "0:4db76fe4c943c47b91ab12c0fbf0c2585671b8ecb94c68d0f6d103f7d6b8da22",
+  "clientAllowanceB": "0",
+  "curPair": "0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9"
+}
+
+ETH-BTC
+../../tonos-cli run 0:acd7e69f6ab1d1235b7918a46c51b9312c0e0c4191f15363060df79fcac8291a getPair '{"value0":"0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa",
+  "pairReserveA": "0:d0ab26448b377a815c2dc357d5a828c0e32bf90d6ca08bcc7273a2100e7a83ef",
+  "clientDepositA": "0:80ab7cab01cdf579877e534e43e14a156fc896c3d2b5d8b36f9932455d93a96c",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:8395cbbe8ed28788fffa1930a5b6466b7da350f9ee010fb46a6341608472d107",
+  "clientDepositB": "0:3a3f7aa6f7ae429410a638c4046f1561d3170db882ad6d3901148cc1ca1519dd",
+  "clientAllowanceB": "0",
+  "curPair": "0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"
+}
+
+BTC-USDT
+../../tonos-cli run 0:acd7e69f6ab1d1235b7918a46c51b9312c0e0c4191f15363060df79fcac8291a getPair '{"value0":"0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac",
+  "pairReserveA": "0:94edb7cb542a12a32c3ca8dc31993622e1b37e4b13d1d5ce974c48e8d9424415",
+  "clientDepositA": "0:f54efe1891ebad4e3c80b612fc833da6b3281be053e89899847dbe3863e3cf1b",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:fc9305c116c11ff27f3b6394ea97e7eea780bed26976f0f6746889f67252482a",
+  "clientDepositB": "0:8b964b3f1841f880e1369182ba38111d928b5e318e009b57c8ca6e3863b6b37f",
+  "clientAllowanceB": "0",
+  "curPair": "0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"
+}
+------------------------------------------------------
+
+------------------------------------client5----------
+client5
+0:7d574a81f923de0469bfa3c4595ebfcdf9c7b72cb7a864ef6c6b993fd5b45a6f
+{
+  "public": "082641cb7a46a4443539fdc3adad2ce745b35761fa6c869bdd860e18633e31ef",
+  "secret": "3b5a85a8ff609c010102b3f1158b9deddb738bcb4f0639b72f784d1a993c0208"
+}
+"jump nut power major vintage walk museum current whisper measure exit stumble"
+
+WTON-USDT
+../../tonos-cli run 0:7d574a81f923de0469bfa3c4595ebfcdf9c7b72cb7a864ef6c6b993fd5b45a6f getPair '{"value0":"0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:f56a30101e4694a00448671c0aa5cd35c9f4cf3b69bacefa9d8c93369a3d94fd",
+  "clientDepositA": "0:6bd611f17053a983360865ea2694adace079e21a7f6a4b5b0fc0790d236fc53f",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:f6c574ef2400730ae6f14d0a3e402a34ffd246e529b044ebee1ac64b95b02764",
+  "clientDepositB": "0:fbb8259176fc5f0162050cf17d1a134c91447cfb8eaff076252cc6710cd07eb0",
+  "clientAllowanceB": "0",
+  "curPair": "0:8f8979814fd3ff28e53e72b608c8e466824c9d7dae05d8b2735322f0ccb41892"
+}
+
+WTON-BTC
+../../tonos-cli run 0:7d574a81f923de0469bfa3c4595ebfcdf9c7b72cb7a864ef6c6b993fd5b45a6f getPair '{"value0":"0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:ab5af2eb1a986d77c3f1dbf6574e4bc452e9363d0fcc91531ff7022075380677",
+  "clientDepositA": "0:72029fdda77f36c8464617c89fe9528a516094deea43fc8292b69267c653b0a6",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac",
+  "pairReserveB": "0:a66d8ae28d22f75edbff2e08fe4afbedaeff170f3a813dcb99928fd8c28fe11f",
+  "clientDepositB": "0:3166c9bc45ee82e4475b1cc352dfa75fd0b7dbd8da3753d8c321cffd85bced7a",
+  "clientAllowanceB": "0",
+  "curPair": "0:fd0ef71a220079a61cde06465f26d368db84ea1ae0eefea8f77827b0ebdb5e35"
+}
+
+TON-ETH
+../../tonos-cli run 0:7d574a81f923de0469bfa3c4595ebfcdf9c7b72cb7a864ef6c6b993fd5b45a6f getPair '{"value0":"0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:ff6da7ac48c8d5cbb9a05013540b52709c04f546ced81bcf0553a027cb04c210",
+  "pairReserveA": "0:f9522862cf4414dbc7112d0ea4883de33f23277d86d0a9960e5cd8c4a2b36bc1",
+  "clientDepositA": "0:8566d0569b49318f15697a79f4bbef607146eff1c605c5cd1730d1024524a902",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa",
+  "pairReserveB": "0:acc694529722ae077ceb22e6711fabf1321bb31630b5da74422f872398e81e93",
+  "clientDepositB": "0:8af17c860d494e7ff3ab538982c1e591c57f4d94a392679f8176a80d3506670e",
+  "clientAllowanceB": "0",
+  "curPair": "0:2eb69f3cc5855e837d74a2d2055315d64d1cf90555d39eaa02a70c09c8a22ab9"
+}
+
+ETH-BTC
+../../tonos-cli run 0:7d574a81f923de0469bfa3c4595ebfcdf9c7b72cb7a864ef6c6b993fd5b45a6f getPair '{"value0":"0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:2e3854dcfa1f1150e3ad3062692e9891650a8915c9982879829b3b47080189aa",
+  "pairReserveA": "0:d0ab26448b377a815c2dc357d5a828c0e32bf90d6ca08bcc7273a2100e7a83ef",
+  "clientDepositA": "0:a3a2a27c6ba5f105586aba3e779b802facc3e209ac3aec108e50594aec27de86",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:8395cbbe8ed28788fffa1930a5b6466b7da350f9ee010fb46a6341608472d107",
+  "clientDepositB": "0:c253dde3e3024bc2ddbeacb59fee77d592db10bc406bfa1b4e784e89a52974c3",
+  "clientAllowanceB": "0",
+  "curPair": "0:f1ad43be654c594e1070a7bdf7df5a4453b23c09aa765260cd5646b34a29bda5"
+}
+
+BTC-USDT
+../../tonos-cli run 0:7d574a81f923de0469bfa3c4595ebfcdf9c7b72cb7a864ef6c6b993fd5b45a6f getPair '{"value0":"0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"}' --abi DEXclient.abi.json
+
+Result: {
+  "pairRootA": "0:2ffafd25bdc5b322318ca768d8fa9044cf602c4589b02671a430b1ff949173ac",
+  "pairReserveA": "0:94edb7cb542a12a32c3ca8dc31993622e1b37e4b13d1d5ce974c48e8d9424415",
+  "clientDepositA": "0:eedbc364ee493450037ac8c1b52fdee83e97aa93cda2dc57c14e749562032787",
+  "clientAllowanceA": "0",
+  "pairRootB": "0:b7b17288b1e1c1166797fc40f6329aa598ef720176738769f79fa49c87f50feb",
+  "pairReserveB": "0:fc9305c116c11ff27f3b6394ea97e7eea780bed26976f0f6746889f67252482a",
+  "clientDepositB": "0:17c69d6e8dafa8bfef7a208cc1ddeb872c122b2c800fe96e37980f5c0b41f7b4",
+  "clientAllowanceB": "0",
+  "curPair": "0:5845a6e5f461e840a7f23a73b360b12dd6ffda010577dd4b64e35d7d61e327d3"
+}

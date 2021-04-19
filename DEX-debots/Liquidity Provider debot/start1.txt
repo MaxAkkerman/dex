@@ -1,0 +1,32 @@
+solc ProDebot.sol
+tvm_linker compile ProDebot.code --lib ../../TVM/TON-Solidity-Compiler/lib/stdlib_sol.tvm
+tonos-cli genaddr ProDebot.tvc ProDebot.abi.json --genkey ProDebot.keys.json
+
+0:5375182921343052a1f15479ddb5ebb0d65c141561932bcd4f01169155418ade
+
+debot_abi=$(cat ProDebot.abi.json | xxd -ps -c 20000)
+
+//REDEPLOY DEXROOTADDRESS FOR DEPLOY CLIENT
+tonos-cli deploy ProDebot.tvc '{"debotAbi":"", "DexRootAddress":"0:6f888960842b35af4af5dabe8ee082bf1c9cbb02e7f0a0e56ca676f8fef84e2d"}' --sign ProDebot.keys.json --abi ProDebot.abi.json
+tonos-cli call 0:5375182921343052a1f15479ddb5ebb0d65c141561932bcd4f01169155418ade setABI "{\"dabi\":\"$debot_abi\"}" --sign ProDebot.keys.json --abi ProDebot.abi.json
+
+ProDebot.sol
+tonos-cli debot fetch 0:5375182921343052a1f15479ddb5ebb0d65c141561932bcd4f01169155418ade
+
+tonos-cli account 0:97de5592196f136a90c5ee26596a51d16e3b9d5101fc08a7193e3abd3c2054f9
+
+
+dex client
+0:6939a2f77fc15d74b0c077ab8d31496c4c78e4c74710b8d2ef44f3760a4fd98c
+
+tonos-cli run 0:6939a2f77fc15d74b0c077ab8d31496c4c78e4c74710b8d2ef44f3760a4fd98c getPair '{"value0":"0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f"}' --abi DEXclient2.abi.json
+
+tonos-cli run 0:6939a2f77fc15d74b0c077ab8d31496c4c78e4c74710b8d2ef44f3760a4fd98c getPair '{"value0":"0:3ab2fe81e0f1438cf7be1132fbfd77abaf8e82e395bc2205d0f5312fff532274"}' --abi DEXclient2.abi.json
+
+DEX Pair address tokenA tokenB
+0:3401c739a392eb456198419bb212ddc5c69dd7b6fbfaaafc2ee8292a1a97c80f
+
+DEX Pair address uni usdt normal
+0:ad53cb283c8e6ba548763623e55a03807851aac6fa212f8abf9a411a713fc76c
+
+tonos-cli run 0:fbfe2385e577f0329c12e5514b99a0a38e5eaf10b6cf9a0576295fb563150f66 getPair '{"value0":"0:ad53cb283c8e6ba548763623e55a03807851aac6fa212f8abf9a411a713fc76c"}' --abi DEXclient.abi.json
